@@ -42,7 +42,8 @@ const createTables = async () => {
             "museumName" varchar(255) NOT NULL,
             image varchar(500),
             description varchar(1000) NOT NULL,
-            link varchar(500)
+            link varchar(500),
+            type varchar(255) NOT NULL
         );
 
         CREATE TABLE reviews (
