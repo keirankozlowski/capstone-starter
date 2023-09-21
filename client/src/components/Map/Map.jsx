@@ -1,27 +1,33 @@
-
-import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
-import { useMemo } from "react";
+import React from 'react';
+import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
 // import "./App.css";
 
+// import 'dotenv/config';
+// require('dotenv').config({ path: '.env.local' });
+
+const mapStyles = {
+  width: '100%',
+  height: '100vh',
+};
+
+const center = {
+  lat: -1.2884,
+  lng: 36.8233,
+};
+
 const Map = () => {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
-  });
-  const center = useMemo(() => ({ lat: 18.52043, lng: 73.856743 }), []);
 
   return (
-    <div className="App">
-      {!isLoaded ? (
-        <h1>Loading...</h1>
-      ) : (
+    <div>
+      <LoadScript googleMapsApiKey="REACT_APP_GOOGLE_API_KEY">
         <GoogleMap
-          mapContainerClassName="map-container"
+          mapContainerStyle={mapStyles}
+          zoom={14}
           center={center}
-          zoom={10}
         >
-          <Marker position={{ lat: 18.52043, lng: 73.856743 }} />
+          <Marker position={center} />
         </GoogleMap>
-      )}
+      </LoadScript>
     </div>
   );
 };

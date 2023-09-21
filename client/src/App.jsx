@@ -1,13 +1,12 @@
-// import './App.css'
-import Map from './components/Map/map'
-function App() {
+import React from 'react';
+import Map from './components/Map/map';
 
+function App() {
   return (
-    <>
-    <h1>Hello World!</h1>
-    <Map />
-    </>
-  )
+    <div>
+      < Map />
+    </div>
+  );
 }
 
-export default App
+export default App;
