@@ -68,24 +68,24 @@ const getReviewByUserId = async (userId) => {
   }
 };
 
-const updateReview = async (reviewId, museumId, rating, body, date) => {
+const updateReview = async (
+  reviewId,
+  { userId, museumId, rating, body, date }
+) => {
   try {
-    const query = `
+    const {
+      rows: [reviews],
+    } = await client.query(
+      `
         UPDATE reviews
-        SET "museumId" = $2, rating = $3, body = $4, date = $5
+        SET "userId" = $2, "museumId" = $3, rating = $4, body = $5, date = $6
         WHERE "reviewId" = $1
         RETURNING *;
-      `;
+      `,
+      [reviewId, userId, museumId, rating, body, date]
+    );
 
-    const { rows } = await client.query(query, [
-      reviewId,
-      museumId,
-      rating,
-      body,
-      date,
-    ]);
-
-    return rows;
+    return reviews;
   } catch (error) {
     throw error;
   }
