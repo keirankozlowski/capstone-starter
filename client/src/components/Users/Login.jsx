@@ -4,7 +4,7 @@ import axios from "axios";
 
 export default function Login() {
   const [user, setUser] = useState([]);
-  const [profile, setProfile] = useState([]);
+  const [profile, setProfile] = useState(null);
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => setUser(codeResponse),
