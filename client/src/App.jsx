@@ -1,11 +1,11 @@
-import React from 'react';
-import Map from './components/Map/map';
+import React from "react";
+import AppRouter from "./components/Navigation/AppRouter";
 
 function App() {
   return (
-    <div>
-      < Map />
-    </div>
+    <>
+      <AppRouter />
+    </>
   );
 }
 
