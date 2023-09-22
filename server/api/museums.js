@@ -33,17 +33,19 @@ router.get("/:museumId", async (req, res, next) => {
   }
 });
 
-// GET museum by name - api/museums/:museumName
+// GET museum by name - api/museums/name/:museumName
 
-// Need to fix route
+// Use %20 in place of spaces in URL
+// Ex. http://localhost:8081/api/museums/name/The%20Metropolitan%20Museum%20of%20Art
 
-// router.get("/:museumName", async (req, res, next) => {
-//   try {
-//     const museum = await getMuseumByName(req.params.museumName);
-//     res.send(museum);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+router.get("/name/:museumName", async (req, res, next) => {
+  const museumName = req.params.museumName.replace(/ /g, "%20");
+  try {
+    const museum = await getMuseumByName(req.params.museumName);
+    res.send(museum);
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;

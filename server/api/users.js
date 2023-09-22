@@ -132,15 +132,13 @@ router.get("/:userId", async (req, res, next) => {
 
 // GET user by username - api/users/:username
 
-// Need to fix the route
-
-// router.get("/:username", async (req, res, next) => {
-//   try {
-//     const user = await getUserByUsername(req.params.username);
-//     res.send(user);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+router.get("/user/:username", async (req, res, next) => {
+  try {
+    const user = await getUserByUsername(req.params.username);
+    res.send(user);
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;
