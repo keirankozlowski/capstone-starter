@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import { GoogleMap, Marker, LoadScript } from "@react-google-maps/api";
 import MapMarkers from "./MapMarkers";
 
@@ -12,13 +12,13 @@ const center = {
 };
 const apiKey = import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY; // Define the API key
 const Map = () => {
+  const [mapMarkers, setMapMarkers] = useState([]);
+
   return (
     <div>
       <LoadScript googleMapsApiKey={apiKey}>
         <GoogleMap mapContainerStyle={mapStyles} zoom={14} center={center}>
-          <Marker position={center} />
-
-          <MapMarkers />
+        <MapMarkers markers={mapMarkers} />
         </GoogleMap>
       </LoadScript>
     </div>
