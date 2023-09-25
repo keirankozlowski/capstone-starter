@@ -39,7 +39,7 @@ async function createTables() {
           CREATE TABLE weeks (
             weight varchar(255) NOT NULL
             size varchar(255) NOT NULL
-            info varchar(255) NOT NULLs
+            info varchar(255) NOT NULL
         );
       `);
       console.log("Tables created successfully");
