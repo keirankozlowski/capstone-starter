@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Marker, InfoWindow } from "@react-google-maps/api";
+import { useNavigate } from "react-router-dom";
 
 const MapMarkers = () => {
   const [mapMarkers, setMapMarkers] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const navigate = useNavigate();
+  const [museum, setMuseum] = useState({});
 
   useEffect(() => {
     const markers = [
@@ -26,7 +29,7 @@ const MapMarkers = () => {
         address: "11 W 53rd St, New York, NY 10019, USA",
       },
       {
-        position: { lat: 40.739613, lng: -74.008980 },
+        position: { lat: 40.739613, lng: -74.00898 },
         title: "The Whitney Museum of American Art",
         details: "Museum featuring 20th and 21st-century American art.",
         address: "99 Gansevoort St, New York, NY 10014, USA",
@@ -34,7 +37,8 @@ const MapMarkers = () => {
       {
         position: { lat: 40.781303, lng: -73.974113 },
         title: "American Museum of Natural History",
-        details: "A world-famous natural history museum and research institution.",
+        details:
+          "A world-famous natural history museum and research institution.",
         address: "200 Central Park West, New York, NY 10024, USA",
       },
     ];
@@ -64,6 +68,14 @@ const MapMarkers = () => {
             <h3>{selectedMarker.title}</h3>
             <p>{selectedMarker.details}</p>
             <p>{selectedMarker.address}</p>
+            <button
+              className="character-buttons"
+              onClick={() => {
+                navigate(`/museums/museumId`);
+              }}
+            >
+              See Details
+            </button>
             <p>
               <a
                 href={`https://www.google.com/maps/dir/?api=1&destination=${selectedMarker.position.lat},${selectedMarker.position.lng}`}
@@ -81,10 +93,6 @@ const MapMarkers = () => {
 };
 
 export default MapMarkers;
-
-
-
-
 
 // import React, { useEffect, useState } from "react";
 // import { Marker, InfoWindow } from "@react-google-maps/api";
