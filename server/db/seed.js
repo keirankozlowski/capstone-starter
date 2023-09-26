@@ -43,7 +43,9 @@ const createTables = async () => {
             image varchar(500),
             description varchar(1000) NOT NULL,
             link varchar(500),
-            type varchar(255) NOT NULL
+            type varchar(255) NOT NULL,
+            lat DECIMAL(10, 6) NOT NULL,
+            lng DECIMAL(10, 6) NOT NULL
         );
 
         CREATE TABLE reviews (
