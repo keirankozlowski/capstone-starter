@@ -153,6 +153,18 @@ async function fetchSingleReviewByUserId(userId) {
   }
 }
 
+//fetch reviews by museumId
+async function fetchReviewsByMuseumId(museumId) {
+  try {
+    const response = await fetch(`${baseURL}/reviews/museum/${museumId}`);
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error("cannot get museum by name", error);
+  }
+}
+
 // create a review
 
 async function addReview(token, userId, museumId, rating, body, date) {
@@ -244,6 +256,7 @@ export {
   fetchAllReviews,
   fetchSingleReview,
   fetchSingleReviewByUserId,
+  fetchReviewsByMuseumId,
   addReview,
   deleteReview,
   editReview,
