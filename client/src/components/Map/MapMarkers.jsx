@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Marker, InfoWindow } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
 import { fetchAllMuseums } from "../../helpers/fetching";
+
 const MapMarkers = () => {
   const [mapMarkers, setMapMarkers] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
@@ -50,7 +51,7 @@ const MapMarkers = () => {
             <p>{selectedMarker.details}</p>
             <p>{selectedMarker.address}</p>
             <button
-              className="character-buttons"
+              className="museum-buttons"
               onClick={() => {
                 // Here, you should use the museum's ID from the selectedMarker
                 navigate(`/museums/${selectedMarker.museumId}`);

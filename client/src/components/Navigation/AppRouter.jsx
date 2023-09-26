@@ -6,6 +6,7 @@ import UserProfile from "../Users/UserProfile";
 import Login from "../Users/Login";
 import Logout from "../Users/Logout";
 import Navbar from "./NavBar";
+import GetSingleMuseum from "../Museums/GetSingleMuseum";
 
 export default function AppRouter() {
   return (
@@ -22,6 +23,7 @@ export default function AppRouter() {
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/register" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/museums/:museumId" element={<GetSingleMuseum />} />
         </Routes>
       </div>
     </>

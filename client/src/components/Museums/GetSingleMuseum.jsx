@@ -23,16 +23,16 @@ export default function GetSingleMuseum() {
   return (
     <div className="single-museum-page">
       <div className="single-museum-card" key={museum.museumId}>
-        <h3 className="museum-headers">{museum.name}</h3>
+        <h3 className="museum-headers">{museum.museumName}</h3>
         <p>{museum.description}</p>
         <br />
         <button
           className="museum-buttons"
           onClick={() => {
-            navigate(`/museums`);
+            navigate(`/map`);
           }}
         >
-          Back
+          Back to Map
         </button>
       </div>
     </div>
