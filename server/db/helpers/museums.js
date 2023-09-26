@@ -1,17 +1,25 @@
 const client = require("../client");
 
-const createMuseum = async ({ museumName, image, description, link, type }) => {
+const createMuseum = async ({
+  museumName,
+  image,
+  description,
+  link,
+  type,
+  lat,
+  lng,
+}) => {
   try {
     const {
       rows: [museum],
     } = await client.query(
       `
-                INSERT INTO museums("museumName", image, description, link, type)
-                VALUES($1, $2, $3, $4, $5)
+                INSERT INTO museums("museumName", image, description, link, type, lat, lng)
+                VALUES($1, $2, $3, $4, $5, $6, $7)
                 RETURNING *;
             `,
 
-      [museumName, image, description, link, type]
+      [museumName, image, description, link, type, lat, lng]
     );
     return museum;
   } catch (error) {
