@@ -1,7 +1,7 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { GoogleMap, Marker, LoadScript } from "@react-google-maps/api";
 import MapMarkers from "./MapMarkers";
-import customMapStyle from './mapStyle.json'
+import customMapStyle from "./mapStyle.json";
 
 const mapStyles = {
   width: "100%",
@@ -18,12 +18,13 @@ const Map = () => {
   return (
     <div>
       <LoadScript googleMapsApiKey={apiKey}>
-        <GoogleMap 
-        mapContainerStyle={mapStyles} 
-        zoom={14} 
-        center={center}
-        options={{styles: customMapStyle,}}>
-        <MapMarkers markers={mapMarkers} />
+        <GoogleMap
+          mapContainerStyle={mapStyles}
+          zoom={14}
+          center={center}
+          options={{ styles: customMapStyle }}
+        >
+          <MapMarkers markers={mapMarkers} />
         </GoogleMap>
       </LoadScript>
     </div>
