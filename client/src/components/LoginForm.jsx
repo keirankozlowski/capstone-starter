@@ -4,8 +4,27 @@ const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:8080/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await response.json();
+      console.log(data);
+      if (data.ok) {
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
