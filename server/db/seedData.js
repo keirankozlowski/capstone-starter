@@ -122,6 +122,13 @@ const reviews = [
   },
   {
     userId: 1,
+    museumId: 1,
+    rating: 5,
+    body: "I'm a morty.",
+    date: "2023-09-20",
+  },
+  {
+    userId: 1,
     museumId: 2,
     rating: 5,
     body: "I'm a review too",

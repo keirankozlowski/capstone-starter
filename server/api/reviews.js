@@ -6,6 +6,7 @@ const {
   getAllReviews,
   getReviewById,
   getReviewByUserId,
+  getReviewsByMuseumId,
   updateReview,
   deleteReview,
 } = require("../db/helpers/reviews");
@@ -40,6 +41,17 @@ router.get("/:reviewId", async (req, res, next) => {
 router.get("/user/:userId", async (req, res, next) => {
   try {
     const review = await getReviewByUserId(req.params.userId);
+    res.send(review);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Get rewview by museum Id - api/reviews/museum/:museumId
+
+router.get("/museum/:museumId", async (req, res, next) => {
+  try {
+    const review = await getReviewsByMuseumId(req.params.museumId);
     res.send(review);
   } catch (error) {
     next(error);
