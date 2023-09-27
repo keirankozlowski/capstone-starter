@@ -1,4 +1,4 @@
-const client = require('../client')
+const client = require("../client");
 
 const createUser = async ({ username, password }) => {
   const {
@@ -10,9 +10,9 @@ const createUser = async ({ username, password }) => {
         RETURNING *
     `,
     [username, password]
-  )
-  return user
-}
+  );
+  return user;
+};
 
 const getUserByUsername = async (username) => {
   const {
@@ -23,8 +23,21 @@ const getUserByUsername = async (username) => {
     WHERE users.username = $1
     `,
     [username]
-  )
-  return user
-}
+  );
+  return user;
+};
 
-module.exports = { createUser, getUserByUsername }
+const getUserByToken = async (id) => {
+  const {
+    rows: [user],
+  } = await client.query(
+    `
+    SELECT * FROM users
+    WHERE users.id = $1
+    `,
+    [id]
+  );
+  return user;
+};
+
+module.exports = { createUser, getUserByUsername, getUserByToken };

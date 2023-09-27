@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -8,7 +8,7 @@ const LoginForm = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8080/api/auth/login", {
+      const response = await fetch("http://localhost:8080/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,4 +53,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
