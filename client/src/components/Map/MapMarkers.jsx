@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Marker, InfoWindow } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
 import { fetchAllMuseums } from "../../helpers/fetching";
+import markersIcon from "../Images/markers.png";
 
 const MapMarkers = () => {
-  const [mapMarkers, setMapMarkers] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const navigate = useNavigate();
   const [museums, setMuseums] = useState([]);
   const [error, setError] = useState(null);
+
   useEffect(() => {
     const renderMuseums = async () => {
       try {
@@ -21,6 +22,7 @@ const MapMarkers = () => {
     };
     renderMuseums();
   }, []);
+
   return (
     <>
       {museums.map((museum) => (
@@ -30,6 +32,10 @@ const MapMarkers = () => {
             lat: parseFloat(museum.lat),
             lng: parseFloat(museum.lng),
           }}
+          icon={{
+            url: markersIcon,
+            scaledSize: new window.google.maps.Size(40, 40),
+          }}
           onClick={() => {
             setSelectedMarker(museum);
           }}
@@ -37,23 +43,27 @@ const MapMarkers = () => {
       ))}
       {selectedMarker && (
         <InfoWindow
-          // position={selectedMarker.position}
           position={{
-            lat: parseFloat(selectedMarker.lat),
+            lat: parseFloat(selectedMarker.lat) + 0.01,
             lng: parseFloat(selectedMarker.lng),
           }}
           onCloseClick={() => {
             setSelectedMarker(null);
           }}
         >
-          <div>
-            <h3>{selectedMarker.title}</h3>
-            <p>{selectedMarker.details}</p>
-            <p>{selectedMarker.address}</p>
+          <div style={{ maxWidth: "300px", maxHeight: "50vh" }}>
+            <img
+              src={selectedMarker.image}
+              alt={selectedMarker.museumName}
+              style={{ width: "300px" }}
+            />
+            <h3>{selectedMarker.museumName}</h3>
+            <p>{selectedMarker.description}</p>
+            {/* <p>{selectedMarker.address}</p> */}
+
             <button
-              className="museum-buttons"
+              className="detailsButton"
               onClick={() => {
-                // Here, you should use the museum's ID from the selectedMarker
                 navigate(`/museums/${selectedMarker.museumId}`);
               }}
             >
