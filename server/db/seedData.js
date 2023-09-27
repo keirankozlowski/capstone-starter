@@ -9,7 +9,7 @@ const users = [
 const museums = [
   {
     museumName: "The Metropolitan Museum of Art",
-    image: "https://tinyurl.com/mppxxwwz",
+    image: "https://media.timeout.com/images/106041969/750/422/image.jpg",
     description:
       "The Met is a world-renowned art museum in New York City, founded in 1870. It boasts a vast and diverse collection spanning 5,000 years, featuring art and artifacts from various cultures and civilizations. It's a major cultural institution known for its exceptional art holdings and educational programs.",
     link: "https://www.metmuseum.org/",
@@ -41,7 +41,7 @@ const museums = [
   },
   {
     museumName: "The Whitney Museum of American Art",
-    image: "https://tinyurl.com/3b7uctfd",
+    image: "https://whitneymedia.org/assets/image/781045/large_lehoux-630.006-web.jpg",
     description:
       "As the preeminent institution devoted to the art of the United States, the Whitney Museum of American Art presents the full range of twentieth-century and contemporary American art, with a special focus on works by living artists. The Whitney is dedicated to collecting, preserving, interpreting, and exhibiting American art, and its collection—arguably the finest holdings of twentieth-century American art in the world—is the Museum's key resource. The Museum's flagship exhibition, the Biennial, is the country's leading survey of the most recent developments in American art.",
     link: "https://whitney.org/",
@@ -92,7 +92,7 @@ const museums = [
   },
   {
     museumName: "The Brooklyn Museum",
-    image: "https://tinyurl.com/2v7jpmh3",
+    image: "https://res.cloudinary.com/hello-tickets/image/upload/c_limit,f_auto,q_auto,w_1300/v1637210908/j407bgg6ewkt2qqloqjo.jpg",
     description:
       "The Brooklyn Museum, founded in 1895, is one of the oldest and largest art museums in the United States. It houses over 1.5 million diverse artworks, from ancient Egyptian artifacts to contemporary pieces, in a Beaux-Arts building designed by McKim, Mead & White. The museum hosts temporary exhibitions, educational programs, and special events, fostering inclusivity and community engagement while enriching Brooklyn's cultural landscape.",
     link: "https://www.brooklynmuseum.org/",
@@ -102,7 +102,7 @@ const museums = [
   },
   {
     museumName: "The Museum of the City of New York",
-    image: "https://tinyurl.com/4ene25z5",
+    image: "https://artnexus.com:3000/uploads/2017/04/1be9b8vlm-mcny.jpg",
     description:
       "The Museum of the City of New York is a treasure trove of history and culture, dedicated to preserving and celebrating the vibrant tapestry of New York City. Located on the iconic Fifth Avenue, this museum offers a captivating journey through the city's past, present, and future. Explore an extensive collection of artifacts, photographs, and exhibitions that showcase the city's rich history, diverse communities, and innovative spirit. From the early days of Dutch colonization to the ever-evolving metropolis we know today, The Museum of the City of New York provides a captivating window into the heart and soul of the Big Apple.",
     link: "https://www.mcny.org/",
