@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [user, setUser] = useState(null);
 
+  //check to see if the token is there or not
   useEffect(() => {
     const token = localStorage.getItem("token");
     const getUser = async () => {
@@ -34,10 +35,10 @@ function App() {
 
   return (
     <>
-      <NavBar />
+      <NavBar user={user} setUser={setUser} />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginForm />} />
+        <Route path="/login" element={<LoginForm setUser={setUser} />} />
         <Route path="/register" element={<RegisterForm />} />
       </Routes>
     </>

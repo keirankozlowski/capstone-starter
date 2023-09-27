@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const LoginForm = () => {
+const LoginForm = ({ setUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,6 +21,7 @@ const LoginForm = () => {
       if (data.ok) {
         if (data.token) {
           localStorage.setItem("token", data.token);
+          setUser(data.user);
         }
       }
     } catch (error) {
