@@ -11,7 +11,7 @@ const center = {
   lat: 40.73061,
   lng: -73.935242,
 };
-const apiKey = import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY; // Define the API key
+const apiKey = import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY;
 const Map = () => {
   const [mapMarkers, setMapMarkers] = useState([]);
 
@@ -20,7 +20,7 @@ const Map = () => {
       <LoadScript googleMapsApiKey={apiKey}>
         <GoogleMap
           mapContainerStyle={mapStyles}
-          zoom={14}
+          zoom={12}
           center={center}
           options={{ styles: customMapStyle }}
         >

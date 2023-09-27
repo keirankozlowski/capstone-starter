@@ -153,7 +153,8 @@ async function fetchSingleReviewByUserId(userId) {
   }
 }
 
-//fetch reviews by museumId
+// fetch reviews by museumId
+
 async function fetchReviewsByMuseumId(museumId) {
   try {
     const response = await fetch(`${baseURL}/reviews/museum/${museumId}`);
@@ -161,7 +162,7 @@ async function fetchReviewsByMuseumId(museumId) {
     console.log(result);
     return result;
   } catch (error) {
-    console.error("cannot get museum by name", error);
+    console.error("cannot get museum by id", error);
   }
 }
 
