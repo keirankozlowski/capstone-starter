@@ -36,11 +36,20 @@ function App() {
   return (
     <>
       <NavBar user={user} setUser={setUser} />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginForm setUser={setUser} />} />
-        <Route path="/register" element={<RegisterForm />} />
-      </Routes>
+      {user ? (
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      ) : (
+        <Routes>
+          <Route path="/" element={<LoginForm setUser={setUser} />} />
+          <Route path="/login" element={<LoginForm setUser={setUser} />} />
+          <Route
+            path="/register"
+            element={<RegisterForm setUser={setUser} />}
+          />
+        </Routes>
+      )}
     </>
   );
 }

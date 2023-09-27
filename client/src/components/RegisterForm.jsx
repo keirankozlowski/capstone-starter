@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const RegisterForm = () => {
+const RegisterForm = ({ setUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,6 +23,8 @@ const RegisterForm = () => {
       if (data.ok) {
         if (data.token) {
           localStorage.setItem("token", data.token);
+          setUser(data.user);
+          navigate("/");
         }
       }
     } catch (error) {

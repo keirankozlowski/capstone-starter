@@ -5,7 +5,7 @@ const {
   getUserByToken,
 } = require("../db/helpers/users");
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = require("../secrets");
+const { JWT_SECRET } = process.env;
 const { token } = require("morgan");
 
 const router = require("express").Router();
