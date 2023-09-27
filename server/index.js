@@ -1,9 +1,10 @@
 const express = require("express");
 const app = express();
-const PORT = 8080;
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
+const PORT = process.env.PORT;
+const path = require("path");
 
 // init morgan
 const morgan = require("morgan");
@@ -21,12 +22,20 @@ app.use(cors());
 const client = require("./db/client");
 client.connect();
 
+app.use(express.static(path.join(__dirname, "..", "client/dist/")));
+
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.sendFile(path.join(__dirname, "..", "client/dist/index.html"));
 });
 
 // Router: /api
 app.use("/api", require("./api"));
+
+app.use((error, req, res, next) => {
+  res
+    .status(error.status || 500)
+    .send(error.message || "internal server error");
+});
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
