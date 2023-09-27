@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import LoginForm from "./components/loginForm";
+import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import HomePage from "./components/HomePage";
 import NavBar from "./components/NavBar";
@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     const getUser = async () => {
-      const response = await fetch("http://localhost:8080/api/auth/me", {
+      const response = await fetch("/api/auth/me", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
