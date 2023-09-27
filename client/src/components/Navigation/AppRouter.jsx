@@ -8,6 +8,7 @@ import Auth from "../Users/Auth";
 import Navbar from "./NavBar";
 import GetSingleMuseum from "../Museums/GetSingleMuseum";
 import { useState } from "react";
+import AllReviews from "../Reviews/AllReviews";
 
 export default function AppRouter() {
   const [token, setToken] = useState(null);
@@ -29,6 +30,7 @@ export default function AppRouter() {
           />
           <Route path="/logout" element={<Logout />} />
           <Route path="/museums/:museumId" element={<GetSingleMuseum />} />
+          <Route path="/reviews" element={<AllReviews />} />
         </Routes>
       </div>
     </>

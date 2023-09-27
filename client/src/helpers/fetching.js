@@ -162,7 +162,7 @@ async function fetchReviewsByMuseumId(museumId) {
     console.log(result);
     return result;
   } catch (error) {
-    console.error("cannot get museum by id", error);
+    console.error("cannot get reviews by museumId", error);
   }
 }
 
