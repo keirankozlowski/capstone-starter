@@ -31,7 +31,7 @@ export default function AppRouter() {
           <Route path="/register" element={<Auth token={token} />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/museums/:museumId" element={<GetSingleMuseum />} />
-          <Route path="/reviews" element={<AllReviews setToken={setToken} token={token} />} />
+          <Route path="/reviews" element={<AllReviews token={token} />} />
         </Routes>
       </div>
     </>

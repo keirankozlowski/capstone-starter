@@ -168,7 +168,7 @@ async function fetchReviewsByMuseumId(museumId) {
 
 // create a review
 
-async function addReview(userId, museumId, rating, body, date, token) {
+async function addReview(token, userId, museumId, rating, body, date) {
   try {
     const response = await fetch(`${baseURL}/reviews`, {
       method: "POST",
@@ -184,44 +184,13 @@ async function addReview(userId, museumId, rating, body, date, token) {
         date,
       }),
     });
-
-    if (!response.ok) {
-      throw new Error(`Failed to add a review. Status: ${response.status}`);
-    }
-
     const result = await response.json();
     return result;
   } catch (error) {
-    console.error("Failed to add a review", error);
+    console.error("You cannot create me", error);
     throw error;
   }
 }
-
-
-// async function addReview(userId, museumId, rating, body, date, token) {
-//   try {
-//     const response = await fetch(`${baseURL}/reviews`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${token}`,
-//       },
-//       body: JSON.stringify({
-//         userId,
-//         museumId,
-//         rating,
-//         body,
-//         date,
-//       }),
-//     });
-//     // console.log(response)
-//     const result = await response.json();
-//     // console.log(result);
-//     return result;
-//   } catch (error) {
-//     console.error(`You cannot create me`, error);
-//   }
-// }
 
 // delete a review
 
