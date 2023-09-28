@@ -6,8 +6,8 @@ const users = [
 ];
 
 const pregnancy = [
-  { username: "Gustavo", age: 7 },
-  { username: "Kieran", age: 9.3 },
-  { username: "Patsy", password: 10.5 },
+  { user_id: 1, age: 7, is_tracking: true },
+  { user_id: 2, age: 12, is_tracking: true },
+  { user_id: 3, age: 15, is_tracking: null },
 ];
-module.exports = { users };
+module.exports = { users, pregnancy };
