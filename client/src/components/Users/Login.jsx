@@ -1,26 +1,47 @@
 import { useState } from "react";
 import { loginUser } from "../../helpers/fetching";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../Redux/authSlice";
 
-export default function Login({ token, setToken }) {
+export default function Login({ token }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [error, setError] = useState(null);
+
   const nav = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(username, password);
+    // console.log(username, password);
     const register = await loginUser(username, password);
     // console.log("response.headers", response.data);
+    console.log("TOKEN: ", register.token);
+
+    if (register.success) {
+      setSuccessMessage("You have logged in");
+      setError(null);
+      dispatch(
+        setCredentials({
+          user: username,
+          token: register.token,
+        })
+      );
+    } else {
+      setSuccessMessage("");
+      setError("Please try again or register for an account");
+    }
 
     // const headers = response.headers;
     // console.log("Response headers", headers);
     //removed .data from below
-    setToken(register.token);
-    console.log(register);
-    setUsername("");
-    setPassword("");
-    // nav("/posts");
+    // setToken(register.token);
+    // console.log(register);
+    // setUsername("");
+    // setPassword("");
+    nav("/profile");
   };
 
   return (
