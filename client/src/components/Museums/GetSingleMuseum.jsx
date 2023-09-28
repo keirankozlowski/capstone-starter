@@ -3,12 +3,14 @@ import { useState, useEffect } from "react";
 import { fetchSingleMuseumById } from "../../helpers/fetching";
 import SingleReview from "../Reviews/SingleReview";
 import "./AllMuseums.css";
+import CreateReview from "../Reviews/CreateReview";
 
 export default function GetSingleMuseum() {
   const navigate = useNavigate();
   const params = useParams();
   const [museum, setMuseum] = useState({});
   const [error, setError] = useState(null);
+  const [reviews, setReviews] = useState([{ userId: 1, rating: '3', body: 'Example Review' }])
 
   async function getMuseumDetails() {
     try {
@@ -38,6 +40,9 @@ export default function GetSingleMuseum() {
           <br />
 
           <SingleReview museumId={params.museumId} />
+
+          <CreateReview setReviews={setReviews} />
+          {/* <CreateReview setReviews={setReviews} token={token} /> */}
 
           <button
             className="museum-buttons"
