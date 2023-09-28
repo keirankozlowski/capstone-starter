@@ -1,9 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
-// import "./Navbar.css"; // Import your CSS file
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../Redux/authSlice"; // import "./Navbar.css"; // Import your CSS file
 import "./Navbar.css"; // Import your CSS file
 
-function Navbar() {
+function Navbar({ token }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    dispatch(logOut());
+    navigate("/register");
+    console.log("logout token:", token);
+  };
+
   return (
     <nav className="navbar">
       <h1>Museum App</h1>
@@ -24,8 +34,8 @@ function Navbar() {
         <li>
           <Link to="/register">Register/Login</Link>
         </li>
-        <button>
-          <Link to="/logout">Logout</Link>
+        <button className="auth-btn" onClick={onLogout}>
+          Log Out
         </button>
       </ul>
     </nav>

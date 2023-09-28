@@ -1,22 +1,37 @@
 import { useState } from "react";
 import { createUser } from "../../helpers/fetching";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../Redux/authSlice";
 
-export default function Register({ token, setToken }) {
+export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+
   const nav = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(username, password);
     const register = await createUser(username, password);
+
+    if (register.success) {
+      dispatch(setCredentials({ user: username, token: register.token }));
+      setError(null);
+      setSuccessMessage("You have signed up! Please log into your account!");
+    } else {
+      setError("Invalid credentials, please try again");
+    }
+
     //deleted .data from below
-    setToken(register.token);
-    console.log(register);
+    // setToken(register.token);
+    // console.log(register);
     // console.log("register", register);
-    setUsername("");
-    setPassword("");
+    // setUsername("");
+    // setPassword("");
     // nav("/posts");
   };
 
@@ -39,7 +54,7 @@ export default function Register({ token, setToken }) {
         />
         <button type="submit">Submit</button>
       </form>
-      {token == null ? null : <h4>You're registered!</h4>}
+      {/* {token == null ? null : <h4>You're registered!</h4>} */}
     </>
   );
 }
