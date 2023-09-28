@@ -10,6 +10,8 @@ import GetSingleMuseum from "../Museums/GetSingleMuseum";
 
 import { useSelector } from "react-redux";
 import { selectCurrentToken } from "../../Redux/authSlice";
+import { useState } from "react";
+import AllReviews from "../Reviews/AllReviews";
 
 export default function AppRouter() {
   const token = useSelector(selectCurrentToken);
@@ -29,6 +31,7 @@ export default function AppRouter() {
           <Route path="/register" element={<Auth token={token} />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/museums/:museumId" element={<GetSingleMuseum />} />
+          <Route path="/reviews" element={<AllReviews />} />
         </Routes>
       </div>
     </>

@@ -12,6 +12,9 @@ function Navbar({ token }) {
     navigate("/register");
     console.log("logout token:", token);
   };
+  import { Link } from "react-router-dom";
+  // import "./Navbar.css"; // Import your CSS file
+  import "./Navbar.css"; // Import your CSS file
 
   return (
     <nav className="navbar">

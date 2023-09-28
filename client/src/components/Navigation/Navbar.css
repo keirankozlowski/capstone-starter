@@ -1,0 +1,75 @@
+/* Navbar.css */
+
+.navbar {
+    background-color: #333; /* Background color for the navbar */
+    color: #fff; /* Text color for navbar items */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .nav-links li {
+    font-size: 18px; /* Font size for navbar items */
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #fff; /* Text color for navbar links */
+    transition: color 0.3s;
+  }
+  
+  .nav-links a:hover {
+    color: #ff5733; /* Text color when hovering over navbar links */
+  }
+  
+  button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px; /* Font size for the button */
+    color: #fff; /* Text color for the button */
+  }
+  
+  button:hover {
+    color: #ff5733; /* Text color when hovering over the button */
+  }
+
+
+  
+
+  /* Home.css */
+
+/* Set the background image */
+.home {
+    background-image: url('https://dreamsinheels.com/wp-content/uploads/2020/07/The-Best-Museums-In-NYC-Per-A-New-Yorker.jpg'); /* Update the path to your image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Style the header element */
+  h1 {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    font-family: 'Your Gorgeous Font', sans-serif;
+  }
+  
+  /* Add more styles as needed */
+  
