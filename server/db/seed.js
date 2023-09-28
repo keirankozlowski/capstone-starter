@@ -1,45 +1,50 @@
-const client = require('./client')
-const { createUser } = require('./helpers/users')
-const { users } = require('./seedData')
+const client = require("./client");
+const { createUser } = require("./helpers/users");
+const { users } = require("./seedData");
 
 const dropTables = async () => {
   await client.query(`
         DROP TABLE IF EXISTS users;
-    `)
-  console.log('Dropped Tables')
-}
+        DROP TABLE IF EXISTS pregnancy;
+    `);
+  console.log("Dropped Tables");
+};
 
 const createTables = async () => {
   await client.query(`
         CREATE TABLE users(
-            id SERIAL PRIMARY KEY,
+            "userId" SERIAL PRIMARY KEY,
             username VARCHAR(255) UNIQUE NOT NULL,
             password VARCHAR(255) NOT NULL
-        )
-    `)
-    console.log('Created Tables')
-}
+        );
+        CREATE TABLE pregnancy(
+            age SERIAL PRIMARY KEY,
+            "userId" INTEGER REFERENCES users("usersId")
+        );
+    `);
+  console.log("Created Tables");
+};
 
 const seedDb = async () => {
-  console.log('Creating Users...')
+  console.log("Creating Users...");
   for (const user of users) {
-    await createUser(user)
+    await createUser(user);
   }
-}
+};
 
 const initDb = async () => {
-  console.log('init')
+  console.log("init");
   try {
-    client.connect()
-    await dropTables()
-    await createTables()
-    await seedDb()
-    console.log('DB is seeded and ready to go!!')
+    client.connect();
+    await dropTables();
+    await createTables();
+    await seedDb();
+    console.log("DB is seeded and ready to go!!");
   } catch (error) {
-    console.error(error)
+    console.error(error);
   } finally {
-    client.end()
+    client.end();
   }
-}
+};
 
-initDb()
+initDb();
