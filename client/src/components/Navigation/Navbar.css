@@ -40,3 +40,36 @@
   button:hover {
     color: #ff5733; /* Text color when hovering over the button */
   }
+
+
+  
+
+  /* Home.css */
+
+/* Set the background image */
+.home {
+    background-image: url('https://dreamsinheels.com/wp-content/uploads/2020/07/The-Best-Museums-In-NYC-Per-A-New-Yorker.jpg'); /* Update the path to your image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Style the header element */
+  h1 {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    font-family: 'Your Gorgeous Font', sans-serif;
+  }
+  
+  /* Add more styles as needed */
+  
