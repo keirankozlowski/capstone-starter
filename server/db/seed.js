@@ -1,11 +1,13 @@
 const client = require("./client");
 const { createUser } = require("./helpers/users");
-const { users } = require("./seedData");
+const { createPregnancy } = require("./helpers/pregnancy");
+const { users, pregnancies } = require("./seedData");
 
 const dropTables = async () => {
   await client.query(`
-        DROP TABLE IF EXISTS users;
         DROP TABLE IF EXISTS pregnancy;
+        DROP TABLE IF EXISTS users;
+
     `);
   console.log("Dropped Tables");
 };
@@ -27,10 +29,17 @@ const createTables = async () => {
   console.log("Created Tables");
 };
 
-const seedDb = async () => {
+const createInitialUsers = async () => {
   console.log("Creating Users...");
   for (const user of users) {
     await createUser(user);
+  }
+};
+
+const createInitialPregnancies = async () => {
+  console.log("Creating Pregnancies...");
+  for (const pregnancy of pregnancies) {
+    await createPregnancy(pregnancy);
   }
 };
 
@@ -40,7 +49,8 @@ const initDb = async () => {
     client.connect();
     await dropTables();
     await createTables();
-    await seedDb();
+    await createInitialUsers();
+    await createInitialPregnancies();
     console.log("DB is seeded and ready to go!!");
   } catch (error) {
     console.error(error);

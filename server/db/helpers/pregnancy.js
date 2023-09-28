@@ -1,30 +1,30 @@
 const client = require("../client");
 
-const createUser = async ({ username, password }) => {
+const createPregnancy = async ({ user_id, age, is_tracking }) => {
   const {
-    rows: [user],
+    rows: [pregnancy],
   } = await client.query(
     `
-        INSERT INTO users(username, password)
-        VALUES ($1, $2)
+        INSERT INTO pregnancy(user_id, age, is_tracking)
+        VALUES ($1, $2, $3)
         RETURNING *
     `,
-    [username, password]
+    [user_id, age, is_tracking]
   );
-  return user;
+  return pregnancy;
 };
 
-const getUserByUsername = async (username) => {
+const getPregnancyByUserId = async (user_id) => {
   const {
-    rows: [user],
+    rows: [pregnancy],
   } = await client.query(
     `
-    SELECT * FROM users
-    WHERE users.username = $1
+    SELECT * FROM pregnancy
+    WHERE users.user_id = $1
     `,
-    [username]
+    [user_id]
   );
-  return user;
+  return pregnancy;
 };
 
-module.exports = { createUser, getUserByUsername };
+module.exports = { createPregnancy, getPregnancyByUserId };
