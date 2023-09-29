@@ -5,7 +5,7 @@ const createPregnancy = async ({ user_id, age, is_tracking }) => {
     rows: [pregnancy],
   } = await client.query(
     `
-        INSERT INTO pregnancy(user_id, age, is_tracking)
+        INSERT INTO pregnancies(user_id, age, is_tracking)
         VALUES ($1, $2, $3)
         RETURNING *
     `,
@@ -16,15 +16,18 @@ const createPregnancy = async ({ user_id, age, is_tracking }) => {
 
 const getPregnancyByUserId = async (user_id) => {
   const {
-    rows: [pregnancy],
+    rows: [pregnancies],
   } = await client.query(
     `
-    SELECT * FROM pregnancy
-    WHERE users.user_id = $1
+    SELECT preg.*
+    FROM pregnancies preg
+    WHERE preg.user_id = $1
+    JOIN pregnancyweeks pregw ON Preg.id = pregw.preg_id
+    JOIN Weeks ON pregw.weeks_id = weeks.id
     `,
     [user_id]
   );
-  return pregnancy;
+  return pregnancies;
 };
 
 module.exports = { createPregnancy, getPregnancyByUserId };
