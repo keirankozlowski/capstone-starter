@@ -10,13 +10,15 @@ const client = require("./client");
 const { createMuseum } = require("./helpers/museums");
 const { createReview } = require("./helpers/reviews");
 const { createUser } = require("./helpers/users");
-const { users, museums, reviews } = require("./seedData");
+const { createJournal } = require("./helpers/journal"); // Corrected
+const { users, museums, reviews, journal } = require("./seedData");
 
 //Drop Tables for cleanliness
 const dropTables = async () => {
   try {
     console.log("Starting to drop tables");
     await client.query(`
+        DROP TABLE IF EXISTS journal;
         DROP TABLE IF EXISTS reviews;
         DROP TABLE IF EXISTS museums;
         DROP TABLE IF EXISTS users;
@@ -57,6 +59,14 @@ const createTables = async () => {
            date DATE NOT NULL DEFAULT CURRENT_DATE
 
         );
+
+        CREATE TABLE journal (
+          "entryId" SERIAL PRIMARY KEY,
+          "userId" INTEGER REFERENCES users("userId"),
+          title varchar(1000),
+          body varchar(1000),
+          date DATE NOT NULL DEFAULT CURRENT_DATE
+      );
     `);
   console.log("Tables built!");
 };
@@ -94,6 +104,18 @@ const createInitialReviews = async () => {
   }
 };
 
+const createInitialJournal = async () => {
+  try {
+    for (const entry of journal) {
+      await createJournal(entry);
+    }
+    console.log("created journal");
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 const rebuildDb = async () => {
   try {
     //ACTUALLY connect to my local database
@@ -107,6 +129,7 @@ const rebuildDb = async () => {
     await createInitialUsers();
     await createInitialMuseums();
     await createInitialReviews();
+    await createInitialJournal();
   } catch (error) {
     console.error(error);
   } finally {
