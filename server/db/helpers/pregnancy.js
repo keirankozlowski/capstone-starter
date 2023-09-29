@@ -19,13 +19,12 @@ const getPregnancyByUserId = async (user_id) => {
     rows: [pregnancies],
   } = await client.query(
     `
-    SELECT preg.*
+    SELECT *
     FROM pregnancies preg
-    WHERE preg.user_id = $1
-    JOIN pregnancyweeks pregw ON Preg.id = pregw.preg_id
-    JOIN Weeks ON pregw.weeks_id = weeks.id
-    `,
-    [user_id]
+    JOIN pregnancyweeks pregw ON preg.id = pregw.preg_id
+    JOIN weeks ON pregw.week_id = weeks.id
+    WHERE preg.user_id = ${user_id};
+    `
   );
   return pregnancies;
 };
