@@ -151,8 +151,29 @@ const reviews = [
   },
 ];
 
-// const journal = [
-//     { username: "sofiec", entry: "loved that museum", date: "2023-08-12" }
-// ]
+const journal = [
+  {
+    entryId: 1, 
+    userId: 1,
+    title: "my museum visit",
+    body: "journal entry",
+    date: "2023-09-23", 
+  },
+  {
+    entryId: 2,
+    userId: 1,
+    title: "Trip to the Natural History Museum",
+    body: "Learned a lot about ancient civilizations and fossils at the natural history museum.",
+    date: "2023-09-25",
+  },
+  {
+    entryId: 3,
+    userId: 2,
+    title: "Adventures in Science Museum",
+    body: "Took my kids to the science museum, and they had a blast with all the interactive exhibits.",
+    date: "2023-09-26",
+  },
+];
 
-module.exports = { users, museums, reviews };
+
+module.exports = { users, museums, reviews, journal };
