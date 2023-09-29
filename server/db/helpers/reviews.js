@@ -5,18 +5,12 @@ const createReview = async (userId, museumId, rating, body, date) => {
     const {
       rows: [review],
     } = await client.query(
-      // `
-      // INSERT INTO reviews("userId", "museumId", rating, body, date)
-      // VALUES($1, $2, $3, $4, $5)
-      // RETURNING *;
-      // s`,
       `
       INSERT INTO reviews("userId", "museumId", rating, body, date)
-      SELECT "userId", $2, $3, $4, $5
-      FROM users
-      WHERE username = $1
+      VALUES($1, $2, $3, $4, $5)
       RETURNING *;
       `,
+
       [userId, museumId, rating, body, date]
     );
     return review;
