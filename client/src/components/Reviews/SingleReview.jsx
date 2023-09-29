@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchReviewsByMuseumId } from "../../helpers/fetching";
+import StarRating from "./StarRating";
 
 export default function SingleReview({ museumId, token }) {
   const [reviews, setReviews] = useState([]);
@@ -35,7 +36,7 @@ export default function SingleReview({ museumId, token }) {
       ) : (
         reviews.map((review) => (
           <div key={review.reviewId}>
-            <p>Rating: {review.rating}</p>
+          <StarRating rating={review.rating} /> 
             <p>{review.body}</p>
             <p>{review.date}</p>
           </div>
