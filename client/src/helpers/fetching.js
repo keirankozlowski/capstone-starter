@@ -249,6 +249,155 @@ async function editReview(
 
 
 
+
+//Experiment
+// JOURNAL ENTRY QUERIES
+
+// fetch all journal entries
+
+async function fetchAllJournalEntries() {
+  try {
+    const response = await fetch(`${baseURL}/journals`);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Cannot get journal entries", error);
+  }
+}
+
+// fetch journal entry by entryId
+
+async function fetchSingleJournalEntryById(entryId) {
+  try {
+    const response = await fetch(`${baseURL}/journal/${entryId}`);
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error("Cannot get single journal entry", error);
+  }
+}
+
+// fetch journal entries by userId
+
+async function fetchJournalEntriesByUserId(userId) {
+  try {
+    const response = await fetch(`${baseURL}/journal/user/${userId}`);
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error("Cannot get journal entries by userId", error);
+  }
+}
+
+// create a journal entry
+async function addJournalEntry(token, userId, title, body, date) {
+  try {
+    const response = await fetch(`${baseURL}/journals`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        userId,
+        title,
+        body,
+        date,
+      }),
+    });
+
+    // Check if the response status is okay
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Failed to create a journal entry: ${errorMessage}`);
+    }
+
+    const result = await response.json(); // Parse the JSON once
+
+    return result;
+  } catch (error) {
+    console.error("You cannot create a journal entry", error);
+    throw error;
+  }
+}
+
+
+
+// async function addJournalEntry(token, userId, title, body, date) {
+//   try {
+//     const response = await fetch(`${baseURL}/journal`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${token}`,
+//       },
+//       body: JSON.stringify({
+//         userId,
+//         title,
+//         body,
+//         date,
+//       }),
+//     });
+//     const result = await response.json();
+//     return result;
+//   } catch (error) {
+//     console.error("You cannot create a journal entry", error);
+//     throw error;
+//   }
+// }
+
+// delete a journal entry
+
+async function deleteJournalEntry(entryId, token) {
+  try {
+    const response = await fetch(`${baseURL}/journal/${entryId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(response);
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error("You cannot delete a journal entry", error);
+  }
+}
+
+// edit a journal entry
+
+async function editJournalEntry(entryId, userId, title, body, date, token) {
+  try {
+    const response = await fetch(`${baseURL}/journals/${entryId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        userId,
+        title,
+        body,
+        date,
+      }),
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("You cannot edit a journal entry", error);
+    throw error;
+  }
+}
+
+
+
+
+
+
 export {
   createUser,
   loginUser,
@@ -263,4 +412,11 @@ export {
   addReview,
   deleteReview,
   editReview,
+  //experiment
+  fetchAllJournalEntries,
+  fetchSingleJournalEntryById,
+  fetchJournalEntriesByUserId,
+  addJournalEntry,
+  deleteJournalEntry,
+  editJournalEntry,
 };
