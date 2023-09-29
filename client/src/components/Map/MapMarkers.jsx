@@ -3,6 +3,7 @@ import { Marker, InfoWindow } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
 import { fetchAllMuseums } from "../../helpers/fetching";
 import markersIcon from "../Images/markers.png";
+import SingleReview from "../Reviews/SingleReview";
 
 const MapMarkers = () => {
   const [selectedMarker, setSelectedMarker] = useState(null);

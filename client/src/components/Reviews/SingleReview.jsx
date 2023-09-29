@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { fetchReviewsByMuseumId } from "../../helpers/fetching";
+import StarRating from "./StarRating";
 
 export default function SingleReview({ museumId }) {
   const [reviews, setReviews] = useState([]);
@@ -32,7 +33,7 @@ export default function SingleReview({ museumId }) {
       ) : (
         reviews.map((review) => (
           <div key={review.reviewId}>
-            <p>Rating: {review.rating}</p>
+          <StarRating rating={review.rating} /> 
             <p>{review.body}</p>
             <p>{review.date}</p>
           </div>
