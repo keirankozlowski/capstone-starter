@@ -1,16 +1,22 @@
 import { useState, useEffect } from "react";
 import { addReview, fetchAllReviews } from "../../helpers/fetching";
 import { useNavigate } from "react-router-dom";
+import StarRating from "./StarRating";
 
 export default function CreateReview({ setReviews, museumId, token }) {
-  const [newReview, setNewReview] = useState({ rating: "", body: "" });
-  const [rating, setRating] = useState("");
+  const [newReview, setNewReview] = useState({ rating: 0, body: "" });
+  const [rating, setRating] = useState(0);
   const [body, setBody] = useState("");
   const [error, setError] = useState(null);
 
   const userId = 5;
 
   const navigate = useNavigate();
+
+  const handleRatingChange = (newRating) => {
+    setRating(newRating);
+    setNewReview({ ...newReview, rating: newRating });
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -33,21 +39,16 @@ export default function CreateReview({ setReviews, museumId, token }) {
     }
     createReview();
 
-    setRating("");
+    setRating(0);
     setBody("");
   };
 
   return (
     <>
       <h3>Add a review</h3>
+      Rating: <StarRating rating={rating} onRatingChange={handleRatingChange} />
       <form onSubmit={submitHandler}>
-        <input
-          placeholder="rating"
-          value={rating}
-          onChange={(e) => setRating(e.target.value)}
-        />
-        <br />
-        <br />
+        
         <input
           placeholder="body"
           value={body}
