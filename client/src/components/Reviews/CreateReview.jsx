@@ -40,7 +40,7 @@ export default function CreateReview({ setReviews, museumId, token }) {
         rating,
         body,
       };
-      const result = await addReview(newReview, token);
+      const result = await addReview(newReview);
       console.log("my user id:", myUserId);
       const updateReview = await fetchAllReviews();
       setReviews(updateReview.reviews);
