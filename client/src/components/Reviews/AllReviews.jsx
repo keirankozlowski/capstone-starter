@@ -6,7 +6,7 @@ export default function AllReviews({ token }) {
   const [reviews, setReviews] = useState([]);
   const [error, setError] = useState(null);
 
-  const [selectedReview, setSelectedReview] = useState(null)
+  const [selectedReview, setSelectedReview] = useState(null);
 
   // FETCH ALL REVIEWS
   useEffect(() => {
@@ -25,19 +25,21 @@ export default function AllReviews({ token }) {
 
   const handleEditReview = (review) => {
     setSelectedReview(review);
-  }
+  };
 
   const handleCancelEdit = () => {
-    setSelectedR}
-    
+    setSelectedReview(null);
+  };
+
   return (
     <>
-    <h1> Get All Reviews</h1>
-    {reviews.map((review) => (
+      <h1> Get All Reviews</h1>
+      {reviews.map((review) => (
         <div key={review.reviewId}>
           <p>Rating: {review.rating}</p>
           <p>{review.body}</p>
           <p>{review.date}</p>
+          <button onClick={() => handleEditReview(review)}>Edit Review</button>
         </div>
       ))}
 

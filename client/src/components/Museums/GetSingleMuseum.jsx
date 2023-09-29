@@ -1,17 +1,22 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { fetchReviewsByMuseumId, fetchSingleMuseumById } from "../../helpers/fetching";
+import {
+  fetchReviewsByMuseumId,
+  fetchSingleMuseumById,
+} from "../../helpers/fetching";
 import SingleReview from "../Reviews/SingleReview";
 import "./AllMuseums.css";
 import CreateReview from "../Reviews/CreateReview";
 import StarRating from "../Reviews/StarRating";
 
-export default function GetSingleMuseum() {
+export default function GetSingleMuseum({ token }) {
   const navigate = useNavigate();
   const params = useParams();
   const [museum, setMuseum] = useState({});
   const [error, setError] = useState(null);
-  const [reviews, setReviews] = useState([])
+  const [reviews, setReviews] = useState([
+    { userId: 1, rating: "3", body: "Example Review" },
+  ]);
 
   async function getMuseumDetails() {
     try {
@@ -28,7 +33,7 @@ export default function GetSingleMuseum() {
     getMuseumDetails();
   }, [params.museumId]);
 
-  // CALCULATES AVERAGE RATING: 
+  // CALCULATES AVERAGE RATING:
   const averageRating = () => {
     if (reviews.length === 0) return 0;
     const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
@@ -44,21 +49,35 @@ export default function GetSingleMuseum() {
         <div className="single-museum-card museum-item" key={museum.museumId}>
           <h3 className="museum-headers">{museum.museumName}</h3>
           <p>{museum.description}</p>
-          <img src={museum.image} alt={museum.museumName} className="museum-image" />
-          <a href={museum.link} target="_blank" rel="noopener noreferrer" className="museum-link">
+          <img
+            src={museum.image}
+            alt={museum.museumName}
+            className="museum-image"
+          />
+          <a
+            href={museum.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="museum-link"
+          >
             Learn More
           </a>
           <br />
 
           {/* REVIEWS */}
-          <div className="averageRating"> 
-          Average Rating: <StarRating rating={averageRating()} /> 
-          {averageRating().toFixed(1)}
+          <div className="averageRating">
+            Average Rating: <StarRating rating={averageRating()} />
+            {averageRating().toFixed(1)}
           </div>
 
-          <SingleReview museumId={params.museumId} />
+          <SingleReview museumId={params.museumId} token={token} />
 
-          <CreateReview setReviews={setReviews} />
+          <CreateReview
+            reviews={reviews}
+            setReviews={setReviews}
+            token={token}
+            museumId={params.museumId}
+          />
           {/* <CreateReview setReviews={setReviews} token={token} /> */}
 
           <button

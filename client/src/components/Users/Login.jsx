@@ -17,15 +17,14 @@ export default function Login({ token }) {
     e.preventDefault();
     // console.log(username, password);
     const register = await loginUser(username, password);
-    // console.log("response.headers", response.data);
-    console.log("TOKEN: ", register.token);
+    // console.log("register", register);
 
-    if (register.success) {
+    if (register) {
       setSuccessMessage("You have logged in");
       setError(null);
       dispatch(
         setCredentials({
-          user: username,
+          user: register.user.username,
           token: register.token,
         })
       );
@@ -33,15 +32,7 @@ export default function Login({ token }) {
       setSuccessMessage("");
       setError("Please try again or register for an account");
     }
-
-    // const headers = response.headers;
-    // console.log("Response headers", headers);
-    //removed .data from below
-    // setToken(register.token);
-    // console.log(register);
-    // setUsername("");
-    // setPassword("");
-    nav("/profile");
+    nav("/map");
   };
 
   return (
@@ -65,7 +56,7 @@ export default function Login({ token }) {
         />
         <button type="submit">Submit</button>
       </form>
-      {token == null ? null : <h4>You're logged in!</h4>}
+      {/* {token == null ? null : <h4>You're logged in!</h4>} */}
     </>
   );
 }

@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { GoogleMap, Marker, LoadScript, useJsApiLoader } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  Marker,
+  LoadScript,
+  useJsApiLoader,
+} from "@react-google-maps/api";
 import MapMarkers from "./MapMarkers";
 import customMapStyle from "./mapStyle.json";
 
@@ -21,14 +26,16 @@ const Map = () => {
 
   return (
     <div>
-      {isLoaded && <GoogleMap
+      {isLoaded && (
+        <GoogleMap
           mapContainerStyle={mapStyles}
           zoom={12}
           center={center}
           options={{ styles: customMapStyle }}
         >
           <MapMarkers markers={mapMarkers} />
-        </GoogleMap>}
+        </GoogleMap>
+      )}
     </div>
   );
 };

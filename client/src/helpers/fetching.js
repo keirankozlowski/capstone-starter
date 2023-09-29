@@ -73,6 +73,19 @@ async function logoutUser(username, password) {
   }
 }
 
+// fetch user id by username
+
+async function fetchUserByUsername(username) {
+  try {
+    const response = await fetch(`${baseURL}/users/${username}`);
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error("cannot get username", error);
+  }
+}
+
 // MUSEUM QUERIES
 
 // fetch all museums
@@ -168,7 +181,7 @@ async function fetchReviewsByMuseumId(museumId) {
 
 // create a review
 
-async function addReview(token, userId, museumId, rating, body, date) {
+async function addReview(userId, museumId, rating, body, date, token) {
   try {
     const response = await fetch(`${baseURL}/reviews`, {
       method: "POST",
@@ -246,10 +259,6 @@ async function editReview(
   }
 }
 
-
-
-
-
 //Experiment
 // JOURNAL ENTRY QUERIES
 
@@ -323,8 +332,6 @@ async function addJournalEntry(token, userId, title, body, date) {
   }
 }
 
-
-
 // async function addJournalEntry(token, userId, title, body, date) {
 //   try {
 //     const response = await fetch(`${baseURL}/journal`, {
@@ -393,15 +400,11 @@ async function editJournalEntry(entryId, userId, title, body, date, token) {
   }
 }
 
-
-
-
-
-
 export {
   createUser,
   loginUser,
   logoutUser,
+  fetchUserByUsername,
   fetchAllMuseums,
   fetchSingleMuseumById,
   fetchSingleMuseumByName,

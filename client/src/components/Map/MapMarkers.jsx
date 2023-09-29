@@ -5,7 +5,7 @@ import { fetchAllMuseums } from "../../helpers/fetching";
 import markersIcon from "../Images/markers.png";
 import SingleReview from "../Reviews/SingleReview";
 
-const MapMarkers = () => {
+const MapMarkers = ({ token }) => {
   const [selectedMarker, setSelectedMarker] = useState(null);
   const navigate = useNavigate();
   const [museums, setMuseums] = useState([]);
