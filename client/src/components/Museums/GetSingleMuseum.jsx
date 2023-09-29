@@ -1,21 +1,24 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { fetchSingleMuseumById } from "../../helpers/fetching";
+import { fetchReviewsByMuseumId, fetchSingleMuseumById } from "../../helpers/fetching";
 import SingleReview from "../Reviews/SingleReview";
 import "./AllMuseums.css";
 import CreateReview from "../Reviews/CreateReview";
+import StarRating from "../Reviews/StarRating";
 
 export default function GetSingleMuseum() {
   const navigate = useNavigate();
   const params = useParams();
   const [museum, setMuseum] = useState({});
   const [error, setError] = useState(null);
-  const [reviews, setReviews] = useState([{ userId: 1, rating: '3', body: 'Example Review' }])
+  const [reviews, setReviews] = useState([])
 
   async function getMuseumDetails() {
     try {
       const museumData = await fetchSingleMuseumById(params.museumId);
       setMuseum(museumData);
+      const museumReviews = await fetchReviewsByMuseumId(params.museumId);
+      setReviews(museumReviews);
     } catch (err) {
       setError("Failed to fetch museum details. Please try again later.");
     }
@@ -25,8 +28,16 @@ export default function GetSingleMuseum() {
     getMuseumDetails();
   }, [params.museumId]);
 
+  // CALCULATES AVERAGE RATING: 
+  const averageRating = () => {
+    if (reviews.length === 0) return 0;
+    const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+    return totalRating / reviews.length;
+  };
+
   return (
     <div className="single-museum-page">
+      {/* MUSEUM DETAILS  */}
       {error ? (
         <p>{error}</p>
       ) : (
@@ -38,6 +49,12 @@ export default function GetSingleMuseum() {
             Learn More
           </a>
           <br />
+
+          {/* REVIEWS */}
+          <div className="averageRating"> 
+          Average Rating: <StarRating rating={averageRating()} /> 
+          {averageRating().toFixed(1)}
+          </div>
 
           <SingleReview museumId={params.museumId} />
 
