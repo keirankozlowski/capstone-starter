@@ -1,11 +1,13 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { fetchSingleMuseumById } from "../../helpers/fetching";
+import {
+  fetchReviewsByMuseumId,
+  fetchSingleMuseumById,
+} from "../../helpers/fetching";
 import SingleReview from "../Reviews/SingleReview";
 import "./AllMuseums.css";
 import CreateReview from "../Reviews/CreateReview";
-// import { useSelector } from "react-redux";
-// import { selectCurrentToken } from "../../Redux/authSlice";
+import StarRating from "../Reviews/StarRating";
 
 export default function GetSingleMuseum({ token }) {
   const navigate = useNavigate();
@@ -16,12 +18,12 @@ export default function GetSingleMuseum({ token }) {
     { userId: 1, rating: "3", body: "Example Review" },
   ]);
 
-  // const token = useSelector(selectCurrentToken);
-
   async function getMuseumDetails() {
     try {
       const museumData = await fetchSingleMuseumById(params.museumId);
       setMuseum(museumData);
+      const museumReviews = await fetchReviewsByMuseumId(params.museumId);
+      setReviews(museumReviews);
     } catch (err) {
       setError("Failed to fetch museum details. Please try again later.");
     }
@@ -31,8 +33,16 @@ export default function GetSingleMuseum({ token }) {
     getMuseumDetails();
   }, [params.museumId]);
 
+  // CALCULATES AVERAGE RATING:
+  const averageRating = () => {
+    if (reviews.length === 0) return 0;
+    const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+    return totalRating / reviews.length;
+  };
+
   return (
     <div className="single-museum-page">
+      {/* MUSEUM DETAILS  */}
       {error ? (
         <p>{error}</p>
       ) : (
@@ -54,9 +64,16 @@ export default function GetSingleMuseum({ token }) {
           </a>
           <br />
 
+          {/* REVIEWS */}
+          <div className="averageRating">
+            Average Rating: <StarRating rating={averageRating()} />
+            {averageRating().toFixed(1)}
+          </div>
+
           <SingleReview museumId={params.museumId} token={token} />
 
           <CreateReview
+            reviews={reviews}
             setReviews={setReviews}
             token={token}
             museumId={params.museumId}

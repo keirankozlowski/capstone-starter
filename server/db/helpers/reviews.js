@@ -1,6 +1,6 @@
 const client = require("../client");
 
-const createReview = async (userId, museumId, rating, body, date) => {
+const createReview = async ({ userId, museumId, rating, body, date }) => {
   try {
     const {
       rows: [review],

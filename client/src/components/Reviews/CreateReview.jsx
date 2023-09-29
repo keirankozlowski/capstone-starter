@@ -1,47 +1,30 @@
 import { useState, useEffect } from "react";
 import { addReview, fetchAllReviews } from "../../helpers/fetching";
 import { useNavigate } from "react-router-dom";
-import { selectCurrentUser } from "../../Redux/authSlice";
-import { useSelector } from "react-redux";
-import { fetchUserByUsername } from "../../helpers/fetching";
 
 export default function CreateReview({ setReviews, museumId, token }) {
-  const [myUserId, setMyUserId] = useState(7);
+  const [newReview, setNewReview] = useState({ rating: "", body: "" });
   const [rating, setRating] = useState("");
   const [body, setBody] = useState("");
+  const [error, setError] = useState(null);
 
-  const singleMuseumId = museumId;
+  const userId = 5;
 
   const navigate = useNavigate();
-  //   const user = useSelector(selectCurrentUser);
-  //   console.log("user: ", user);
-  //   //   console.log("token", token);
-
-  //   useEffect(() => {
-  //     // Fetch the userId when the component mounts
-  //     async function fetchUserId() {
-  //       try {
-  //         const response = await fetchUserByUsername(user);
-  //         console.log("userid?: ", response.userId);
-  //         setMyUserId(response.userId);
-  //       } catch (error) {
-  //         console.error("Error fetching user info", error);
-  //       }
-  //     }
-  //     fetchUserId();
-  //   }, [user]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     async function createReview() {
-      const newReview = {
-        myUserId,
-        singleMuseumId,
+      //   console.log("my user id:", myUserId);
+      const result = await addReview(
+        userId,
+        museumId,
         rating,
         body,
-      };
-      const result = await addReview(newReview);
-      console.log("my user id:", myUserId);
+        new Date().toISOString(),
+        token
+      );
+
       const updateReview = await fetchAllReviews();
       setReviews(updateReview.reviews);
       navigate("./", { replace: true });
@@ -58,12 +41,6 @@ export default function CreateReview({ setReviews, museumId, token }) {
     <>
       <h3>Add a review</h3>
       <form onSubmit={submitHandler}>
-        <input
-          placeholder="userId"
-          value={7}
-          onChange={(e) => setMyUserId(e.target.value)}
-        />
-        <input placeholder="Museum Id" value={singleMuseumId} disabled />
         <input
           placeholder="rating"
           value={rating}
