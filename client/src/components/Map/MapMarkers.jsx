@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchAllMuseums } from "../../helpers/fetching";
 import markersIcon from "../Images/markers.png";
 
-const MapMarkers = () => {
+const MapMarkers = ({ token }) => {
   const [selectedMarker, setSelectedMarker] = useState(null);
   const navigate = useNavigate();
   const [museums, setMuseums] = useState([]);

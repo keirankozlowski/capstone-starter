@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { fetchReviewsByMuseumId } from "../../helpers/fetching";
 
-export default function SingleReview({ museumId }) {
+export default function SingleReview({ museumId, token }) {
   const [reviews, setReviews] = useState([]);
   const [error, setError] = useState(null);
 
-// FETCH REVIEWS BY MUSEUMID
+  const navigate = useNavigate();
+
+  // FETCH REVIEWS BY MUSEUMID
   useEffect(() => {
     async function getMuseumReviews() {
       if (museumId === null) {

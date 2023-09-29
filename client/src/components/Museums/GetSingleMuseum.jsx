@@ -4,13 +4,19 @@ import { fetchSingleMuseumById } from "../../helpers/fetching";
 import SingleReview from "../Reviews/SingleReview";
 import "./AllMuseums.css";
 import CreateReview from "../Reviews/CreateReview";
+// import { useSelector } from "react-redux";
+// import { selectCurrentToken } from "../../Redux/authSlice";
 
-export default function GetSingleMuseum() {
+export default function GetSingleMuseum({ token }) {
   const navigate = useNavigate();
   const params = useParams();
   const [museum, setMuseum] = useState({});
   const [error, setError] = useState(null);
-  const [reviews, setReviews] = useState([{ userId: 1, rating: '3', body: 'Example Review' }])
+  const [reviews, setReviews] = useState([
+    { userId: 1, rating: "3", body: "Example Review" },
+  ]);
+
+  // const token = useSelector(selectCurrentToken);
 
   async function getMuseumDetails() {
     try {
@@ -33,15 +39,28 @@ export default function GetSingleMuseum() {
         <div className="single-museum-card museum-item" key={museum.museumId}>
           <h3 className="museum-headers">{museum.museumName}</h3>
           <p>{museum.description}</p>
-          <img src={museum.image} alt={museum.museumName} className="museum-image" />
-          <a href={museum.link} target="_blank" rel="noopener noreferrer" className="museum-link">
+          <img
+            src={museum.image}
+            alt={museum.museumName}
+            className="museum-image"
+          />
+          <a
+            href={museum.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="museum-link"
+          >
             Learn More
           </a>
           <br />
 
-          <SingleReview museumId={params.museumId} />
+          <SingleReview museumId={params.museumId} token={token} />
 
-          <CreateReview setReviews={setReviews} />
+          <CreateReview
+            setReviews={setReviews}
+            token={token}
+            museumId={params.museumId}
+          />
           {/* <CreateReview setReviews={setReviews} token={token} /> */}
 
           <button
