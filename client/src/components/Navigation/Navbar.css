@@ -34,7 +34,7 @@
     border: none;
     cursor: pointer;
     font-size: 16px; /* Font size for the button */
-    color: #fff; /* Text color for the button */
+    color: #4ee60d; /* Text color for the button */
   }
   
   button:hover {
@@ -65,7 +65,7 @@
     font-weight: bold;
     text-align: center;
     margin-top: 20px;
-    color: #fff;
+    color: #f5f6f1;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 20px;
     font-family: 'Your Gorgeous Font', sans-serif;
