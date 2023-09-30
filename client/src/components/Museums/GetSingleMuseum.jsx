@@ -72,7 +72,11 @@ export default function GetSingleMuseum({ token, userId }) {
             {averageRating().toFixed(1)}
           </div>
 
-          <SingleReview museumId={params.museumId} token={token} />
+          <SingleReview
+            museumId={params.museumId}
+            token={token}
+            userId={userId}
+          />
 
           <CreateReview
             reviews={reviews}
