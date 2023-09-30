@@ -17,11 +17,15 @@ export default function Register() {
     e.preventDefault();
     console.log(username, password);
     const register = await createUser(username, password);
-    console.log("register:", register);
+    // console.log("register:", register);
 
     if (register) {
       dispatch(
-        setCredentials({ user: register.user.username, token: register.token })
+        setCredentials({
+          username: register.user.username,
+          userId: register.user.userId,
+          token: register.token,
+        })
       );
       setError(null);
       setSuccessMessage("You have signed up! Please log into your account!");

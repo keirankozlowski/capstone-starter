@@ -9,7 +9,7 @@ import "./AllMuseums.css";
 import CreateReview from "../Reviews/CreateReview";
 import StarRating from "../Reviews/StarRating";
 
-export default function GetSingleMuseum({ token }) {
+export default function GetSingleMuseum({ token, userId }) {
   const navigate = useNavigate();
   const params = useParams();
   const [museum, setMuseum] = useState({});
@@ -17,6 +17,8 @@ export default function GetSingleMuseum({ token }) {
   const [reviews, setReviews] = useState([
     { userId: 1, rating: "3", body: "Example Review" },
   ]);
+
+  console.log("userID: ", userId);
 
   async function getMuseumDetails() {
     try {
@@ -77,6 +79,7 @@ export default function GetSingleMuseum({ token }) {
             setReviews={setReviews}
             token={token}
             museumId={params.museumId}
+            userId={userId}
           />
           {/* <CreateReview setReviews={setReviews} token={token} /> */}
 

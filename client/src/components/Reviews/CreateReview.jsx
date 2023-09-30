@@ -3,13 +3,11 @@ import { addReview, fetchAllReviews } from "../../helpers/fetching";
 import { useNavigate } from "react-router-dom";
 import StarRating from "./StarRating";
 
-export default function CreateReview({ setReviews, museumId, token }) {
+export default function CreateReview({ setReviews, museumId, token, userId }) {
   const [newReview, setNewReview] = useState({ rating: 0, body: "" });
   const [rating, setRating] = useState(0);
   const [body, setBody] = useState("");
   const [error, setError] = useState(null);
-
-  const userId = 5;
 
   const navigate = useNavigate();
 
@@ -48,7 +46,6 @@ export default function CreateReview({ setReviews, museumId, token }) {
       <h3>Add a review</h3>
       Rating: <StarRating rating={rating} onRatingChange={handleRatingChange} />
       <form onSubmit={submitHandler}>
-        
         <input
           placeholder="body"
           value={body}
