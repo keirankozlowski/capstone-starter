@@ -15,7 +15,7 @@ export default function AverageRating({ reviews }) {
 
   return (
     <div className="averageRating">
-      Average Rating: <StarRating rating={averageRating} disableHover={true} />
+      Average Rating: <StarRating rating={averageRating} onRatingChange={() => {}} disableHover={true} />
       {averageRating.toFixed(1)}
     </div>
   );
