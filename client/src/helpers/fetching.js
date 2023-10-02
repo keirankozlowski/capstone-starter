@@ -266,7 +266,7 @@ async function editReview(
 
 async function fetchAllJournalEntries() {
   try {
-    const response = await fetch(`${baseURL}/journals`);
+    const response = await fetch(`${baseURL}/journal`);
     const result = await response.json();
     return result;
   } catch (error) {
@@ -303,7 +303,7 @@ async function fetchJournalEntriesByUserId(userId) {
 // create a journal entry
 async function addJournalEntry(token, userId, title, body, date) {
   try {
-    const response = await fetch(`${baseURL}/journals`, {
+    const response = await fetch(`${baseURL}/journal`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -383,7 +383,7 @@ async function deleteJournalEntry(entryId, token) {
 
 async function editJournalEntry(entryId, userId, title, body, date, token) {
   try {
-    const response = await fetch(`${baseURL}/journals/${entryId}`, {
+    const response = await fetch(`${baseURL}/journal/${entryId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

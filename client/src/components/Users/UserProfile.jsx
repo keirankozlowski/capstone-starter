@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-  fetchAllJournalEntries,
+  fetchJournalEntriesByUserId,
   addJournalEntry,
   editJournalEntry,
   deleteJournalEntry,
@@ -16,7 +16,7 @@ export default function JournalEntries({ token, userId }) {
   useEffect(() => {
     const fetchEntries = async () => {
       try {
-        const entries = await fetchAllJournalEntries();
+        const entries = await fetchJournalEntriesByUserId(userId);
         if (Array.isArray(entries)) {
           setJournalEntries(entries);
         } else {
@@ -53,7 +53,9 @@ export default function JournalEntries({ token, userId }) {
   };
 
   const handleEditEntry = (entryId) => {
-    const entryToEdit = journalEntries.find((entry) => entry.entryId === entryId);
+    const entryToEdit = journalEntries.find(
+      (entry) => entry.entryId === entryId
+    );
     setEditingEntry(entryToEdit);
   };
 
@@ -170,16 +172,12 @@ export default function JournalEntries({ token, userId }) {
           type="text"
           placeholder="Title"
           value={newEntry.title}
-          onChange={(e) =>
-            setNewEntry({ ...newEntry, title: e.target.value })
-          }
+          onChange={(e) => setNewEntry({ ...newEntry, title: e.target.value })}
         />
         <textarea
           placeholder="Body"
           value={newEntry.body}
-          onChange={(e) =>
-            setNewEntry({ ...newEntry, body: e.target.value })
-          }
+          onChange={(e) => setNewEntry({ ...newEntry, body: e.target.value })}
         />
         <button className="create-button" onClick={handleCreateEntry}>
           Create
@@ -188,17 +186,6 @@ export default function JournalEntries({ token, userId }) {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
 
 // import React, { useState, useEffect } from "react";
 // import {
@@ -376,7 +363,3 @@ export default function JournalEntries({ token, userId }) {
 //     </div>
 //   );
 // }
-
-
-
-
