@@ -4,6 +4,7 @@ import { fetchReviewsByMuseumId } from "../../helpers/fetching";
 import { deleteReview } from "../../helpers/fetching";
 import EditReview from "./EditReview";
 import StarRating from "./StarRating";
+import CreateReview from "./CreateReview";
 
 export default function SingleReview({ museumId, token, userId }) {
   const [reviews, setReviews] = useState([]);
@@ -62,7 +63,7 @@ export default function SingleReview({ museumId, token, userId }) {
       ) : (
         reviews.map((review) => (
           <div key={review.reviewId}>
-          <StarRating
+            <StarRating
               rating={review.rating}
               onRatingChange={() => {}}
               disableHover={true}
@@ -91,6 +92,15 @@ export default function SingleReview({ museumId, token, userId }) {
           token={token}
           userId={userId}
           museumId={selectedReview.museumId}
+        />
+      )}
+      {token && (
+        <CreateReview
+          reviews={reviews}
+          setReviews={setReviews}
+          token={token}
+          museumId={museumId}
+          userId={userId}
         />
       )}
     </>

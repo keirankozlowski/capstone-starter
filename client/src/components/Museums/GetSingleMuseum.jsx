@@ -6,8 +6,6 @@ import {
 } from "../../helpers/fetching";
 import SingleReview from "../Reviews/SingleReview";
 import "./AllMuseums.css";
-import CreateReview from "../Reviews/CreateReview";
-import StarRating from "../Reviews/StarRating";
 import AverageRating from "../Reviews/AverageRating";
 
 export default function GetSingleMuseum({ token, museumId, userId }) {
@@ -66,15 +64,7 @@ export default function GetSingleMuseum({ token, museumId, userId }) {
             token={token}
             userId={userId}
           />
-          {token && (
-            <CreateReview
-              reviews={reviews}
-              setReviews={setReviews}
-              token={token}
-              museumId={params.museumId}
-              userId={userId}
-            />
-          )}
+
           <button
             className="museum-buttons"
             onClick={() => {
