@@ -357,6 +357,8 @@ async function addJournalEntry(token, userId, title, body, date) {
 
 // delete a journal entry
 
+// Updated deleteJournalEntry function
+
 async function deleteJournalEntry(entryId, token) {
   try {
     const response = await fetch(`${baseURL}/journal/${entryId}`, {
@@ -374,6 +376,8 @@ async function deleteJournalEntry(entryId, token) {
     console.error("You cannot delete a journal entry", error);
   }
 }
+
+
 
 // edit a journal entry
 
