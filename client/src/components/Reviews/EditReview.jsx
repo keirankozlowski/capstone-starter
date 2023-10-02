@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import { editReview, fetchSingleReview } from "../../helpers/fetching";
 import { useNavigate } from "react-router-dom";
 
-export default function EditReview({ reviewId, onCancel, token }) {
+export default function EditReview({
+  reviewId,
+  onCancel,
+  token,
+  museumId,
+  userId,
+}) {
   const [newRating, setNewRating] = useState("");
   const [newBody, setNewBody] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
-  console.log("EditReview Token: ", token);
 
   useEffect(() => {
     async function fetchReviewData() {
@@ -26,10 +30,14 @@ export default function EditReview({ reviewId, onCancel, token }) {
   const handleEditReview = async (event) => {
     try {
       event.preventDefault();
+
       const editedReview = await editReview(
         reviewId,
+        userId,
+        museumId,
         newRating,
         newBody,
+        new Date().toISOString(),
         token
       );
       navigate("./", { replace: true });
