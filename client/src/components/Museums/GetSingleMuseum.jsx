@@ -9,14 +9,12 @@ import "./AllMuseums.css";
 import CreateReview from "../Reviews/CreateReview";
 import StarRating from "../Reviews/StarRating";
 
-export default function GetSingleMuseum({ token }) {
+export default function GetSingleMuseum({ token, userId }) {
   const navigate = useNavigate();
   const params = useParams();
   const [museum, setMuseum] = useState({});
   const [error, setError] = useState(null);
-  const [reviews, setReviews] = useState([
-    { userId: 1, rating: "3", body: "Example Review" },
-  ]);
+  const [reviews, setReviews] = useState([]);
 
   async function getMuseumDetails() {
     try {
@@ -35,7 +33,8 @@ export default function GetSingleMuseum({ token }) {
 
   // CALCULATES AVERAGE RATING:
   const averageRating = () => {
-    if (reviews.length === 0) return 0;
+    if (!Array.isArray(reviews) || reviews.length === 0) return 0;
+    console.log("reviews:", reviews);
     const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
     return totalRating / reviews.length;
   };
@@ -70,16 +69,20 @@ export default function GetSingleMuseum({ token }) {
             {averageRating().toFixed(1)}
           </div>
 
-          <SingleReview museumId={params.museumId} token={token} />
-
-          <CreateReview
-            reviews={reviews}
-            setReviews={setReviews}
-            token={token}
+          <SingleReview
             museumId={params.museumId}
+            token={token}
+            userId={userId}
           />
-          {/* <CreateReview setReviews={setReviews} token={token} /> */}
-
+          {token && (
+            <CreateReview
+              reviews={reviews}
+              setReviews={setReviews}
+              token={token}
+              museumId={params.museumId}
+              userId={userId}
+            />
+          )}
           <button
             className="museum-buttons"
             onClick={() => {

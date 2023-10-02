@@ -2,6 +2,7 @@ import { useState } from "react";
 import { loginUser } from "../../helpers/fetching";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+// import { login } from "../../Redux/authSlice";
 import { setCredentials } from "../../Redux/authSlice";
 
 export default function Login({ token }) {
@@ -17,14 +18,15 @@ export default function Login({ token }) {
     e.preventDefault();
     // console.log(username, password);
     const register = await loginUser(username, password);
-    // console.log("register", register);
+    console.log("register", register);
 
     if (register) {
       setSuccessMessage("You have logged in");
       setError(null);
       dispatch(
         setCredentials({
-          user: register.user.username,
+          username: register.user.username,
+          userId: register.user.userId,
           token: register.token,
         })
       );
