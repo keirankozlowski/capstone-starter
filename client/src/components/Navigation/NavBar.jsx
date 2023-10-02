@@ -27,16 +27,22 @@ function Navbar({ token }) {
         <li>
           <Link to="/museums">Museums</Link>
         </li>
-
-        <li>
-          <Link to="/profile">Profile</Link>
-        </li>
-        <li>
-          <Link to="/register">Register/Login</Link>
-        </li>
-        <button className="auth-btn" onClick={onLogout}>
-          Log Out
-        </button>
+        {token ? (
+          <>
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
+            <button className="auth-btn" onClick={onLogout}>
+              Log Out
+            </button>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to="/register">Register/Login</Link>
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   );

@@ -16,6 +16,6 @@ router.use("/museums", require("./museums"));
 router.use("/reviews", require("./reviews"));
 
 // ROUTER: /api/journal
-router.use("/journals", require("./journal"));
+router.use("/journal", require("./journal"));
 
 module.exports = router;
