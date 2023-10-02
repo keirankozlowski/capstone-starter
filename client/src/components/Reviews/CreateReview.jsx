@@ -29,7 +29,8 @@ export default function CreateReview({ setReviews, museumId, token, userId }) {
       );
 
       const updateReview = await fetchAllReviews();
-      setReviews(updateReview.reviews);
+      setReviews(updateReview);
+      console.log("new reviews", updateReview);
       navigate("./", { replace: true });
 
       return result;

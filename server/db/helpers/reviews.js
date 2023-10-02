@@ -84,14 +84,10 @@ const getReviewsByMuseumId = async (museumId) => {
   }
 };
 
-const updateReview = async ({
+const updateReview = async (
   reviewId,
-  userId,
-  museumId,
-  rating,
-  body,
-  date,
-}) => {
+  { userId, museumId, rating, body, date }
+) => {
   try {
     const {
       rows: [reviews],
