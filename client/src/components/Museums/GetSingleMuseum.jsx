@@ -10,7 +10,7 @@ import CreateReview from "../Reviews/CreateReview";
 import StarRating from "../Reviews/StarRating";
 import AverageRating from "../Reviews/AverageRating";
 
-export default function GetSingleMuseum({ token, museumId }) {
+export default function GetSingleMuseum({ token, museumId, userId }) {
   const navigate = useNavigate();
   const params = useParams();
   const [museum, setMuseum] = useState({});
@@ -61,16 +61,20 @@ export default function GetSingleMuseum({ token, museumId }) {
             <AverageRating museumId={params.museumId} reviews={reviews} />
           </div>
 
-          <SingleReview museumId={params.museumId} token={token} />
-
-          <CreateReview
-            reviews={reviews}
-            setReviews={setReviews}
-            token={token}
+          <SingleReview
             museumId={params.museumId}
+            token={token}
+            userId={userId}
           />
-          {/* <CreateReview setReviews={setReviews} token={token} /> */}
-
+          {token && (
+            <CreateReview
+              reviews={reviews}
+              setReviews={setReviews}
+              token={token}
+              museumId={params.museumId}
+              userId={userId}
+            />
+          )}
           <button
             className="museum-buttons"
             onClick={() => {

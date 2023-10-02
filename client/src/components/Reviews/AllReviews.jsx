@@ -23,13 +23,13 @@ export default function AllReviews({ token }) {
     renderReviews();
   }, []);
 
-  const handleEditReview = (review) => {
-    setSelectedReview(review);
-  };
+  // const handleEditReview = (review) => {
+  //   setSelectedReview(review);
+  // };
 
-  const handleCancelEdit = () => {
-    setSelectedReview(null);
-  };
+  // const handleCancelEdit = () => {
+  //   setSelectedReview(null);
+  // };
 
   return (
     <>
@@ -39,17 +39,17 @@ export default function AllReviews({ token }) {
           <p>Rating: {review.rating}</p>
           <p>{review.body}</p>
           <p>{review.date}</p>
-          <button onClick={() => handleEditReview(review)}>Edit Review</button>
+          {/* <button onClick={() => handleEditReview(review)}>Edit Review</button> */}
         </div>
       ))}
 
-      {selectedReview && (
+      {/* {selectedReview && (
         <EditReview
           reviewId={selectedReview.reviewId}
           onCancel={handleCancelEdit}
           token={token}
         />
-      )}
+      )} */}
     </>
   );
 }

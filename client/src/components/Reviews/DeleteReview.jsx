@@ -1,26 +1,27 @@
+// import React from "react";
+// import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 // import { deleteReview } from "../../helpers/fetching";
 
-// async function handleDelete(reviewId, token) {
+// export default function DeleteReview({ reviewId, onDelete }) {
+//   const [reviews, setReviews] = useState(null);
+
+//   const navigate = useNavigate();
+
+//   const handleDelete = async () => {
 //     try {
-//       const result = await deleteReview(reviewId, token);
-//       console.log(result);
-//       setRemainingReviews((prevReviews) =>
-//         prevReviews.filter((review) => review.reviewId !== reviewId)
-//       );
+//       await onDelete(reviewId);
+//       console.log("Review deleted successfully");
 
 //       navigate("./", { replace: true });
 //     } catch (error) {
 //       console.error(error);
 //     }
-//   }
+//   };
 
-// BUTTON FOR RETURN STATEMENT IN WHATEVER COMPONENT WE CHOOSE
-
-//   {userId === review.userId && (
-//     <button
-//       onClick={() => handleDelete(review.reviewId)}
-//       className="museum-buttons"
-//     >
-//       Delete Review
-//     </button>
-//   )}
+//   return (
+//     <div>
+//       <button onClick={handleDelete}>Confirm Delete</button>
+//     </div>
+//   );
+// }

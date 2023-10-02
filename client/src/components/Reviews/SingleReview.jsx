@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchReviewsByMuseumId } from "../../helpers/fetching";
+import { deleteReview } from "../../helpers/fetching";
+import EditReview from "./EditReview";
 import StarRating from "./StarRating";
 
-export default function SingleReview({ museumId, token }) {
+export default function SingleReview({ museumId, token, userId }) {
   const [reviews, setReviews] = useState([]);
+  const [selectedReview, setSelectedReview] = useState(null);
+
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
@@ -28,6 +32,28 @@ export default function SingleReview({ museumId, token }) {
     getMuseumReviews();
   }, [museumId]);
 
+  const handleEditReview = (review) => {
+    setSelectedReview(review);
+  };
+
+  const handleCancelEdit = () => {
+    setSelectedReview(null);
+  };
+
+  const handleDeleteReview = async (reviewId) => {
+    try {
+      const result = await deleteReview(reviewId, token);
+      console.log("reviewId: ", reviewId);
+      setReviews((prevReviews) =>
+        prevReviews.filter((review) => review.reviewId !== reviewId)
+      );
+      navigate("./", { replace: true });
+      return result;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <h3>Reviews</h3>
@@ -36,15 +62,36 @@ export default function SingleReview({ museumId, token }) {
       ) : (
         reviews.map((review) => (
           <div key={review.reviewId}>
-            <StarRating
+          <StarRating
               rating={review.rating}
               onRatingChange={() => {}}
               disableHover={true}
             />
             <p>{review.body}</p>
             <p>{review.date}</p>
+            {token && userId === review.userId && (
+              <div>
+                <button onClick={() => handleEditReview(review)}>
+                  Edit Review
+                </button>
+                <button
+                  onClick={() => handleDeleteReview(review.reviewId, token)}
+                >
+                  Delete Review
+                </button>
+              </div>
+            )}
           </div>
         ))
+      )}
+      {selectedReview && (
+        <EditReview
+          reviewId={selectedReview.reviewId}
+          onCancel={handleCancelEdit}
+          token={token}
+          userId={userId}
+          museumId={selectedReview.museumId}
+        />
       )}
     </>
   );
