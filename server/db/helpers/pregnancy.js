@@ -14,6 +14,21 @@ const createPregnancy = async ({ user_id, age, is_tracking }) => {
   return pregnancy;
 };
 
+const getAllPregnancies = async () => {
+  try {
+    const {
+      //is this label for rows correct?
+      rows: [pregnancy],
+    } = await client.query(`
+          SELECT *
+          FROM pregnancies;
+      `);
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const getPregnancyByUserId = async (user_id) => {
   const {
     rows: [pregnancies],
@@ -29,4 +44,48 @@ const getPregnancyByUserId = async (user_id) => {
   return pregnancies;
 };
 
-module.exports = { createPregnancy, getPregnancyByUserId };
+async function updatePregnancies(pregnancyId, fields) {
+  try {
+    const toUpdate = {};
+    for (let column in fields) {
+      if (fields[column] !== undefined) toUpdate[column] = fields[column];
+    }
+    let pregnancy;
+
+    if (util.dbFields(toUpdate).insert.length > 0) {
+      const { rows } = await client.query(
+        `
+          UPDATE pregnancy
+          SET ${util.dbFields(toUpdate).insert}
+          WHERE "pregnancyId"=${pregnancyId}
+          RETURNING *;
+        `,
+        Object.values(toUpdate)
+      );
+      pregnancy = rows[0];
+    }
+
+    return pregnancy;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function deletePregnancy(pregnancyId) {
+  try {
+    const { rows } = await client.query(
+      'DELETE FROM pregnancy WHERE "pregnancyId"=$1 RETURNING *',
+      [pregnancyId]
+    );
+    return rows[0];
+  } catch (err) {
+    throw err;
+  }
+}
+module.exports = {
+  createPregnancy,
+  getPregnancyByUserId,
+  getAllPregnancies,
+  updatePregnancies,
+  deletePregnancy,
+};
