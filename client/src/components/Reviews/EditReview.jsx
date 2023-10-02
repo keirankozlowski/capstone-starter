@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { editReview, fetchSingleReview } from "../../helpers/fetching";
 import { useNavigate } from "react-router-dom";
+import StarRating from "./StarRating";
 
 export default function EditReview({
   reviewId,
@@ -58,12 +59,9 @@ export default function EditReview({
       <br />
       <form onSubmit={handleEditReview}>
         <label>Rating: </label>
-        <input
-          type="number"
-          name="newRating"
-          id="newRating"
-          value={newRating}
-          onChange={(event) => setNewRating(event.target.value)}
+        <StarRating
+          rating={newRating}
+          onRatingChange={(newRating) => setNewRating(newRating)}
         />
 
         <label>Review Text: </label>
