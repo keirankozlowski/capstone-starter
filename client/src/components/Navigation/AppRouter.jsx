@@ -8,24 +8,13 @@ import Auth from "../Users/Auth";
 import Navbar from "./NavBar";
 import GetSingleMuseum from "../Museums/GetSingleMuseum";
 
-import { useSelector, useDispatch } from "react-redux";
-import {
-  selectCurrentToken,
-  selectCurrentUser,
-  setCredentials,
-} from "../../Redux/authSlice";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectCurrentToken, selectCurrentUserId } from "../../Redux/authSlice";
 import AllReviews from "../Reviews/AllReviews";
 
 export default function AppRouter() {
-  const dispatch = useDispatch();
   const token = useSelector(selectCurrentToken);
-
-  useEffect(() => {
-    if (token) {
-      dispatch(setCredentials({ token: token }));
-    }
-  }, [token, dispatch]);
+  const userId = useSelector(selectCurrentUserId);
 
   return (
     <>
@@ -38,12 +27,15 @@ export default function AppRouter() {
           <Route path="/" element={<Home />} />
           <Route path="/map" element={<Map />} />
           <Route path="/museums" element={<GetAllMuseums />} />
-          <Route path="/profile" element={<UserProfile token={token} />} />
+          <Route
+            path="/profile"
+            element={<UserProfile token={token} userId={userId} />}
+          />
           <Route path="/register" element={<Auth token={token} />} />
           <Route path="/logout" element={<Logout />} />
           <Route
             path="/museums/:museumId"
-            element={<GetSingleMuseum token={token} />}
+            element={<GetSingleMuseum token={token} userId={userId} />}
           />
           <Route path="/reviews" element={<AllReviews token={token} />} />
         </Routes>

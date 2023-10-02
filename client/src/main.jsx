@@ -3,28 +3,23 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "./Redux/authSlice";
-
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./Redux/store.js";
 import App from "./App.jsx";
 import "./index.css";
 
-const clientId = import.meta.env.VITE_REACT_APP_CLIENT_ID;
-
-const store = configureStore({
-  reducer: {
-    authenticate: authReducer,
-  },
-});
+// const clientId = import.meta.env.VITE_REACT_APP_CLIENT_ID;
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <GoogleOAuthProvider clientId={clientId}>
-    <React.StrictMode>
-      <Provider store={store}>
+  // <GoogleOAuthProvider clientId={clientId}>
+  <React.StrictMode>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
-      </Provider>
-    </React.StrictMode>
-  </GoogleOAuthProvider>
+      </PersistGate>
+    </Provider>
+  </React.StrictMode>
+  // </GoogleOAuthProvider>
 );
