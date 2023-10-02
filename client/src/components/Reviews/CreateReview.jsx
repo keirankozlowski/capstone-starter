@@ -19,7 +19,6 @@ export default function CreateReview({ setReviews, museumId, token, userId }) {
   const submitHandler = (e) => {
     e.preventDefault();
     async function createReview() {
-      //   console.log("my user id:", myUserId);
       const result = await addReview(
         userId,
         museumId,

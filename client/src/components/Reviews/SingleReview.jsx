@@ -65,7 +65,7 @@ export default function SingleReview({ museumId, token, userId }) {
             <StarRating rating={review.rating} />
             <p>{review.body}</p>
             <p>{review.date}</p>
-            {userId === review.userId && (
+            {token && userId === review.userId && (
               <div>
                 <button onClick={() => handleEditReview(review)}>
                   Edit Review
