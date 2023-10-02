@@ -31,6 +31,7 @@ app.get("/", (req, res) => {
 // Router: /api
 app.use("/api", require("./api"));
 
+
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });

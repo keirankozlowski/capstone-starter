@@ -111,10 +111,6 @@ const getAllJournalEntries = async () => {
     }
   };
   
-  module.exports = {
-    deleteJournalEntry,
-  };
-  
 
 module.exports = {
   createJournal,
