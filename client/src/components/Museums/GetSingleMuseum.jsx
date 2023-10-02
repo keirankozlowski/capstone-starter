@@ -8,14 +8,16 @@ import SingleReview from "../Reviews/SingleReview";
 import "./AllMuseums.css";
 import CreateReview from "../Reviews/CreateReview";
 import StarRating from "../Reviews/StarRating";
+import AverageRating from "../Reviews/AverageRating";
 
-export default function GetSingleMuseum({ token, userId }) {
+export default function GetSingleMuseum({ token, museumId, userId }) {
   const navigate = useNavigate();
   const params = useParams();
   const [museum, setMuseum] = useState({});
   const [error, setError] = useState(null);
   const [reviews, setReviews] = useState([]);
 
+  useEffect(() => {
   async function getMuseumDetails() {
     try {
       const museumData = await fetchSingleMuseumById(params.museumId);
@@ -27,17 +29,8 @@ export default function GetSingleMuseum({ token, userId }) {
     }
   }
 
-  useEffect(() => {
     getMuseumDetails();
   }, [params.museumId]);
-
-  // CALCULATES AVERAGE RATING:
-  const averageRating = () => {
-    if (!Array.isArray(reviews) || reviews.length === 0) return 0;
-    console.log("reviews:", reviews);
-    const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-    return totalRating / reviews.length;
-  };
 
   return (
     <div className="single-museum-page">
@@ -65,8 +58,7 @@ export default function GetSingleMuseum({ token, userId }) {
 
           {/* REVIEWS */}
           <div className="averageRating">
-            Average Rating: <StarRating rating={averageRating()} />
-            {averageRating().toFixed(1)}
+            <AverageRating museumId={params.museumId} reviews={reviews} />
           </div>
 
           <SingleReview

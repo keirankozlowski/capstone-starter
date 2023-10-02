@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Marker, InfoWindow } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
-import { fetchAllMuseums } from "../../helpers/fetching";
+import { fetchAllMuseums, fetchReviewsByMuseumId } from "../../helpers/fetching";
 import markersIcon from "../Images/markers.png";
-import SingleReview from "../Reviews/SingleReview";
+import AverageRating from "../Reviews/AverageRating"
 
 const MapMarkers = ({ searchParam, selectedTypes }) => {
   const [selectedMarker, setSelectedMarker] = useState(null);
   const navigate = useNavigate();
   const [museums, setMuseums] = useState([]);
   const [error, setError] = useState(null);
+  const [reviews, setReviews] = useState([]);
+
+  // FETCH REVIEWS BY MUSEUM ID
+  const fetchReviewsForMuseum = async (museumId) => {
+    try {
+      const reviewsData = await fetchReviewsByMuseumId(museumId); 
+      setReviews(reviewsData);
+    } catch (error) {
+      setError("Failed to fetch reviews. Please try again later.");
+    }
+  };
 
   useEffect(() => {
     const renderMuseums = async () => {
@@ -52,6 +63,7 @@ const MapMarkers = ({ searchParam, selectedTypes }) => {
             scaledSize: new window.google.maps.Size(40, 40),
           }}
           onClick={() => {
+            fetchReviewsForMuseum(museum.museumId);
             setSelectedMarker(museum);
           }}
         />
@@ -76,6 +88,8 @@ const MapMarkers = ({ searchParam, selectedTypes }) => {
             <p>{selectedMarker.description}</p>
             {/* <p>{selectedMarker.address}</p> */}
 
+            <AverageRating museumId={selectedMarker.museumId} reviews={reviews} />
+
             <button
               className="detailsButton"
               onClick={() => {
@@ -84,6 +98,7 @@ const MapMarkers = ({ searchParam, selectedTypes }) => {
             >
               See Details
             </button>
+
             <p>
               <a
                 href={`https://www.google.com/maps/dir/?api=1&destination=${selectedMarker.lat},${selectedMarker.lng}`}

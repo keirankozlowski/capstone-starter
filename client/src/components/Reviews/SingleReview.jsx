@@ -62,7 +62,11 @@ export default function SingleReview({ museumId, token, userId }) {
       ) : (
         reviews.map((review) => (
           <div key={review.reviewId}>
-            <StarRating rating={review.rating} />
+          <StarRating
+              rating={review.rating}
+              onRatingChange={() => {}}
+              disableHover={true}
+            />
             <p>{review.body}</p>
             <p>{review.date}</p>
             {token && userId === review.userId && (
