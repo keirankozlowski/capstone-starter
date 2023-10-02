@@ -5,7 +5,7 @@ import { fetchAllMuseums } from "../../helpers/fetching";
 import markersIcon from "../Images/markers.png";
 import SingleReview from "../Reviews/SingleReview";
 
-const MapMarkers = ({ token }) => {
+const MapMarkers = ({ searchParam, selectedTypes }) => {
   const [selectedMarker, setSelectedMarker] = useState(null);
   const navigate = useNavigate();
   const [museums, setMuseums] = useState([]);
@@ -15,7 +15,7 @@ const MapMarkers = ({ token }) => {
     const renderMuseums = async () => {
       try {
         const museumArray = await fetchAllMuseums();
-        console.log("Museum Array: ", museumArray);
+        // console.log("Museum Array: ", museumArray);
         setMuseums(museumArray);
       } catch (error) {
         setError("Failed to fetch museums. Please try again later.");
@@ -24,9 +24,23 @@ const MapMarkers = ({ token }) => {
     renderMuseums();
   }, []);
 
+  const searchedMuseums = museums.filter((museum) => {
+    return (
+      //boolean expression
+      searchParam.length === 0 ||
+      museum.museumName.toLowerCase().includes(searchParam) ||
+      museum.description.toLowerCase().includes(searchParam)
+    );
+  });
+
+  const filteredMuseums = searchedMuseums.filter((museum) => {
+    //boolean expression that involves museum.type
+    return selectedTypes.includes(museum.type);
+  });
+
   return (
     <>
-      {museums.map((museum) => (
+      {filteredMuseums.map((museum) => (
         <Marker
           key={museum.museumId}
           position={{
