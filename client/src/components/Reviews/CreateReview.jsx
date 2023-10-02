@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { addReview, fetchAllReviews } from "../../helpers/fetching";
+import { addReview, fetchAllReviews, fetchReviewsByMuseumId } from "../../helpers/fetching";
 import { useNavigate } from "react-router-dom";
 import StarRating from "./StarRating";
 
@@ -28,7 +28,7 @@ export default function CreateReview({ setReviews, museumId, token, userId }) {
         token
       );
 
-      const updateReview = await fetchAllReviews();
+      const updateReview = await fetchReviewsByMuseumId(museumId);
       setReviews(updateReview);
       console.log("new reviews", updateReview);
       navigate("./", { replace: true });
