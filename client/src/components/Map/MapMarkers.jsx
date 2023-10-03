@@ -39,8 +39,7 @@ const MapMarkers = ({ searchParam, selectedTypes }) => {
     return (
       //boolean expression
       searchParam.length === 0 ||
-      museum.museumName.toLowerCase().includes(searchParam) ||
-      museum.description.toLowerCase().includes(searchParam)
+      museum.museumName.toLowerCase().includes(searchParam)
     );
   });
 
@@ -82,10 +81,10 @@ const MapMarkers = ({ searchParam, selectedTypes }) => {
             <img
               src={selectedMarker.image}
               alt={selectedMarker.museumName}
-              style={{ width: "300px" }}
+              style={{ width: "250px" }}
             />
             <h3>{selectedMarker.museumName}</h3>
-            <p>{selectedMarker.description}</p>
+            {/* <p>{selectedMarker.description}</p> */}
             {/* <p>{selectedMarker.address}</p> */}
 
             <AverageRating museumId={selectedMarker.museumId} reviews={reviews} />
