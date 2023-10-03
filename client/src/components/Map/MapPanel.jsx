@@ -1,32 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { fetchAllMuseums } from "../../helpers/fetching";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 
-const MapPanel = () => {
-  const [museums, setMuseums] = useState([]);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const renderMuseums = async () => {
-      try {
-        const museumArray = await fetchAllMuseums();
-        console.log("Museum Array: ", museumArray);
-        setMuseums(museumArray);
-      } catch (error) {
-        setError("Failed to fetch museums");
-      }
-    };
-    renderMuseums();
-  }, []);
-
+const MapPanel = ({ museums }) => {
   return (
     <div className="side-panel">
       <h2>Museums</h2>
       <ul>
         {museums.map((museum) => (
           <li key={museum.museumName}>
-                        <img
+            <img
               src={museum.image}
               alt={museum.museumName}
               style={{ width: "300px" }}
