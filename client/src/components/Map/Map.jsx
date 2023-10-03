@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from "react";
 import {
   GoogleMap,
-  Marker,
-  LoadScript,
   useJsApiLoader,
 } from "@react-google-maps/api";
 import MapMarkers from "./MapMarkers";
 import customMapStyle from "./mapStyle.json";
+import { fetchAllMuseums } from "../../helpers/fetching";
+import MapPanel from "./MapPanel";
+import "./Map.css";
 
 const mapStyles = {
-  width: "100%",
-  height: "100vh",
+  width: "75%",
+  height: "75vh",
 };
 const center = {
   lat: 40.73061,
   lng: -73.935242,
 };
+
 const apiKey = import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY;
+
 const Map = () => {
   const [searchParam, setSearchParam] = useState("");
   const [selectedTypes, setSelectedTypes] = useState([
@@ -24,9 +27,25 @@ const Map = () => {
     "academic",
     "other",
   ]);
+  const [museums, setMuseums] = useState([]);
+  const [error, setError] = useState(null);
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: apiKey,
   });
+
+  useEffect(() => {
+    const renderMuseums = async () => {
+      try {
+        const museumArray = await fetchAllMuseums();
+        console.log("Museum Array: ", museumArray);
+        setMuseums(museumArray);
+      } catch (error) {
+        setError("Failed to get museums");
+      }
+    };
+    renderMuseums();
+  }, []);
+
   const onOptionChange = (e) => {
     if (selectedTypes.includes(e.target.value)) {
       setSelectedTypes(selectedTypes.filter((t) => e.target.value !== t));
@@ -36,10 +55,10 @@ const Map = () => {
   };
 
   return (
-    <div>
+    <div className="map-container">
+      <div className="mapPanel">
       <label>
-        <h4 className="search-filter-header"> Search:{""}</h4>
-        <br />
+        Search: 
         <input
           id="search-museums-bar"
           type="text"
@@ -73,6 +92,10 @@ const Map = () => {
           onChange={onOptionChange}
         />
         <label htmlFor="other">Other</label>
+      </div>
+      <div className="panel-content">
+        <MapPanel museums={museums} />
+        </div>
       </div>
 
       {isLoaded && (
