@@ -9,6 +9,7 @@ export default function EditReview({
   token,
   museumId,
   userId,
+  onUpdateReview,
 }) {
   const [newRating, setNewRating] = useState("");
   const [newBody, setNewBody] = useState("");
@@ -43,6 +44,7 @@ export default function EditReview({
       );
       navigate("./", { replace: true });
       if (editedReview) {
+        onUpdateReview(editedReview)
         onCancel();
       } else {
         console.error("Failed to update review.");
