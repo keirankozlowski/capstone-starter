@@ -6,7 +6,6 @@ import {
 } from "../../helpers/fetching";
 import SingleReview from "../Reviews/SingleReview";
 import "./AllMuseums.css";
-import AverageRating from "../Reviews/AverageRating";
 
 export default function GetSingleMuseum({ token, museumId, userId }) {
   const navigate = useNavigate();
@@ -16,16 +15,16 @@ export default function GetSingleMuseum({ token, museumId, userId }) {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-  async function getMuseumDetails() {
-    try {
-      const museumData = await fetchSingleMuseumById(params.museumId);
-      setMuseum(museumData);
-      const museumReviews = await fetchReviewsByMuseumId(params.museumId);
-      setReviews(museumReviews);
-    } catch (err) {
-      setError("Failed to fetch museum details. Please try again later.");
+    async function getMuseumDetails() {
+      try {
+        const museumData = await fetchSingleMuseumById(params.museumId);
+        setMuseum(museumData);
+        const museumReviews = await fetchReviewsByMuseumId(params.museumId);
+        setReviews(museumReviews);
+      } catch (err) {
+        setError("Failed to fetch museum details. Please try again later.");
+      }
     }
-  }
 
     getMuseumDetails();
   }, [params.museumId]);
@@ -53,11 +52,6 @@ export default function GetSingleMuseum({ token, museumId, userId }) {
             Learn More
           </a>
           <br />
-
-          {/* REVIEWS */}
-          <div className="averageRating">
-            <AverageRating museumId={params.museumId} reviews={reviews} />
-          </div>
 
           <SingleReview
             museumId={params.museumId}
