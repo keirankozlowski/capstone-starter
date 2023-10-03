@@ -5,6 +5,7 @@ import { deleteReview } from "../../helpers/fetching";
 import EditReview from "./EditReview";
 import StarRating from "./StarRating";
 import CreateReview from "./CreateReview";
+import AverageRating from "./AverageRating";
 
 export default function SingleReview({ museumId, token, userId }) {
   const [reviews, setReviews] = useState([]);
@@ -55,8 +56,20 @@ export default function SingleReview({ museumId, token, userId }) {
     }
   };
 
+  const updateReview = (editedReview) => {
+    setReviews((prevReviews) =>
+      prevReviews.map((review) =>
+        review.reviewId === editedReview.reviewId ? editedReview : review
+      )
+    );
+  };
+
   return (
     <>
+      <div className="averageRating">
+        <AverageRating museumId={museumId} reviews={reviews} />
+      </div>
+
       <h3>Reviews</h3>
       {reviews.length === 0 ? (
         <p>No reviews available</p>
@@ -92,6 +105,7 @@ export default function SingleReview({ museumId, token, userId }) {
           token={token}
           userId={userId}
           museumId={selectedReview.museumId}
+          onUpdateReview={updateReview}
         />
       )}
       {token && (
