@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const {
   getAllWeeks,
-  getWeeksById,
+  getWeeksId,
   createWeeks,
   updateWeeks,
   deleteWeeks,
@@ -16,12 +16,12 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
-// GET- /api/weeks/:pregId
-router.get("/:pregId", async (req, res, next) => {
+// GET- /api/weeks/:id
+router.get("/:id", async (req, res, next) => {
   try {
-    const { pregId } = req.params;
-    const weeks = await getWeeksPregId(pregId);
-    res.send(pregId);
+    const { id } = req.params;
+    const weeks = await getWeeksId(id);
+    res.send(weeks);
   } catch (error) {
     next(error);
   }

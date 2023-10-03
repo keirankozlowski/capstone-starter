@@ -1,4 +1,5 @@
 const client = require("../client");
+const util = require("../util");
 
 const createPregnancy = async ({ user_id, age, is_tracking }) => {
   const {
@@ -17,8 +18,7 @@ const createPregnancy = async ({ user_id, age, is_tracking }) => {
 const getAllPregnancies = async () => {
   try {
     const {
-      //is this label for rows correct?
-      rows: [pregnancy],
+      rows: [pregnancies],
     } = await client.query(`
           SELECT *
           FROM pregnancies;

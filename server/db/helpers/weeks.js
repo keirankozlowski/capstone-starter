@@ -1,4 +1,5 @@
 const client = require("../client");
+const util = require("../util");
 
 const getAllWeeks = async () => {
   try {
@@ -15,21 +16,18 @@ const getAllWeeks = async () => {
   }
 };
 
-// const getWeeksByPreg_id = async (preg_id) => {
-//   const {
-//     rows: [weeks],
-//   } = await client.query(
-//     //need help with rewriting this :
-//     `
-//     SELECT *
-//     FROM pregnancies preg
-//     JOIN pregnancyweeks pregw ON preg.id = pregw.preg_id
-//     JOIN weeks ON pregw.week_id = weeks.id
-//     WHERE preg.user_id = ${user_id};
-//     `
-//   );
-//   return weeks;
-// };
+const getWeeksId = async (week_id) => {
+  const {
+    rows: [week],
+  } = await client.query(
+    //need help with rewriting this :
+    `
+    SELECT * FROM weeks WHERE id = $1
+    `,
+    [week_id]
+  );
+  return week;
+};
 
 const createWeeks = async ({ weight, size, info }) => {
   const {
@@ -58,7 +56,7 @@ async function updateWeeks(week_id, fields) {
         `
           UPDATE weeks
           SET ${util.dbFields(toUpdate).insert}
-          WHERE "pregnancyId"=${pregnancyId}
+          WHERE "id"=${week_id}
           RETURNING *;
         `,
         Object.values(toUpdate)
@@ -72,11 +70,11 @@ async function updateWeeks(week_id, fields) {
   }
 }
 
-async function deleteWeeks(preg_id) {
+async function deleteWeeks(id) {
   try {
     const { rows } = await client.query(
-      'DELETE FROM pregnancy WHERE "pregnancyId"=$1 RETURNING *',
-      [preg_id]
+      'DELETE FROM weeks WHERE "id"=$1 RETURNING *',
+      [id]
     );
     return rows[0];
   } catch (err) {
@@ -86,7 +84,7 @@ async function deleteWeeks(preg_id) {
 
 module.exports = {
   getAllWeeks,
-  getWeeksById,
+  getWeeksId,
   createWeeks,
   updateWeeks,
   deleteWeeks,
