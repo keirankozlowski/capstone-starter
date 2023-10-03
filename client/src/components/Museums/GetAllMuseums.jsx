@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { fetchAllMuseums } from "../../helpers/fetching";
 import "./AllMuseums.css"; // Import your CSS file
+import { useNavigate } from "react-router-dom";
 
 export default function GetAllMuseums() {
   const [museums, setMuseums] = useState([]);
   const [error, setError] = useState(null);
   const [searchParam, setSearchParam] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const renderMuseums = async () => {
@@ -28,19 +30,6 @@ export default function GetAllMuseums() {
 
   console.log("Search Param: ", searchParam);
   console.log("Filtered Museums: ", searchedMuseumsPage);
-
-  // const filteredMuseumsPage =
-  //   currentFilter === "All"
-  //     ? searchedCharacters
-  //     : searchedCharacters.filter((character) => {
-  //         if (currentFilter === "Human") {
-  //           return character.human;
-  //         } else if (currentFilter === "Non-Human") {
-  //           return !character.human;
-  //         } else {
-  //           return true;
-  //         }
-  //       });
 
   return (
     <div>
@@ -73,6 +62,14 @@ export default function GetAllMuseums() {
               <a href={museum.link} target="_blank" rel="noopener noreferrer">
                 Learn More
               </a>
+              <button
+                className="detailsButton"
+                onClick={() => {
+                  navigate(`/museums/${museum.museumId}`);
+                }}
+              >
+                See Details
+              </button>
             </li>
           ))}
         </ul>
