@@ -33,7 +33,7 @@ export default function GetAllMuseums() {
 
   return (
     <div>
-      <h1>Get All Museums</h1>
+      <h1>All Museums</h1>
 
       <label>
         <h4 className="search-filter-header"> Search:</h4>
@@ -53,12 +53,13 @@ export default function GetAllMuseums() {
           {searchedMuseumsPage.map((museum) => (
             <div key={museum.museumName} className="museum-item">
               <h2>{museum.museumName}</h2>
-              <p>{museum.description}</p>
               <img
                 src={museum.image}
                 alt={museum.museumName}
                 className="museum-image"
               />
+              <p>{museum.description}</p>
+
               <a href={museum.link} target="_blank" rel="noopener noreferrer">
                 Learn More
               </a>
