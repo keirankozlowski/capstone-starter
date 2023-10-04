@@ -84,6 +84,20 @@ const getReviewsByMuseumId = async (museumId) => {
   }
 };
 
+const getReviewsByMuseumIdwithUsername = async (museumId) => {
+  try {
+    const { rows } = await client.query(
+      `SELECT reviews.*, users.username
+      FROM reviews
+      INNER JOIN users ON reviews."userId" = users."userId"
+      WHERE reviews."museumId" = $1;
+      `,
+      [museumId]
+    );
+    return rows;
+  } catch (error) {}
+};
+
 const updateReview = async (
   reviewId,
   { userId, museumId, rating, body, date }
@@ -132,6 +146,7 @@ module.exports = {
   getReviewById,
   getReviewByUserId,
   getReviewsByMuseumId,
+  getReviewsByMuseumIdwithUsername,
   updateReview,
   deleteReview,
 };

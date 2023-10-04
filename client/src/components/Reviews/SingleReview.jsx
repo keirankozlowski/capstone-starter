@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchReviewsByMuseumId } from "../../helpers/fetching";
+import { fetchReviewsByMuseumIdwithUsername } from "../../helpers/fetching";
 import { deleteReview } from "../../helpers/fetching";
 import EditReview from "./EditReview";
 import StarRating from "./StarRating";
@@ -24,7 +24,9 @@ export default function SingleReview({ museumId, token, userId }) {
       }
 
       try {
-        const museumReviews = await fetchReviewsByMuseumId(museumId);
+        const museumReviews = await fetchReviewsByMuseumIdwithUsername(
+          museumId
+        );
         console.log("Museum Reviews: ", museumReviews);
         setReviews(museumReviews || []);
       } catch (error) {
@@ -59,7 +61,9 @@ export default function SingleReview({ museumId, token, userId }) {
   const updateReview = (editedReview) => {
     setReviews((prevReviews) =>
       prevReviews.map((review) =>
-        review.reviewId === editedReview.reviewId ? editedReview : review
+        review.reviewId === editedReview.reviewId
+          ? { ...review, ...editedReview }
+          : review
       )
     );
   };
@@ -83,6 +87,10 @@ export default function SingleReview({ museumId, token, userId }) {
             />
             <p>{review.body}</p>
             <p>{review.date}</p>
+            <div>
+              <p>{review.username}</p>
+            </div>
+
             {token && userId === review.userId && (
               <div>
                 <button onClick={() => handleEditReview(review)}>

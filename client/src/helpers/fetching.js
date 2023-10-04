@@ -179,6 +179,19 @@ async function fetchReviewsByMuseumId(museumId) {
   }
 }
 
+async function fetchReviewsByMuseumIdwithUsername(museumId) {
+  try {
+    const response = await fetch(
+      `${baseURL}/reviews/museum/review/${museumId}`
+    );
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error("cannot get reviews by museumId with username", error);
+  }
+}
+
 // create a review
 
 async function addReview(userId, museumId, rating, body, date, token) {
@@ -377,8 +390,6 @@ async function deleteJournalEntry(entryId, token) {
   }
 }
 
-
-
 // edit a journal entry
 
 async function editJournalEntry(entryId, userId, title, body, date, token) {
@@ -416,6 +427,7 @@ export {
   fetchSingleReview,
   fetchSingleReviewByUserId,
   fetchReviewsByMuseumId,
+  fetchReviewsByMuseumIdwithUsername,
   addReview,
   deleteReview,
   editReview,
