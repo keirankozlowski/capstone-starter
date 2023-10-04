@@ -30,4 +30,4 @@ dist-ssr
 .env.test
 .env.local
 
-/postcss.config.js
+/postcss.config.cjs
