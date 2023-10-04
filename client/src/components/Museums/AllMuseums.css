@@ -1,55 +1,85 @@
 /* AllMuseums.css */
+.all-museums {
+  display: grid;
+  grid-column-gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
 
 /* Style the museum list items */
 .museum-item {
-  margin-bottom: 20px; /* Add margin between each museum card */
-  background-color: #f5f5f5; /* Background color for the card */
-  border: 1px solid #ddd; /* Border for the card */
-  border-radius: 5px; /* Rounded corners for the card */
-  padding: 20px; /* Padding inside the card */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle elevation effect */
-  transition: transform 0.2s; /* Add a smooth transition effect */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  /* Add margin between each museum card */
+  background-color: #f5f5f5;
+  /* Background color for the card */
+  border: 1px solid #ddd;
+  /* Border for the card */
+  border-radius: 5px;
+  /* Rounded corners for the card */
+  padding: 20px;
+  /* Padding inside the card */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Box shadow for a subtle elevation effect */
+  transition: transform 0.2s;
+  /* Add a smooth transition effect */
+  list-style: none;
 }
 
 /* Style the museum images within the card */
 .museum-image {
-  max-width: 150px; /* Adjust the max-width to make the images smaller */
-  height: auto; /* Maintain the image aspect ratio */
+  max-width: 150px;
+  /* Adjust the max-width to make the images smaller */
+  height: auto;
+  /* Maintain the image aspect ratio */
 }
 
 /* Style the museum headers (museum name) */
 .museum-headers {
-  font-size: 1.5rem; /* Adjust the font size as needed */
-  margin-bottom: 10px; /* Add margin below the museum name */
+  font-size: 1.5rem;
+  /* Adjust the font size as needed */
+  margin-bottom: 10px;
+  /* Add margin below the museum name */
 }
 
 /* Style the Learn More link */
 .museum-link {
-  text-decoration: none; /* Remove underline from the link */
-  color: #007BFF; /* Link color */
-  margin-right: 10px; /* Add margin to separate it from other content */
+  text-decoration: none;
+  /* Remove underline from the link */
+  color: #007BFF;
+  /* Link color */
+  margin-right: 10px;
+  /* Add margin to separate it from other content */
 }
 
 /* Style the Back to Map button */
 .museum-buttons {
-  background-color: #007BFF; /* Button background color */
-  color: white; /* Button text color */
-  border: none; /* Remove button border */
-  padding: 10px 20px; /* Padding inside the button */
-  border-radius: 5px; /* Rounded corners for the button */
-  cursor: pointer; /* Add pointer cursor on hover */
-  transition: background-color 0.2s; /* Add a smooth transition effect for background color */
+  background-color: #007BFF;
+  /* Button background color */
+  color: white;
+  /* Button text color */
+  border: none;
+  /* Remove button border */
+  padding: 10px 20px;
+  /* Padding inside the button */
+  border-radius: 5px;
+  /* Rounded corners for the button */
+  cursor: pointer;
+  /* Add pointer cursor on hover */
+  transition: background-color 0.2s;
+  /* Add a smooth transition effect for background color */
 }
 
 /* Hover effect for the Back to Map button */
 .museum-buttons:hover {
-  background-color: #0056b3; /* Button background color on hover */
+  background-color: #0056b3;
+  /* Button background color on hover */
 }
 
 /* Add space between cards on larger screens */
 @media (min-width: 768px) {
   .museum-item {
-    margin-right: 20px; /* Add margin to the right of each card */
+    margin-right: 20px;
+    /* Add margin to the right of each card */
   }
 }
-
