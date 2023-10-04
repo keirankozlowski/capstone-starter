@@ -7,13 +7,17 @@ import Logout from "../Users/Logout";
 import Auth from "../Users/Auth";
 import Navbar from "./NavBar";
 import GetSingleMuseum from "../Museums/GetSingleMuseum";
-
 import { useSelector } from "react-redux";
-import { selectCurrentToken, selectCurrentUserId } from "../../Redux/authSlice";
+import {
+  selectCurrentToken,
+  selectCurrentUsername,
+  selectCurrentUserId,
+} from "../../Redux/authSlice";
 import AllReviews from "../Reviews/AllReviews";
 
 export default function AppRouter() {
   const token = useSelector(selectCurrentToken);
+  const username = useSelector(selectCurrentUsername);
   const userId = useSelector(selectCurrentUserId);
 
   return (
@@ -29,7 +33,9 @@ export default function AppRouter() {
           <Route path="/museums" element={<GetAllMuseums />} />
           <Route
             path="/profile"
-            element={<UserProfile token={token} userId={userId} />}
+            element={
+              <UserProfile token={token} username={username} userId={userId} />
+            }
           />
           <Route path="/register" element={<Auth token={token} />} />
           <Route path="/logout" element={<Logout />} />

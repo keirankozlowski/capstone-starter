@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Marker, InfoWindow } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
-import { fetchAllMuseums, fetchReviewsByMuseumId } from "../../helpers/fetching";
+import {
+  fetchAllMuseums,
+  fetchReviewsByMuseumId,
+} from "../../helpers/fetching";
 import markersIcon from "../Images/markers.png";
-import AverageRating from "../Reviews/AverageRating"
+import AverageRating from "../Reviews/AverageRating";
 
 const MapMarkers = ({ searchParam, selectedTypes }) => {
   const [selectedMarker, setSelectedMarker] = useState(null);
@@ -15,7 +18,7 @@ const MapMarkers = ({ searchParam, selectedTypes }) => {
   // FETCH REVIEWS BY MUSEUM ID
   const fetchReviewsForMuseum = async (museumId) => {
     try {
-      const reviewsData = await fetchReviewsByMuseumId(museumId); 
+      const reviewsData = await fetchReviewsByMuseumId(museumId);
       setReviews(reviewsData);
     } catch (error) {
       setError("Failed to fetch reviews. Please try again later.");
@@ -87,7 +90,10 @@ const MapMarkers = ({ searchParam, selectedTypes }) => {
             {/* <p>{selectedMarker.description}</p> */}
             {/* <p>{selectedMarker.address}</p> */}
 
-            <AverageRating museumId={selectedMarker.museumId} reviews={reviews} />
+            <AverageRating
+              museumId={selectedMarker.museumId}
+              reviews={reviews}
+            />
 
             <button
               className="detailsButton"
