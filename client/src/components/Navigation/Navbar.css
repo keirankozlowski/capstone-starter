@@ -36,7 +36,7 @@
     text-decoration: none;
     color: white;
     transition: color 0.3s;
-    background: linear-gradient(#95BF74 0 100%) left / 0 no-repeat;
+    background: linear-gradient(#F4E9CD 0 100%) left / 0 no-repeat;
     color: rgba(255, 255, 255, 0.428);
     background-clip: text;
     transition: background-size 0.45s 0.04s;
@@ -49,3 +49,30 @@
     }
     background-size: 100%;
 }
+
+/* Home.css */
+
+/* Set the background image */
+.home {
+    background-image: url('https://dreamsinheels.com/wp-content/uploads/2020/07/The-Best-Museums-In-NYC-Per-A-New-Yorker.jpg'); /* Update the path to your image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Style the header element */
+  .quote {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    color: #f5f6f1;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    font-family: 'Your Gorgeous Font', sans-serif;
+  }
