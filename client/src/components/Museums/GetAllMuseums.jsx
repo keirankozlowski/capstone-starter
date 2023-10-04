@@ -49,9 +49,9 @@ export default function GetAllMuseums() {
       {error ? (
         <p>{error}</p>
       ) : (
-        <ul>
+        <div className="all-museums">
           {searchedMuseumsPage.map((museum) => (
-            <li key={museum.museumName} className="museum-item">
+            <div key={museum.museumName} className="museum-item">
               <h2>{museum.museumName}</h2>
               <p>{museum.description}</p>
               <img
@@ -70,9 +70,9 @@ export default function GetAllMuseums() {
               >
                 See Details
               </button>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );
