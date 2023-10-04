@@ -127,10 +127,4 @@ dist
 .yarn/unplugged
 .yarn/build-state.yml
 .yarn/install-state.gz
-<<<<<<< HEAD
 .pnp.*
-
-/postcss.config.js
-=======
-.pnp.*
->>>>>>> c7385f23192c78b86c58a8622bdf543ea038637b
