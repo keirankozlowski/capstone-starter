@@ -17,9 +17,7 @@ const createPregnancy = async ({ user_id, age, is_tracking }) => {
 
 const getAllPregnancies = async () => {
   try {
-    const {
-      rows: [pregnancies],
-    } = await client.query(`
+    const { rows } = await client.query(`
           SELECT *
           FROM pregnancies;
       `);
@@ -55,9 +53,9 @@ async function updatePregnancies(pregnancyId, fields) {
     if (util.dbFields(toUpdate).insert.length > 0) {
       const { rows } = await client.query(
         `
-          UPDATE pregnancy
+          UPDATE pregnancies
           SET ${util.dbFields(toUpdate).insert}
-          WHERE "pregnancyId"=${pregnancyId}
+          WHERE "id"=${pregnancyId}
           RETURNING *;
         `,
         Object.values(toUpdate)
@@ -73,8 +71,15 @@ async function updatePregnancies(pregnancyId, fields) {
 
 async function deletePregnancy(pregnancyId) {
   try {
+    await client.query(
+      `
+      DELETE FROM pregnancyweeks WHERE "preg_id" = $1
+    `,
+      [pregnancyId]
+    );
+
     const { rows } = await client.query(
-      'DELETE FROM pregnancy WHERE "pregnancyId"=$1 RETURNING *',
+      'DELETE FROM pregnancies WHERE "id"=$1 RETURNING *',
       [pregnancyId]
     );
     return rows[0];

@@ -7,7 +7,7 @@ const {
   deletePregnancy,
 } = require("../db/helpers/pregnancy");
 
-// GET - /api/pregnancy - get all pregnancies
+// GET - /api/pregnancies - get all pregnancies
 router.get("/", async (req, res, next) => {
   try {
     const pregnancies = await getAllPregnancies();
@@ -39,8 +39,8 @@ router.post("/", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   try {
-    const pregnancy = await updatePregnancies(req.params.id, req.body);
-    res.send(pregnancy);
+    const pregnancies = await updatePregnancies(req.params.id, req.body);
+    res.send(pregnancies);
   } catch (err) {
     next(err);
   }

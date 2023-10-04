@@ -10,7 +10,7 @@ const getAllWeeks = async () => {
           SELECT *
           FROM weeks;
       `);
-    return rows;
+    return weeks;
   } catch (error) {
     throw error;
   }
