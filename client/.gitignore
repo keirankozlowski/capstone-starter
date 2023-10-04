@@ -30,4 +30,8 @@ dist-ssr
 .env.test
 .env.local
 
+<<<<<<< HEAD
+=======
+# tailwind
+>>>>>>> c7385f23192c78b86c58a8622bdf543ea038637b
 /postcss.config.cjs
