@@ -7,6 +7,7 @@ const {
   getReviewById,
   getReviewByUserId,
   getReviewsByMuseumId,
+  getReviewsByMuseumIdwithUsername,
   updateReview,
   deleteReview,
 } = require("../db/helpers/reviews");
@@ -47,11 +48,22 @@ router.get("/user/:userId", async (req, res, next) => {
   }
 });
 
-// Get rewview by museum Id - api/reviews/museum/:museumId
+// Get review by museum Id - api/reviews/museum/:museumId
 
 router.get("/museum/:museumId", async (req, res, next) => {
   try {
     const review = await getReviewsByMuseumId(req.params.museumId);
+    res.send(review);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Get review by museum id with username - api/reviews/museum/review/:museumId
+
+router.get("/museum/review/:museumId", async (req, res, next) => {
+  try {
+    const review = await getReviewsByMuseumIdwithUsername(req.params.museumId);
     res.send(review);
   } catch (error) {
     next(error);

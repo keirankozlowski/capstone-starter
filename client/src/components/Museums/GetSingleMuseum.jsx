@@ -1,13 +1,13 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
-  fetchReviewsByMuseumId,
+  fetchReviewsByMuseumIdwithUsername,
   fetchSingleMuseumById,
 } from "../../helpers/fetching";
 import SingleReview from "../Reviews/SingleReview";
 import "./AllMuseums.css";
 
-export default function GetSingleMuseum({ token, museumId, userId }) {
+export default function GetSingleMuseum({ token, userId }) {
   const navigate = useNavigate();
   const params = useParams();
   const [museum, setMuseum] = useState({});
@@ -19,7 +19,9 @@ export default function GetSingleMuseum({ token, museumId, userId }) {
       try {
         const museumData = await fetchSingleMuseumById(params.museumId);
         setMuseum(museumData);
-        const museumReviews = await fetchReviewsByMuseumId(params.museumId);
+        const museumReviews = await fetchReviewsByMuseumIdwithUsername(
+          params.museumId
+        );
         setReviews(museumReviews);
       } catch (err) {
         setError("Failed to fetch museum details. Please try again later.");
