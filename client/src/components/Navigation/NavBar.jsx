@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../Redux/authSlice"; // import "./Navbar.css"; // Import your CSS file
 import "./Navbar.css"; // Import your CSS file
+import logo from ".././images/logo.png"
 
 function Navbar({ token }) {
   const dispatch = useDispatch();
@@ -16,7 +17,9 @@ function Navbar({ token }) {
 
   return (
     <nav className="navbar">
-      <h1>Museum App</h1>
+      <img src={logo} alt="Logo" className="logo" />
+      <img />
+      <h1 className="navbar-title">Museum App</h1>
       <ul className="nav-links">
         <li>
           <Link to="/">Home</Link>
