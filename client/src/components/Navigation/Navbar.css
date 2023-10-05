@@ -1,50 +1,56 @@
-/* Navbar.css */
-
+/* Navbar CSS */
 .navbar {
-    background-color: #333; /* Background color for the navbar */
-    color: #fff; /* Text color for navbar items */
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    padding: 1rem;
-  }
-  
-  .nav-links {
-    list-style: none;
+    justify-content: center;
+    min-height: 100vh;
+    width: 20vw;
+    background: #283F3B;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.logo {
+    width: 12vw;
+}
+
+.navbar-title {
+    color: white; 
+    font-size: 1.5rem;
+}
+
+.nav-links {
+    list-style-type: none;
     display: flex;
-    gap: 20px;
-  }
-  
-  .nav-links li {
-    font-size: 18px; /* Font size for navbar items */
-  }
-  
-  .nav-links a {
+    flex-direction: column;
+}
+
+.nav-links li {
+    margin: 1rem 0;
+}
+
+.nav-links a {
     text-decoration: none;
-    color: #fff; /* Text color for navbar links */
+    color: white;
     transition: color 0.3s;
-  }
-  
-  .nav-links a:hover {
-    color: #ff5733; /* Text color when hovering over navbar links */
-  }
-  
-  button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 16px; /* Font size for the button */
-    color: #4ee60d; /* Text color for the button */
-  }
-  
-  button:hover {
-    color: #ff5733; /* Text color when hovering over the button */
-  }
+    background: linear-gradient(#F4E9CD 0 100%) left / 0 no-repeat;
+    color: rgba(255, 255, 255, 0.428);
+    background-clip: text;
+    transition: background-size 0.45s 0.04s;
+}
 
+.nav-links a:hover {
+    color: #F4E9CD;
+    &::before {
+        left: calc(100% + 1rem);
+    }
+    background-size: 100%;
+}
 
-  
-
-  /* Home.css */
+/* Home.css */
 
 /* Set the background image */
 .home {
@@ -60,7 +66,7 @@
   }
   
   /* Style the header element */
-  h1 {
+  .quote {
     font-size: 36px;
     font-weight: bold;
     text-align: center;
@@ -70,6 +76,3 @@
     padding: 20px;
     font-family: 'Your Gorgeous Font', sans-serif;
   }
-  
-  /* Add more styles as needed */
-  

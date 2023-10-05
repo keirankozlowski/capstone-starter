@@ -8,7 +8,7 @@ import "./Map.css";
 
 const mapStyles = {
   width: "75%",
-  height: "75vh",
+  height: "95vh",
 };
 const center = {
   lat: 40.73061,
