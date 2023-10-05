@@ -34,7 +34,6 @@ const Map = () => {
     const renderMuseums = async () => {
       try {
         const museumArray = await fetchAllMuseums();
-        console.log("Museum Array: ", museumArray);
         setMuseums(museumArray);
       } catch (error) {
         setError("Failed to get museums");
