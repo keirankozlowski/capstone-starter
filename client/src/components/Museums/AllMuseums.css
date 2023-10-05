@@ -76,6 +76,39 @@
   /* Button background color on hover */
 }
 
+
+.loader {
+  border: 10px solid #f3f3f3;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite;
+  position: relative;
+  top: calc(50% - 40px);
+  left: calc(50% - 40px);
+  border-top: 16px solid #283F3B;
+  border-right: 16px solid #556F44;
+  border-bottom: 16px solid #659B5E;
+  border-left: 16px solid #95BF74;
+  /* background-image: "../Images/museumlogo.png"; */
+}
+
+.loader img {
+  width: 70px;
+  height: 70px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
 /* Add space between cards on larger screens */
 @media (min-width: 768px) {
   .museum-item {
