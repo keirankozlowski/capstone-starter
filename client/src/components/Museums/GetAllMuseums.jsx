@@ -62,7 +62,7 @@ export default function GetAllMuseums() {
               <p>{museum.description}</p>
 
               <a href={museum.link} target="_blank" rel="noopener noreferrer">
-                Learn More
+                Learn More at Museum Website
               </a>
               <button
                 className="detailsButton"
