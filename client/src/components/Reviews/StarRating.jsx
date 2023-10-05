@@ -66,7 +66,11 @@ const StarRating = ({ rating, onRatingChange, disableHover }) => {
     stars.push(starIcon);
   }
 
-  return <>{stars}</>;
+  return (
+    <>
+      <div className="star-rating">{stars}</div>
+    </>
+  );
 };
 
 export default StarRating;
