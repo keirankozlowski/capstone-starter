@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { fetchAllMuseums } from "../../helpers/fetching";
 import "./AllMuseums.css";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../Loading/Spinner";
 
 export default function GetAllMuseums() {
   const [museums, setMuseums] = useState([]);
@@ -46,8 +47,8 @@ export default function GetAllMuseums() {
         />
       </label>
 
-      {error ? (
-        <p>{error}</p>
+      {searchedMuseumsPage.length === 0 ? (
+        <Spinner />
       ) : (
         <div className="all-museums">
           {searchedMuseumsPage.map((museum) => (
@@ -61,7 +62,7 @@ export default function GetAllMuseums() {
               <p>{museum.description}</p>
 
               <a href={museum.link} target="_blank" rel="noopener noreferrer">
-                Learn More
+                Learn More at Museum Website
               </a>
               <button
                 className="detailsButton"
