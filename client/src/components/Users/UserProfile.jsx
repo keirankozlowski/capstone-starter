@@ -5,6 +5,7 @@ import {
   editJournalEntry,
   deleteJournalEntry,
 } from "../../helpers/fetching";
+import "./JournalEntries.css"; 
 
 export default function JournalEntries({ token, userId }) {
   const [journalEntries, setJournalEntries] = useState([]);
@@ -101,14 +102,14 @@ export default function JournalEntries({ token, userId }) {
   };
 
   return (
-    <div>
+    <div className="journal-entries-container">
       <h1>Journal Entries</h1>
-      {error && <p>{error}</p>}
-      <ul>
+      {error && <p className="error-message">{error}</p>}
+      <ul className="journal-entry-list">
         {journalEntries.map((entry) => (
-          <li key={entry.entryId}>
+          <li key={entry.entryId} className="journal-entry-card">
             {editingEntry?.entryId === entry.entryId ? (
-              <div>
+              <div className="edit-entry-form">
                 <h2>Edit Journal Entry</h2>
                 <input
                   type="text"
@@ -140,15 +141,15 @@ export default function JournalEntries({ token, userId }) {
                 </button>
               </div>
             ) : (
-              <div>
+              <div className="view-entry">
                 <h2>{entry.title}</h2>
                 <p>{entry.body}</p>
                 <p>Date: {entry.date}</p>
                 {token && (
-                  <>
+                  <div className="action-buttons">
                     <button
                       className="delete-button"
-                      onClick={() => handleDeleteEntry(entry.entryId)} // Pass entryId to the function
+                      onClick={() => handleDeleteEntry(entry.entryId)}
                     >
                       Delete
                     </button>
@@ -158,27 +159,36 @@ export default function JournalEntries({ token, userId }) {
                     >
                       Edit
                     </button>
-                  </>
+                  </div>
                 )}
               </div>
             )}
           </li>
         ))}
       </ul>
-      <div>
+      <div className="create-entry-form">
         <h2>Create New Journal Entry</h2>
-        {error && <p>{error}</p>}
-        <input
-          type="text"
-          placeholder="Title"
-          value={newEntry.title}
-          onChange={(e) => setNewEntry({ ...newEntry, title: e.target.value })}
-        />
-        <textarea
-          placeholder="Body"
-          value={newEntry.body}
-          onChange={(e) => setNewEntry({ ...newEntry, body: e.target.value })}
-        />
+        {error && <p className="error-message">{error}</p>}
+        <div className="form-input">
+          <label htmlFor="entryTitle">Title</label>
+          <input
+            type="text"
+            id="entryTitle"
+            placeholder="Title"
+            value={newEntry.title}
+            onChange={(e) => setNewEntry({ ...newEntry, title: e.target.value })}
+          />
+        </div>
+        <div className="form-input">
+          <label htmlFor="entryBody">Body</label>
+          <textarea
+            id="entryBody"
+            rows={5} // Adjust the number of rows as needed
+            placeholder="Body"
+            value={newEntry.body}
+            onChange={(e) => setNewEntry({ ...newEntry, body: e.target.value })}
+          />
+        </div>
         <button className="create-button" onClick={handleCreateEntry}>
           Create
         </button>
@@ -187,13 +197,23 @@ export default function JournalEntries({ token, userId }) {
   );
 }
 
+
+
+
+
+
+
+
+
+
 // import React, { useState, useEffect } from "react";
 // import {
-//   fetchAllJournalEntries,
+//   fetchJournalEntriesByUserId,
 //   addJournalEntry,
 //   editJournalEntry,
 //   deleteJournalEntry,
 // } from "../../helpers/fetching";
+// import "./JournalEntries.css"; 
 
 // export default function JournalEntries({ token, userId }) {
 //   const [journalEntries, setJournalEntries] = useState([]);
@@ -205,7 +225,7 @@ export default function JournalEntries({ token, userId }) {
 //   useEffect(() => {
 //     const fetchEntries = async () => {
 //       try {
-//         const entries = await fetchAllJournalEntries();
+//         const entries = await fetchJournalEntriesByUserId(userId);
 //         if (Array.isArray(entries)) {
 //           setJournalEntries(entries);
 //         } else {
@@ -219,9 +239,7 @@ export default function JournalEntries({ token, userId }) {
 //     fetchEntries();
 //   }, []);
 
-//   // Function to handle journal entry creation
 //   const handleCreateEntry = async () => {
-//     // Check if the user is authenticated
 //     if (!token) {
 //       setError("You must be logged in to create a journal entry.");
 //       return;
@@ -236,20 +254,20 @@ export default function JournalEntries({ token, userId }) {
 //         new Date().toISOString()
 //       );
 
-//       setJournalEntries((entries) => [...entries, createdEntry]);
+//       setJournalEntries([...journalEntries, createdEntry]);
 //       setNewEntry({ title: "", body: "" });
 //     } catch (error) {
 //       setError("Failed to create a journal entry. Please try again later.");
 //     }
 //   };
 
-//   // Function to handle journal entry edit
 //   const handleEditEntry = (entryId) => {
-//     const entryToEdit = journalEntries.find((entry) => entry.entryId === entryId);
+//     const entryToEdit = journalEntries.find(
+//       (entry) => entry.entryId === entryId
+//     );
 //     setEditingEntry(entryToEdit);
 //   };
 
-//   // Function to save edited journal entry
 //   const saveEditedEntry = async () => {
 //     if (!editingEntry) return;
 
@@ -275,13 +293,11 @@ export default function JournalEntries({ token, userId }) {
 //     }
 //   };
 
-//   // Function to handle journal entry deletion by user ID
 //   const handleDeleteEntry = async (entryId) => {
 //     try {
-//       const result = await deleteJournalEntry(entryId, userId, token);
+//       const result = await deleteJournalEntry(entryId, token);
 
 //       if (result) {
-//         // Delete was successful, update the state to remove the entry
 //         setJournalEntries((entries) =>
 //           entries.filter((entry) => entry.entryId !== entryId)
 //         );
@@ -290,7 +306,6 @@ export default function JournalEntries({ token, userId }) {
 //       }
 //     } catch (error) {
 //       setError("An error occurred while deleting the journal entry.");
-//       console.error("Error deleting journal entry:", error);
 //     }
 //   };
 
@@ -308,19 +323,30 @@ export default function JournalEntries({ token, userId }) {
 //                   type="text"
 //                   value={editingEntry.title}
 //                   onChange={(e) =>
-//                     setEditingEntry({ ...editingEntry, title: e.target.value })
+//                     setEditingEntry({
+//                       ...editingEntry,
+//                       title: e.target.value,
+//                     })
 //                   }
 //                 />
 //                 <textarea
 //                   value={editingEntry.body}
 //                   onChange={(e) =>
-//                     setEditingEntry({ ...editingEntry, body: e.target.value })
+//                     setEditingEntry({
+//                       ...editingEntry,
+//                       body: e.target.value,
+//                     })
 //                   }
 //                 />
 //                 <button className="save-button" onClick={saveEditedEntry}>
 //                   Save
 //                 </button>
-//                 <button className="cancel-button" onClick={() => setEditingEntry(null)}>Cancel</button>
+//                 <button
+//                   className="cancel-button"
+//                   onClick={() => setEditingEntry(null)}
+//                 >
+//                   Cancel
+//                 </button>
 //               </div>
 //             ) : (
 //               <div>
@@ -329,10 +355,16 @@ export default function JournalEntries({ token, userId }) {
 //                 <p>Date: {entry.date}</p>
 //                 {token && (
 //                   <>
-//                     <button className="delete-button" onClick={() => handleDeleteEntry(entry.entryId)}>
+//                     <button
+//                       className="delete-button"
+//                       onClick={() => handleDeleteEntry(entry.entryId)} // Pass entryId to the function
+//                     >
 //                       Delete
 //                     </button>
-//                     <button className="edit-button" onClick={() => handleEditEntry(entry.entryId)}>
+//                     <button
+//                       className="edit-button"
+//                       onClick={() => handleEditEntry(entry.entryId)}
+//                     >
 //                       Edit
 //                     </button>
 //                   </>
@@ -363,3 +395,29 @@ export default function JournalEntries({ token, userId }) {
 //     </div>
 //   );
 // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
