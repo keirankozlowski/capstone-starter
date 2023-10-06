@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import SingleReview from "../Reviews/SingleReview";
 
 const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
-  console.log("Selected Marker in MapPanel:", selectedMarker);
 
   const [error, setError] = useState(null);
   const [museumReviews, setMuseumReviews] = useState({});
@@ -30,7 +29,6 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
     }
   };
   useEffect(() => {
-    console.log("Museums in useEffect:", museums);
     museums.forEach((museum) => {
       fetchReviewsForMuseum(museum.museumId);
     });
