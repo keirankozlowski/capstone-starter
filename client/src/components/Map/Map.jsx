@@ -5,6 +5,8 @@ import customMapStyle from "./mapStyle.json";
 import { fetchAllMuseums } from "../../helpers/fetching";
 import MapPanel from "./MapPanel";
 import "./Map.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const mapStyles = {
   width: "75%",
@@ -27,6 +29,7 @@ const Map = () => {
   const [museums, setMuseums] = useState([]);
   const [error, setError] = useState(null);
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const [isSearchBarExpanded, setIsSearchBarExpanded] = useState(false);
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: apiKey,
   });
@@ -57,20 +60,28 @@ const Map = () => {
     }
   };
 
+  const toggleSearchBar = () => {
+    const searchBar = document.querySelector("#search-museums-bar");
+    searchBar.classList.toggle("expanded");
+  };
+
   return (
     <div className="map-container">
-      <div className="mapPanel">
+      <div className={`mapPanel ${isSearchBarExpanded ? "expanded" : ""}`}>
         <label>
-          Search:
           <input
             id="search-museums-bar"
             type="text"
-            placeholder="search museums"
+            placeholder="Looking for a museum?"
             onChange={(event) =>
               setSearchParam(event.target.value.toLowerCase())
             }
           />
         </label>
+        <button className="search-btn-map" onClick={toggleSearchBar}>
+          <FontAwesomeIcon icon={faSearch} 
+          onClick={() => setIsSearchBarExpanded(!isSearchBarExpanded)} />
+        </button>
 
         <div className="filter-buttons">
           <input
@@ -99,8 +110,11 @@ const Map = () => {
           <label htmlFor="other">Other</label>
         </div>
         <div className="panel-content">
-          <MapPanel museums={filteredMuseums} selectedMarker={selectedMarker}
-          setSelectedMarker={setSelectedMarker} />
+          <MapPanel
+            museums={filteredMuseums}
+            selectedMarker={selectedMarker}
+            setSelectedMarker={setSelectedMarker}
+          />
         </div>
       </div>
 
