@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { fetchReviewsByMuseumId } from "../../helpers/fetching";
 import AverageRating from "../Reviews/AverageRating";
 import { useNavigate } from "react-router-dom";
+import SingleReview from "../Reviews/SingleReview";
 
 const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
   console.log("Selected Marker in MapPanel:", selectedMarker);
@@ -9,6 +10,7 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
   const [error, setError] = useState(null);
   const [museumReviews, setMuseumReviews] = useState({});
   const [selectedMuseum, setSelectedMuseum] = useState(null);
+  const [selectedMuseumReviews, setSelectedMuseumReviews] = useState([]);
   const [descriptionExpanded, setDescriptionExpanded] = useState(false);
   const navigate = useNavigate();
 
@@ -17,15 +19,14 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
     try {
       if (!museumReviews[museumId]) {
         const reviewsData = await fetchReviewsByMuseumId(museumId);
-        console.log("Reviews Data for Museum", museumId, reviewsData);
         setMuseumReviews((prevReviews) => ({
           ...prevReviews,
           [museumId]: reviewsData,
         }));
+        setSelectedMuseumReviews(reviewsData);
       }
     } catch (error) {
       console.error("Error fetching reviews:", error);
-      setError("Failed to fetch reviews. Please try again later.");
     }
   };
   useEffect(() => {
@@ -73,10 +74,11 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
               {descriptionExpanded ? "See Less" : "See More"}
             </button>
           )}
-          <AverageRating
+
+          <SingleReview
             museumId={selectedMuseum.museumId}
-            reviews={museumReviews[selectedMuseum.museumId] || []}
           />
+
           <button
             className="detailsButton"
             onClick={() => {
