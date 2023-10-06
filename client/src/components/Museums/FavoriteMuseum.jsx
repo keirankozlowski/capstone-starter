@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addFavorite,
@@ -12,30 +12,27 @@ export default function FavoriteMuseum({ museumId }) {
   console.log("favoriteMuseums", favoriteMuseums);
   const dispatch = useDispatch();
 
-  const [isFavorite, setIsFavorite] = useState(
-    favoriteMuseums.includes(museumId)
-  );
+  // const [isFavorite, setIsFavorite] = useState(
+  //   favoriteMuseums.includes(museumId)
+  // );
 
-  console.log("isFavorite:", isFavorite);
-
-  // useEffect(() => {
-  //   setIsFavorite(favoriteMuseums.includes(museumId));
-  // }, [favoriteMuseums, museumId]);
+  const isFavorite = favoriteMuseums.some((item) => item.museumId === museumId);
+  console.log("isFavorite", isFavorite);
 
   const handleAddFavorite = () => {
     dispatch(addFavorite(museumId));
     // console.log("is this adding");
-    setIsFavorite(true);
+    // setIsFavorite(true);
   };
 
   const handleRemoveFavorite = () => {
     dispatch(removeFavorite(museumId));
     console.log("is this removing");
-    setIsFavorite(false);
+    // setIsFavorite(false);
   };
 
   return (
-    <div className="favorite-button">
+    <div>
       {isFavorite ? (
         <>
           <HiHeart
