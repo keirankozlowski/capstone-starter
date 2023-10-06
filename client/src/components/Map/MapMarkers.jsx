@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Marker, InfoWindow } from "@react-google-maps/api";
+import { Marker, InfoWindowF } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
 import {
   fetchAllMuseums,
@@ -73,7 +73,7 @@ const MapMarkers = ({ searchParam, selectedTypes, selectedMarker, setSelectedMar
         />
       ))}
       {selectedMarker && (
-        <InfoWindow
+        <InfoWindowF
           position={{
             lat: parseFloat(selectedMarker.lat) + 0.01,
             lng: parseFloat(selectedMarker.lng),
@@ -114,7 +114,7 @@ const MapMarkers = ({ searchParam, selectedTypes, selectedMarker, setSelectedMar
               </a>
             </p>
           </div>
-        </InfoWindow>
+        </InfoWindowF>
       )}
     </>
   );
