@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../Redux/authSlice"; // import "./Navbar.css"; // Import your CSS file
 import "./Navbar.css"; // Import your CSS file
-import logo from ".././images/logo.png"
+import logo from ".././images/logo.png";
+import { resetFavorites } from "../../Redux/favoriteSlice";
 
 function Navbar({ token }) {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ function Navbar({ token }) {
 
   const onLogout = () => {
     dispatch(logOut());
+    dispatch(resetFavorites());
     navigate("/register");
     console.log("logout token:", token);
   };

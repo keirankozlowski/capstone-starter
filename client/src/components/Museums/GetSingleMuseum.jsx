@@ -6,6 +6,7 @@ import {
 } from "../../helpers/fetching";
 import SingleReview from "../Reviews/SingleReview";
 import "./AllMuseums.css";
+import FavoriteMuseum from "./FavoriteMuseum";
 
 export default function GetSingleMuseum({ token, userId }) {
   const navigate = useNavigate();
@@ -38,6 +39,9 @@ export default function GetSingleMuseum({ token, userId }) {
         <p>{error}</p>
       ) : (
         <div className="single-museum-card museum-item" key={museum.museumId}>
+          <div className="overlay flex items-center justify-center">
+            <FavoriteMuseum museumId={params.museumId} />
+          </div>
           <h3 className="museum-headers">{museum.museumName}</h3>
           <p>{museum.description}</p>
           <img
