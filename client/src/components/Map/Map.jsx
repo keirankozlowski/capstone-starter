@@ -26,6 +26,7 @@ const Map = () => {
   ]);
   const [museums, setMuseums] = useState([]);
   const [error, setError] = useState(null);
+  const [selectedMarker, setSelectedMarker] = useState(null);
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: apiKey,
   });
@@ -98,7 +99,8 @@ const Map = () => {
           <label htmlFor="other">Other</label>
         </div>
         <div className="panel-content">
-          <MapPanel museums={filteredMuseums} />
+          <MapPanel museums={filteredMuseums} selectedMarker={selectedMarker}
+          setSelectedMarker={setSelectedMarker} />
         </div>
       </div>
 
@@ -109,7 +111,12 @@ const Map = () => {
           center={center}
           options={{ styles: customMapStyle }}
         >
-          <MapMarkers searchParam={searchParam} selectedTypes={selectedTypes} />
+          <MapMarkers
+            searchParam={searchParam}
+            selectedTypes={selectedTypes}
+            setSelectedMarker={setSelectedMarker}
+            selectedMarker={selectedMarker}
+          />
         </GoogleMap>
       )}
     </div>
