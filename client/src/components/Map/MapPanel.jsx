@@ -9,6 +9,7 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
   const [error, setError] = useState(null);
   const [museumReviews, setMuseumReviews] = useState({});
   const [selectedMuseum, setSelectedMuseum] = useState(null);
+  const [descriptionExpanded, setDescriptionExpanded] = useState(false);
   const navigate = useNavigate();
 
   // FETCH REVIEWS BY MUSEUM ID
@@ -59,6 +60,19 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
             style={{ width: "300px" }}
           />
           <h3>{selectedMuseum.museumName}</h3>
+          <p>
+            {descriptionExpanded
+              ? selectedMuseum.description
+              : selectedMuseum.description.substring(0, 150)}
+          </p>
+          {selectedMuseum.description.length > 150 && (
+            <button
+              onClick={() => setDescriptionExpanded(!descriptionExpanded)}
+              className="see-more-button"
+            >
+              {descriptionExpanded ? "See Less" : "See More"}
+            </button>
+          )}
           <AverageRating
             museumId={selectedMuseum.museumId}
             reviews={museumReviews[selectedMuseum.museumId] || []}
