@@ -14,6 +14,7 @@ const MapMarkers = ({ searchParam, selectedTypes, selectedMarker, setSelectedMar
   const [museums, setMuseums] = useState([]);
   const [error, setError] = useState(null);
   const [reviews, setReviews] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   // FETCH REVIEWS BY MUSEUM ID
   const fetchReviewsForMuseum = async (museumId) => {
@@ -31,8 +32,10 @@ const MapMarkers = ({ searchParam, selectedTypes, selectedMarker, setSelectedMar
         const museumArray = await fetchAllMuseums();
         // console.log("Museum Array: ", museumArray);
         setMuseums(museumArray);
+        setIsLoading(false);
       } catch (error) {
         setError("Failed to fetch museums. Please try again later.");
+        setIsLoading(false);
       }
     };
     renderMuseums();

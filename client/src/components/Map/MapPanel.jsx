@@ -14,16 +14,19 @@ const MapPanel = ({ museums, selectedMarker }) => {
     try {
       if (!museumReviews[museumId]) {
         const reviewsData = await fetchReviewsByMuseumId(museumId);
+        console.log("Reviews Data for Museum", museumId, reviewsData);
         setMuseumReviews((prevReviews) => ({
           ...prevReviews,
           [museumId]: reviewsData,
         }));
       }
     } catch (error) {
+      console.error("Error fetching reviews:", error);
       setError("Failed to fetch reviews. Please try again later.");
     }
   };
   useEffect(() => {
+    console.log("Museums in useEffect:", museums);
     museums.forEach((museum) => {
       fetchReviewsForMuseum(museum.museumId);
     });
@@ -33,6 +36,8 @@ const MapPanel = ({ museums, selectedMarker }) => {
     if (selectedMarker) {
       setSelectedMuseum(selectedMarker);
       fetchReviewsForMuseum(selectedMarker.museumId);
+    } else {
+      setSelectedMuseum(null);
     }
   }, [selectedMarker]);
 
