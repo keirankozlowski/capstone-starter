@@ -9,7 +9,6 @@ import markersIcon from "../Images/markers.png";
 import AverageRating from "../Reviews/AverageRating";
 
 const MapMarkers = ({ searchParam, selectedTypes, selectedMarker, setSelectedMarker }) => {
-  // const [selectedMarker, setSelectedMarker] = useState(null);
   const navigate = useNavigate();
   const [museums, setMuseums] = useState([]);
   const [error, setError] = useState(null);

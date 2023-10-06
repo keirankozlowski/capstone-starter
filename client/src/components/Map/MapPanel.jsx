@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchReviewsByMuseumId } from "../../helpers/fetching";
 import AverageRating from "../Reviews/AverageRating";
+import { useNavigate } from "react-router-dom";
 
 const MapPanel = ({ museums, selectedMarker }) => {
   console.log("Selected Marker in MapPanel:", selectedMarker);
@@ -8,6 +9,7 @@ const MapPanel = ({ museums, selectedMarker }) => {
   const [error, setError] = useState(null);
   const [museumReviews, setMuseumReviews] = useState({});
   const [selectedMuseum, setSelectedMuseum] = useState(null);
+  const navigate = useNavigate();
 
   // FETCH REVIEWS BY MUSEUM ID
   const fetchReviewsForMuseum = async (museumId) => {
@@ -41,6 +43,11 @@ const MapPanel = ({ museums, selectedMarker }) => {
     }
   }, [selectedMarker]);
 
+  const handleSelectMuseumByName = (museum) => {
+    setSelectedMuseum(museum);
+    fetchReviewsForMuseum(museum.museumId);
+  };
+
   return (
     <div className="side-panel">
       <h2>Museums</h2>
@@ -56,6 +63,14 @@ const MapPanel = ({ museums, selectedMarker }) => {
             museumId={selectedMuseum.museumId}
             reviews={museumReviews[selectedMuseum.museumId] || []}
           />
+          <button
+            className="detailsButton"
+            onClick={() => {
+              navigate(`/museums/${selectedMarker.museumId}`);
+            }}
+          >
+            See Details
+          </button>
         </div>
       ) : (
         <ul>
@@ -66,7 +81,13 @@ const MapPanel = ({ museums, selectedMarker }) => {
                 alt={museum.museumName}
                 style={{ width: "300px" }}
               />
-              <h4>{museum.museumName}</h4>
+              <h4
+                onClick={() => {
+                  handleSelectMuseumByName(museum);
+                }}
+              >
+                {museum.museumName}
+              </h4>
               <AverageRating
                 museumId={museum.museumId}
                 reviews={museumReviews[museum.museumId] || []}
