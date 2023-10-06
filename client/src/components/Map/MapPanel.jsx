@@ -3,7 +3,7 @@ import { fetchReviewsByMuseumId } from "../../helpers/fetching";
 import AverageRating from "../Reviews/AverageRating";
 import { useNavigate } from "react-router-dom";
 
-const MapPanel = ({ museums, selectedMarker }) => {
+const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
   console.log("Selected Marker in MapPanel:", selectedMarker);
 
   const [error, setError] = useState(null);
@@ -44,7 +44,7 @@ const MapPanel = ({ museums, selectedMarker }) => {
   }, [selectedMarker]);
 
   const handleSelectMuseumByName = (museum) => {
-    setSelectedMuseum(museum);
+    setSelectedMarker(museum);
     fetchReviewsForMuseum(museum.museumId);
   };
 
