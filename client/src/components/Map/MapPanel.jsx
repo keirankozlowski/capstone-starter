@@ -49,8 +49,7 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
   };
 
   return (
-    <div className="side-panel">
-      <h2>Museums</h2>
+    <div className="side-panel"><br />
       {selectedMuseum ? (
         <div>
           <img

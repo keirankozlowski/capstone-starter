@@ -61,54 +61,55 @@ const Map = () => {
   };
 
   const toggleSearchBar = () => {
-    const searchBar = document.querySelector("#search-museums-bar");
-    searchBar.classList.toggle("expanded");
+    setIsSearchBarExpanded(!isSearchBarExpanded);
   };
 
   return (
     <div className="map-container">
       <div className={`mapPanel ${isSearchBarExpanded ? "expanded" : ""}`}>
-        <label>
-          <input
-            id="search-museums-bar"
-            type="text"
-            placeholder="Looking for a museum?"
-            onChange={(event) =>
-              setSearchParam(event.target.value.toLowerCase())
-            }
-          />
-        </label>
         <button className="search-btn-map" onClick={toggleSearchBar}>
-          <FontAwesomeIcon icon={faSearch} 
-          onClick={() => setIsSearchBarExpanded(!isSearchBarExpanded)} />
+          <FontAwesomeIcon icon={faSearch} />
         </button>
 
-        <div className="filter-buttons">
-          <input
-            type="checkbox"
-            id="art"
-            value="art"
-            checked={selectedTypes.includes("art")}
-            onChange={onOptionChange}
-          />
-          <label htmlFor="art">Art</label>
-          <input
-            type="checkbox"
-            id="academic"
-            value="academic"
-            checked={selectedTypes.includes("academic")}
-            onChange={onOptionChange}
-          />
-          <label htmlFor="academic">Academic</label>
-          <input
-            type="checkbox"
-            id="other"
-            value="other"
-            checked={selectedTypes.includes("other")}
-            onChange={onOptionChange}
-          />
-          <label htmlFor="other">Other</label>
-        </div>
+            <input
+              id="search-museums-bar"
+              type="text"
+              placeholder="Explore Museums"
+              onChange={(event) =>
+                setSearchParam(event.target.value.toLowerCase())
+              }
+              className={isSearchBarExpanded ? "expanded" : ""}
+            />
+
+        {isSearchBarExpanded && (
+          <div className="filter-buttons">
+            <input
+              type="checkbox"
+              id="art"
+              value="art"
+              checked={selectedTypes.includes("art")}
+              onChange={onOptionChange}
+            />
+            <label htmlFor="art">Art</label>
+            <input
+              type="checkbox"
+              id="academic"
+              value="academic"
+              checked={selectedTypes.includes("academic")}
+              onChange={onOptionChange}
+            />
+            <label htmlFor="academic">Academic</label>
+            <input
+              type="checkbox"
+              id="other"
+              value="other"
+              checked={selectedTypes.includes("other")}
+              onChange={onOptionChange}
+            />
+            <label htmlFor="other">Other</label>
+          </div>
+        )}
+
         <div className="panel-content">
           <MapPanel
             museums={filteredMuseums}
