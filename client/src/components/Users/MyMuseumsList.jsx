@@ -12,19 +12,17 @@ export default function MyMuseumsList({ museumId }) {
 
   const [favoriteMuseumsData, setFavoriteMuseumsData] = useState([]);
 
+  const isFavorite = favoriteMuseums.some((item) => item.museumId === museumId);
+
   useEffect(() => {
     async function fetchFavoriteMuseumsData() {
-      const museums = await fetchAllMuseums();
-      const favoriteMuseumsIntegers = favoriteMuseums
-        .map((museum) => Number.parseInt(museum.museumId, 10))
-        .filter((museumId) => !Number.isNaN(museumId));
-      console.log("integer:", favoriteMuseumsIntegers);
-
-      console.log("museums in profile:", museums);
-      const filteredMuseums = museums.filter((museum) =>
-        favoriteMuseumsIntegers.includes(museum.museumId)
+      const allMuseums = await fetchAllMuseums();
+      const filteredMuseums = allMuseums.filter((museum) =>
+        favoriteMuseums.some(
+          (favorite) => favorite.museumId === museum.museumId
+        )
       );
-      console.log("filtered museums", filteredMuseums);
+
       setFavoriteMuseumsData(filteredMuseums);
     }
 
@@ -39,7 +37,7 @@ export default function MyMuseumsList({ museumId }) {
           {/* {favoriteMuseums} */}
           {favoriteMuseumsData.map((museum) => (
             <li className="favorites-card" key={museum.museumId}>
-              <FavoriteMuseum museumId={museumId} />
+              <FavoriteMuseum museumId={museumId} isFavorite={isFavorite} />
               {/* <p>{museum.museumId}</p> */}
               <h2>{museum.museumName}</h2>
               <img className="museum-img" src={museum.image} />

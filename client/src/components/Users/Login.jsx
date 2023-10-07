@@ -4,8 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 // import { login } from "../../Redux/authSlice";
 import { setCredentials } from "../../Redux/authSlice";
+// import { fetchFavoritesByUserIdAsync } from "../../Redux/favoriteSlice";
+import { setFavorites } from "../../Redux/favoriteSlice";
+import { fetchFavoritesByUserId } from "../../helpers/fetching";
 
-export default function Login({ token }) {
+export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [successMessage, setSuccessMessage] = useState(null);
@@ -29,7 +32,12 @@ export default function Login({ token }) {
           userId: register.user.userId,
           token: register.token,
         })
+        // fetchFavoritesByUserIdAsync(register.user.userId)
       );
+      const myFavorites = await fetchFavoritesByUserId(register.user.userId);
+
+      // Dispatch setFavorites action to update favorites in Redux store
+      dispatch(setFavorites(myFavorites));
     } else {
       setSuccessMessage("");
       setError("Please try again or register for an account");

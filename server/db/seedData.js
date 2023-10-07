@@ -41,7 +41,8 @@ const museums = [
   },
   {
     museumName: "The Whitney Museum of American Art",
-    image: "https://whitneymedia.org/assets/image/781045/large_lehoux-630.006-web.jpg",
+    image:
+      "https://whitneymedia.org/assets/image/781045/large_lehoux-630.006-web.jpg",
     description:
       "As the preeminent institution devoted to the art of the United States, the Whitney Museum of American Art presents the full range of twentieth-century and contemporary American art, with a special focus on works by living artists. The Whitney is dedicated to collecting, preserving, interpreting, and exhibiting American art, and its collection—arguably the finest holdings of twentieth-century American art in the world—is the Museum's key resource. The Museum's flagship exhibition, the Biennial, is the country's leading survey of the most recent developments in American art.",
     link: "https://whitney.org/",
@@ -92,7 +93,8 @@ const museums = [
   },
   {
     museumName: "The Brooklyn Museum",
-    image: "https://res.cloudinary.com/hello-tickets/image/upload/c_limit,f_auto,q_auto,w_1300/v1637210908/j407bgg6ewkt2qqloqjo.jpg",
+    image:
+      "https://res.cloudinary.com/hello-tickets/image/upload/c_limit,f_auto,q_auto,w_1300/v1637210908/j407bgg6ewkt2qqloqjo.jpg",
     description:
       "The Brooklyn Museum, founded in 1895, is one of the oldest and largest art museums in the United States. It houses over 1.5 million diverse artworks, from ancient Egyptian artifacts to contemporary pieces, in a Beaux-Arts building designed by McKim, Mead & White. The museum hosts temporary exhibitions, educational programs, and special events, fostering inclusivity and community engagement while enriching Brooklyn's cultural landscape.",
     link: "https://www.brooklynmuseum.org/",
@@ -153,11 +155,11 @@ const reviews = [
 
 const journal = [
   {
-    entryId: 1, 
+    entryId: 1,
     userId: 1,
     title: "my museum visit",
     body: "journal entry",
-    date: "2023-09-23", 
+    date: "2023-09-23",
   },
   {
     entryId: 2,
@@ -175,5 +177,9 @@ const journal = [
   },
 ];
 
+const favorites = [
+  { favoriteId: 1, userId: 1, museumId: 1 },
+  { favoriteId: 2, userId: 1, museumId: 2 },
+];
 
-module.exports = { users, museums, reviews, journal };
+module.exports = { users, museums, reviews, journal, favorites };

@@ -5,9 +5,15 @@ import {
   removeFavorite,
   selectFavorites,
 } from "../../Redux/favoriteSlice";
+import { addNewFavorite, deleteFavorite } from "../../helpers/fetching";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 
-export default function FavoriteMuseum({ museumId }) {
+export default function FavoriteMuseum({
+  userId,
+  museumId,
+  token,
+  isFavorite,
+}) {
   const favoriteMuseums = useSelector(selectFavorites);
   console.log("favoriteMuseums", favoriteMuseums);
   const dispatch = useDispatch();
@@ -16,19 +22,29 @@ export default function FavoriteMuseum({ museumId }) {
   //   favoriteMuseums.includes(museumId)
   // );
 
-  const isFavorite = favoriteMuseums.some((item) => item.museumId === museumId);
-  console.log("isFavorite", isFavorite);
+  // const isFavorite = favoriteMuseums.some((item) => item.museumId === museumId);
+  // console.log("isFavorite", isFavorite);
 
-  const handleAddFavorite = () => {
-    dispatch(addFavorite(museumId));
-    // console.log("is this adding");
-    // setIsFavorite(true);
+  const handleAddFavorite = async () => {
+    if (!isFavorite) {
+      const addedFavorite = await addNewFavorite(userId, museumId, token);
+
+      dispatch(addFavorite(addedFavorite));
+    }
   };
 
-  const handleRemoveFavorite = () => {
-    dispatch(removeFavorite(museumId));
-    console.log("is this removing");
-    // setIsFavorite(false);
+  const handleRemoveFavorite = async (favoriteId, token) => {
+    if (isFavorite) {
+      try {
+        // Perform the API request to delete a favorite
+        await deleteFavorite(favoriteId, token);
+
+        // Dispatch the removeFavorite action to update the Redux store
+        dispatch(removeFavorite({ favoriteId }));
+      } catch (error) {
+        console.error("Error removing favorite:", error);
+      }
+    }
   };
 
   return (
