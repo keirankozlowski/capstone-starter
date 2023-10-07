@@ -28,6 +28,7 @@ const StarRating = ({ rating, onRatingChange, disableHover }) => {
             onClick={() => handleStarClick(i)}
             onMouseEnter={() => handleStarHover(i)}
             onMouseLeave={() => handleStarHover(0)}
+            style={{ color: "#556f44" }}
           />
         );
       } else if (
@@ -41,6 +42,7 @@ const StarRating = ({ rating, onRatingChange, disableHover }) => {
             onClick={() => handleStarClick(i)}
             onMouseEnter={() => handleStarHover(i)}
             onMouseLeave={() => handleStarHover(0)}
+            style={{ color: "#556f44" }}
           />
         );
       } else {
@@ -51,6 +53,7 @@ const StarRating = ({ rating, onRatingChange, disableHover }) => {
             onClick={() => handleStarClick(i)}
             onMouseEnter={() => handleStarHover(i)}
             onMouseLeave={() => handleStarHover(0)}
+            style={{ color: "#556f44" }}
           />
         );
       }
@@ -60,6 +63,7 @@ const StarRating = ({ rating, onRatingChange, disableHover }) => {
           icon={i <= rating ? solidStar : regularStar}
           key={`star${i}`}
           onClick={() => handleStarClick(i)}
+          style={{ color: "#556f44" }}
         />
       );
     }
