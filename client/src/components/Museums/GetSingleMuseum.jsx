@@ -7,7 +7,6 @@ import {
 import SingleReview from "../Reviews/SingleReview";
 import "./AllMuseums.css";
 import FavoriteMuseum from "./FavoriteMuseum";
-import { faLessThanEqual } from "@fortawesome/free-solid-svg-icons";
 
 export default function GetSingleMuseum({ token, userId }) {
   const navigate = useNavigate();

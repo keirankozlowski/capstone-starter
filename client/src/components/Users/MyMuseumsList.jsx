@@ -1,13 +1,15 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { selectFavorites } from "../../Redux/favoriteSlice";
 import { fetchAllMuseums } from "../../helpers/fetching";
 import "./MyMuseums.css";
 import FavoriteMuseum from "../Museums/FavoriteMuseum";
 
-export default function MyMuseumsList({ museumId, userId, token }) {
+export default function MyMuseumsList({ userId, token }) {
   const favoriteMuseums = useSelector(selectFavorites);
+  const navigate = useNavigate();
   console.log("favorite museums:", favoriteMuseums);
 
   const [favoriteMuseumsData, setFavoriteMuseumsData] = useState([]);
@@ -37,13 +39,21 @@ export default function MyMuseumsList({ museumId, userId, token }) {
               <div className="overlay flex items-center justify-center">
                 <FavoriteMuseum
                   userId={userId}
-                  museumId={museumId}
+                  museumId={museum.museumId}
                   token={token}
                 />
               </div>
               <h2>{museum.museumName}</h2>
               <img className="museum-img" src={museum.image} />
               <p>{museum.description}</p>
+              <button
+                className="detailsButton"
+                onClick={() => {
+                  navigate(`/museums/${museum.museumId}`);
+                }}
+              >
+                See Details
+              </button>
             </div>
           ))}
         </ul>
