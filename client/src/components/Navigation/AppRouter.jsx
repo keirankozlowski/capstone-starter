@@ -47,7 +47,7 @@ export default function AppRouter() {
           <Route path="/reviews" element={<AllReviews token={token} />} />
           <Route
             path="/profile/favorites"
-            element={<MyMuseumsList userId={userId} />}
+            element={<MyMuseumsList userId={userId} token={token} />}
           />
         </Routes>
       </div>

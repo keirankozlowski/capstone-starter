@@ -7,21 +7,14 @@ import {
 import SingleReview from "../Reviews/SingleReview";
 import "./AllMuseums.css";
 import FavoriteMuseum from "./FavoriteMuseum";
-import { useSelector } from "react-redux";
-import { selectFavorites } from "../../Redux/favoriteSlice";
+import { faLessThanEqual } from "@fortawesome/free-solid-svg-icons";
 
 export default function GetSingleMuseum({ token, userId }) {
-  const favoriteMuseums = useSelector(selectFavorites);
   const navigate = useNavigate();
   const params = useParams();
   const [museum, setMuseum] = useState({});
   const [error, setError] = useState(null);
   const [reviews, setReviews] = useState([]);
-
-  const isFavorite = favoriteMuseums.some(
-    (item) => item.museumId === params.museumId
-  );
-  console.log("isFavorite", isFavorite);
 
   useEffect(() => {
     async function getMuseumDetails() {
@@ -52,7 +45,6 @@ export default function GetSingleMuseum({ token, userId }) {
               userId={userId}
               museumId={params.museumId}
               token={token}
-              isFavorite={isFavorite}
             />
           </div>
           <h3 className="museum-headers">{museum.museumName}</h3>

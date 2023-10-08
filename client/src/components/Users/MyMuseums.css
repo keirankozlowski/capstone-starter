@@ -1,4 +1,5 @@
 .favorites-card {
+    position: relative;
     border: 1px solid #ddd;
     background-color: #fff;
     margin: 20px 0;
@@ -14,4 +15,26 @@
 
 h1 {
     text-align: center;
+}
+
+.favorites-card:hover .overlay {
+	opacity: 1;
+}
+
+.overlay {
+	position: absolute;
+  top: 0; /* Position it at the top of .museum-item */
+  left: 0;
+	background: rgba(0, 0, 0, 0.8);
+	width: 100%;
+	transition: 0.5s ease;
+	opacity: 0;
+	/* bottom: 0; */
+	font-size: 20px;
+	padding: 20px;
+	text-align: center;
+}
+
+.favorite-overlay {
+  color: white;
 }

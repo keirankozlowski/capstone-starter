@@ -4,14 +4,6 @@ const initialState = {
   favorites: [],
 };
 
-// export const fetchFavoritesByUserIdAsync = createAsyncThunk(
-//   "favoriteMuseum/fetchFavoritesByUserId",
-//   async (userId) => {
-//     const response = await fetchFavoritesByUserId(userId);
-//     return response; // Assuming the API returns the user's favorites
-//   }
-// );
-
 const favoriteSlice = createSlice({
   name: "favoriteMuseum",
   initialState,
@@ -29,23 +21,16 @@ const favoriteSlice = createSlice({
       console.log("museumId in slice", favorite.museumId);
     },
     removeFavorite: (state, action) => {
-      const favoriteToRemove = action.payload;
-      console.log("museum to remove", favoriteToRemove.museumId);
+      const favoriteIdToRemove = action.payload.favoriteId;
+      console.log("remove:", favoriteIdToRemove);
       state.favorites = state.favorites.filter(
-        (favorite) => favorite.favorite !== favoriteToRemove
+        (favorite) => favorite.favoriteId !== favoriteIdToRemove
       );
     },
+
     resetFavorites: (state) => {
       state.favorites = initialState.favorites;
     },
-    // extraReducers: (builder) => {
-    //   builder.addCase(
-    //     fetchFavoritesByUserIdAsync.fulfilled,
-    //     (state, action) => {
-    //       state.favorites = action.payload;
-    //     }
-    //   );
-    // },
   },
 });
 

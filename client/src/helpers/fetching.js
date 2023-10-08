@@ -494,7 +494,7 @@ async function addNewFavorite(userId, museumId, token) {
 
 async function deleteFavorite(favoriteId, token) {
   try {
-    const response = await fetch(`${baseURL}/reviews/${favoriteId}`, {
+    const response = await fetch(`${baseURL}/favorites/${favoriteId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

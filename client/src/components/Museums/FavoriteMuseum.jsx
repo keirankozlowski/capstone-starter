@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addFavorite,
@@ -8,39 +7,48 @@ import {
 import { addNewFavorite, deleteFavorite } from "../../helpers/fetching";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 
-export default function FavoriteMuseum({
-  userId,
-  museumId,
-  token,
-  isFavorite,
-}) {
+export default function FavoriteMuseum({ userId, museumId, token }) {
   const favoriteMuseums = useSelector(selectFavorites);
-  console.log("favoriteMuseums", favoriteMuseums);
   const dispatch = useDispatch();
 
-  // const [isFavorite, setIsFavorite] = useState(
-  //   favoriteMuseums.includes(museumId)
-  // );
+  console.log("favoritemuseum", favoriteMuseums);
 
-  // const isFavorite = favoriteMuseums.some((item) => item.museumId === museumId);
-  // console.log("isFavorite", isFavorite);
+  const isFavorite = favoriteMuseums.some(
+    (item) => item.museumId === Number(museumId)
+  );
 
   const handleAddFavorite = async () => {
     if (!isFavorite) {
+      console.log("isFavorite", isFavorite);
       const addedFavorite = await addNewFavorite(userId, museumId, token);
-
       dispatch(addFavorite(addedFavorite));
     }
   };
 
-  const handleRemoveFavorite = async (favoriteId, token) => {
+  const handleRemoveFavorite = async () => {
     if (isFavorite) {
       try {
-        // Perform the API request to delete a favorite
-        await deleteFavorite(favoriteId, token);
+        // Find the favorite object with matching userId
+        const favoriteToRemove = favoriteMuseums.find(
+          (favorite) =>
+            favorite.userId === Number(userId) &&
+            favorite.museumId === Number(museumId)
+        );
+        console.log(
+          "remove this",
+          favoriteMuseums.find(
+            (favorite) =>
+              favorite.userId === Number(userId) &&
+              favorite.museumId === Number(museumId)
+          )
+        );
 
-        // Dispatch the removeFavorite action to update the Redux store
-        dispatch(removeFavorite({ favoriteId }));
+        if (favoriteToRemove) {
+          const favoriteId = favoriteToRemove.favoriteId;
+          await deleteFavorite(favoriteId, token);
+
+          dispatch(removeFavorite({ favoriteId }));
+        }
       } catch (error) {
         console.error("Error removing favorite:", error);
       }
@@ -60,7 +68,11 @@ export default function FavoriteMuseum({
         </>
       ) : (
         <>
-          <HiOutlineHeart size={36} onClick={handleAddFavorite} />
+          <HiOutlineHeart
+            size={36}
+            color="#95BF74"
+            onClick={handleAddFavorite}
+          />
           <span className="favorite-overlay">Add to Favorites</span>
         </>
       )}
