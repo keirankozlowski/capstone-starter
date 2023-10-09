@@ -14,6 +14,7 @@ import {
   selectCurrentUserId,
 } from "../../Redux/authSlice";
 import AllReviews from "../Reviews/AllReviews";
+import UserReviews from "../Users/UserReviews";
 
 export default function AppRouter() {
   const token = useSelector(selectCurrentToken);
@@ -37,6 +38,14 @@ export default function AppRouter() {
               <UserProfile token={token} username={username} userId={userId} />
             }
           />
+          <Route
+            path="/profile/reviews"
+            element={<UserReviews userId={userId} token={token} />}
+          />
+          {/* <Route
+            path="/profile/favorites"
+            element={<MyMuseumsList userId={userId} token={token} />}
+          /> */}
           <Route path="/register" element={<Auth token={token} />} />
           <Route path="/logout" element={<Logout />} />
           <Route
