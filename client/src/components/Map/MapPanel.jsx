@@ -48,6 +48,12 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
     fetchReviewsForMuseum(museum.museumId);
   };
 
+  const exitSingleMuseumView = () => {
+    setSelectedMarker(null);
+    setSelectedMuseum(null);
+    setSelectedMuseumReviews([]);
+  };
+
   return (
     <div className="side-panel"><br />
       {selectedMuseum ? (
@@ -84,6 +90,21 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
           >
             See Details
           </button>
+          
+          <button
+            className="exit-button"
+            onClick={exitSingleMuseumView}
+            style={{
+              position: "absolute",
+              top: "10px",
+              right: "10px",
+              backgroundColor: "transparent",
+              border: "none",
+            }}
+          >
+            &#x2716;
+          </button>
+
         </div>
       ) : (
         <ul>
