@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { logOut } from "../../Redux/authSlice"; // import "./Navbar.css"; // Import your CSS file
 import "./Navbar.css"; // Import your CSS file
 import logo from ".././images/logo.png";
+import { resetFavorites } from "../../Redux/favoriteSlice";
 import Dropdown from "./Dropdown";
 
 function Navbar({ token }) {
@@ -12,6 +13,7 @@ function Navbar({ token }) {
 
   const onLogout = () => {
     dispatch(logOut());
+    dispatch(resetFavorites());
     navigate("/register");
     console.log("logout token:", token);
   };
