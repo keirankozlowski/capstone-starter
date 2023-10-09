@@ -5,6 +5,7 @@ import { logOut } from "../../Redux/authSlice"; // import "./Navbar.css"; // Imp
 import "./Navbar.css"; // Import your CSS file
 import logo from ".././images/logo.png";
 import { resetFavorites } from "../../Redux/favoriteSlice";
+import Dropdown from "./Dropdown";
 
 function Navbar({ token }) {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ function Navbar({ token }) {
         {token ? (
           <>
             <li>
-              <Link to="/profile">Profile</Link>
+              <Dropdown />
             </li>
             <button className="auth-btn" onClick={onLogout}>
               Log Out

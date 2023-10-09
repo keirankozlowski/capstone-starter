@@ -45,10 +45,12 @@
 
 .nav-links a:hover {
   color: #f4e9cd;
-  &::before {
-    left: calc(100% + 1rem);
-  }
+
   background-size: 100%;
+}
+
+.nav-links a::before {
+  left: calc(100% + 1rem);
 }
 
 /* Home.css */

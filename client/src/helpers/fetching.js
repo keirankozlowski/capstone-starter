@@ -155,14 +155,27 @@ async function fetchSingleReview(reviewId) {
 
 // fetch single museum by name
 
-async function fetchSingleReviewByUserId(userId) {
+// async function fetchSingleReviewByUserId(userId) {
+//   try {
+//     const response = await fetch(`${baseURL}/reviews/user/${userId}`);
+//     const result = await response.json();
+//     console.log(result);
+//     return result;
+//   } catch (error) {
+//     console.error("cannot get user's review", error);
+//   }
+// }
+
+//fetch all reviews by userId
+
+async function fetchReviewsByUserId(userId) {
   try {
     const response = await fetch(`${baseURL}/reviews/user/${userId}`);
     const result = await response.json();
     console.log(result);
     return result;
   } catch (error) {
-    console.error("cannot get museum by name", error);
+    console.error("Cannot get journal entries by userId", error);
   }
 }
 
@@ -520,7 +533,8 @@ export {
   fetchSingleMuseumByName,
   fetchAllReviews,
   fetchSingleReview,
-  fetchSingleReviewByUserId,
+  // fetchSingleReviewByUserId,
+  fetchReviewsByUserId,
   fetchReviewsByMuseumId,
   fetchReviewsByMuseumIdwithUsername,
   addReview,
