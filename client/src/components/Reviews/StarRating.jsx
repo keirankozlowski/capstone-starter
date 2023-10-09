@@ -63,7 +63,7 @@ const StarRating = ({ rating, onRatingChange, disableHover }) => {
           icon={i <= rating ? solidStar : regularStar}
           key={`star${i}`}
           onClick={() => handleStarClick(i)}
-          style={{ color: "#556f44" }}
+          style={{ color: "#95BF74" }}
         />
       );
     }
