@@ -7,7 +7,6 @@ import Logout from "../Users/Logout";
 import Auth from "../Users/Auth";
 import Navbar from "./NavBar";
 import GetSingleMuseum from "../Museums/GetSingleMuseum";
-import MyMuseumsList from "../Users/MyMuseumsList";
 import { useSelector } from "react-redux";
 import {
   selectCurrentToken,
@@ -45,10 +44,6 @@ export default function AppRouter() {
             element={<GetSingleMuseum token={token} userId={userId} />}
           />
           <Route path="/reviews" element={<AllReviews token={token} />} />
-          <Route
-            path="/profile/favorites"
-            element={<MyMuseumsList userId={userId} token={token} />}
-          />
         </Routes>
       </div>
     </>
