@@ -118,10 +118,10 @@
 }
 
 
-  
+  .heart-button {
+    color: #95BF74;
+  }
 
-  
-  
 /* Container for Register and Login forms */
 .form-container {
     display: flex;
