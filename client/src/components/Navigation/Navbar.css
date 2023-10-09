@@ -45,10 +45,12 @@
 
 .nav-links a:hover {
   color: #f4e9cd;
-  &::before {
-    left: calc(100% + 1rem);
-  }
+
   background-size: 100%;
+}
+
+.nav-links a::before {
+  left: calc(100% + 1rem);
 }
 
 /* Home.css */
@@ -69,8 +71,8 @@
 }
 
 .cb-slideshow {
-    background: transparent;
-  }
+  background: transparent;
+}
 
 .cb-slideshow,
 .cb-slideshow:after {
@@ -81,6 +83,7 @@
   left: 0px;
   z-index: 0;
 }
+
 .cb-slideshow:after {
   content: "";
 }
@@ -104,21 +107,39 @@
   background-image: url("https://mooseoom.foxthemes.me/wp-content/uploads/2019/11/exhibition-362163_1920-1.jpg");
   animation-delay: 0s;
 }
+
 .cb-slideshow li:nth-child(2) span {
   background-image: url("https://mooseoom.foxthemes.me/wp-content/uploads/2019/11/our-vision-1024x757-1.jpg");
   animation-delay: 12s;
 }
+
 .cb-slideshow li:nth-child(3) span {
   background-image: url("https://mooseoom.foxthemes.me/wp-content/uploads/2019/10/about-ua-banner.jpg");
   animation-delay: 24s;
 }
 
-@keyframes imageAnimation { 
-    0% { opacity: 0; animation-timing-function: ease-in; }
-    8% { opacity: 1; animation-timing-function: ease-out; }
-    17% { opacity: 1 }
-    25% { opacity: 1 }
-    100% { opacity: 0 }
+@keyframes imageAnimation {
+  0% {
+    opacity: 0;
+    animation-timing-function: ease-in;
+  }
+
+  8% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+
+  17% {
+    opacity: 1
+  }
+
+  25% {
+    opacity: 1
+  }
+
+  100% {
+    opacity: 0
+  }
 }
 
 .no-cssanimations .cb-slideshow li span {
