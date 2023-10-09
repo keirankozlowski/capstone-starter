@@ -112,6 +112,68 @@
   height: 70px;
 }
 
+
+
+
+
+
+
+/* MuseumPlayerCard.css */
+.museum-player-card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+
+.museum-player-card h3 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.museum-player-card p {
+  margin: 8px 0;
+}
+
+.museum-player-card .museum-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.museum-player-card .museum-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.museum-player-card .museum-link:hover {
+  text-decoration: underline;
+}
+
+.museum-player-card .museum-buttons {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin-top: 16px;
+  font-size: 1rem;
+}
+
+.museum-player-card .museum-buttons:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
