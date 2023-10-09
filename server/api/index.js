@@ -18,4 +18,7 @@ router.use("/reviews", require("./reviews"));
 // ROUTER: /api/journal
 router.use("/journal", require("./journal"));
 
+// ROUTER: /api/favorites
+router.use("/favorites", require("./favorites"));
+
 module.exports = router;

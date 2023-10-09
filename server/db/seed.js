@@ -11,7 +11,8 @@ const { createMuseum } = require("./helpers/museums");
 const { createReview } = require("./helpers/reviews");
 const { createUser } = require("./helpers/users");
 const { createJournal } = require("./helpers/journal"); // Corrected
-const { users, museums, reviews, journal } = require("./seedData");
+const { createFavorite } = require("./helpers/favorites");
+const { users, museums, reviews, journal, favorites } = require("./seedData");
 
 //Drop Tables for cleanliness
 const dropTables = async () => {
@@ -20,8 +21,10 @@ const dropTables = async () => {
     await client.query(`
         DROP TABLE IF EXISTS journal;
         DROP TABLE IF EXISTS reviews;
+        DROP TABLE IF EXISTS favorites;
         DROP TABLE IF EXISTS museums;
         DROP TABLE IF EXISTS users;
+
         `);
     console.log("Tables dropped!");
   } catch (error) {
@@ -34,29 +37,29 @@ const createTables = async () => {
   console.log("Building tables...");
   await client.query(`
         CREATE TABLE users (
-            "userId" SERIAL PRIMARY KEY,
-            username varchar(255) UNIQUE NOT NULL,
-            password varchar(255) NOT NULL
+          "userId" SERIAL PRIMARY KEY,
+          username varchar(255) UNIQUE NOT NULL,
+          password varchar(255) NOT NULL
         );
 
         CREATE TABLE museums (
-            "museumId" SERIAL PRIMARY KEY,
-            "museumName" varchar(255) NOT NULL,
-            image varchar(500),
-            description varchar(1000) NOT NULL,
-            link varchar(500),
-            type varchar(255) NOT NULL,
-            lat DECIMAL(10, 6) NOT NULL,
-            lng DECIMAL(10, 6) NOT NULL
+          "museumId" SERIAL PRIMARY KEY,
+          "museumName" varchar(255) NOT NULL,
+          image varchar(500),
+          description varchar(1000) NOT NULL,
+          link varchar(500),
+          type varchar(255) NOT NULL,
+          lat DECIMAL(10, 6) NOT NULL,
+          lng DECIMAL(10, 6) NOT NULL
         );
 
         CREATE TABLE reviews (
-            "reviewId" SERIAL PRIMARY KEY,
-            "userId" INTEGER REFERENCES users("userId"),
-            "museumId" INTEGER REFERENCES museums("museumId"),
-           rating INTEGER,
-           body varchar(1000),
-           date DATE NOT NULL DEFAULT CURRENT_DATE
+          "reviewId" SERIAL PRIMARY KEY,
+          "userId" INTEGER REFERENCES users("userId"),
+          "museumId" INTEGER REFERENCES museums("museumId"),
+          rating INTEGER,
+          body varchar(1000),
+          date DATE NOT NULL DEFAULT CURRENT_DATE
 
         );
 
@@ -66,6 +69,11 @@ const createTables = async () => {
           title varchar(1000),
           body varchar(1000),
           date DATE NOT NULL DEFAULT CURRENT_DATE
+      );
+        CREATE TABLE favorites (
+          "favoriteId" SERIAL PRIMARY KEY,
+          "userId" INTEGER REFERENCES users("userId") NOT NULL,
+          "museumId" INTEGER REFERENCES museums("museumId") NOT NULL
       );
     `);
   console.log("Tables built!");
@@ -115,6 +123,16 @@ const createInitialJournal = async () => {
   }
 };
 
+const createInitialFavorites = async () => {
+  try {
+    for (const favorite of favorites) {
+      await createFavorite(favorite);
+    }
+    console.log("created favorites");
+  } catch (error) {
+    throw error;
+  }
+};
 
 const rebuildDb = async () => {
   try {
@@ -130,6 +148,7 @@ const rebuildDb = async () => {
     await createInitialMuseums();
     await createInitialReviews();
     await createInitialJournal();
+    await createInitialFavorites();
   } catch (error) {
     console.error(error);
   } finally {

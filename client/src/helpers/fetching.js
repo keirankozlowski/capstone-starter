@@ -428,6 +428,101 @@ async function editJournalEntry(entryId, userId, title, body, date, token) {
   }
 }
 
+// FAVORITE QUERIES
+
+async function fetchAllFavorites() {
+  try {
+    const response = await fetch(`${baseURL}/favorites`);
+    const result = await response.json();
+    // console.log(result);
+    return result;
+  } catch (error) {
+    console.error("Cannot get favorites", error);
+  }
+}
+
+// fetch single museum by id
+
+async function fetchFavoriteById(favoriteId) {
+  try {
+    const response = await fetch(`${baseURL}/favorites/${favoriteId}`);
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error("cannot get single rfavorite", error);
+  }
+}
+
+// fetch single museum by name
+
+async function fetchFavoritesByMuseumId(museumId) {
+  try {
+    const response = await fetch(`${baseURL}/favorites/museum/${museumId}`);
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error("cannot get favorite by museum name", error);
+  }
+}
+
+// fetch reviews by museumId
+
+async function fetchFavoritesByUserId(userId) {
+  try {
+    const response = await fetch(`${baseURL}/favorites/user/${userId}`);
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error("cannot get favorites by user Id", error);
+  }
+}
+
+// add a favorite
+
+async function addNewFavorite(userId, museumId, token) {
+  try {
+    const response = await fetch(`${baseURL}/favorites`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        userId,
+        museumId,
+      }),
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("You cannot add a favorite", error);
+    throw error;
+  }
+}
+
+// delete a review
+
+async function deleteFavorite(favoriteId, token) {
+  try {
+    const response = await fetch(`${baseURL}/favorites/${favoriteId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(response);
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error(`You cannot delete this favorite museum`, error);
+  }
+}
+
 export {
   createUser,
   loginUser,
@@ -452,4 +547,10 @@ export {
   addJournalEntry,
   deleteJournalEntry,
   editJournalEntry,
+  fetchAllFavorites,
+  fetchFavoriteById,
+  fetchFavoritesByMuseumId,
+  fetchFavoritesByUserId,
+  addNewFavorite,
+  deleteFavorite,
 };
