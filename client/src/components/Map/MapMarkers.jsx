@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Marker, InfoWindow } from "@react-google-maps/api";
+import { Marker, InfoWindowF } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
 import {
   fetchAllMuseums,
@@ -8,12 +8,12 @@ import {
 import markersIcon from "../Images/markers.png";
 import AverageRating from "../Reviews/AverageRating";
 
-const MapMarkers = ({ searchParam, selectedTypes }) => {
-  const [selectedMarker, setSelectedMarker] = useState(null);
+const MapMarkers = ({ searchParam, selectedTypes, selectedMarker, setSelectedMarker }) => {
   const navigate = useNavigate();
   const [museums, setMuseums] = useState([]);
   const [error, setError] = useState(null);
   const [reviews, setReviews] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   // FETCH REVIEWS BY MUSEUM ID
   const fetchReviewsForMuseum = async (museumId) => {
@@ -31,8 +31,10 @@ const MapMarkers = ({ searchParam, selectedTypes }) => {
         const museumArray = await fetchAllMuseums();
         // console.log("Museum Array: ", museumArray);
         setMuseums(museumArray);
+        setIsLoading(false);
       } catch (error) {
         setError("Failed to fetch museums. Please try again later.");
+        setIsLoading(false);
       }
     };
     renderMuseums();
@@ -71,7 +73,7 @@ const MapMarkers = ({ searchParam, selectedTypes }) => {
         />
       ))}
       {selectedMarker && (
-        <InfoWindow
+        <InfoWindowF
           position={{
             lat: parseFloat(selectedMarker.lat) + 0.01,
             lng: parseFloat(selectedMarker.lng),
@@ -87,8 +89,6 @@ const MapMarkers = ({ searchParam, selectedTypes }) => {
               style={{ width: "250px" }}
             />
             <h3>{selectedMarker.museumName}</h3>
-            {/* <p>{selectedMarker.description}</p> */}
-            {/* <p>{selectedMarker.address}</p> */}
 
             <AverageRating
               museumId={selectedMarker.museumId}
@@ -114,7 +114,7 @@ const MapMarkers = ({ searchParam, selectedTypes }) => {
               </a>
             </p>
           </div>
-        </InfoWindow>
+        </InfoWindowF>
       )}
     </>
   );

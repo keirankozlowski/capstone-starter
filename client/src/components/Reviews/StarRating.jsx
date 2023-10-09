@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStarHalfStroke } from "@fortawesome/free-solid-svg-icons";
+import { faStarHalf } from "@fortawesome/free-solid-svg-icons";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 
@@ -28,6 +28,7 @@ const StarRating = ({ rating, onRatingChange, disableHover }) => {
             onClick={() => handleStarClick(i)}
             onMouseEnter={() => handleStarHover(i)}
             onMouseLeave={() => handleStarHover(0)}
+            style={{ color: "#95BF74" }}
           />
         );
       } else if (
@@ -36,11 +37,12 @@ const StarRating = ({ rating, onRatingChange, disableHover }) => {
       ) {
         starIcon = (
           <FontAwesomeIcon
-            icon={faStarHalfStroke}
+            icon={faStarHalf}
             key={`halfStar${i}`}
             onClick={() => handleStarClick(i)}
             onMouseEnter={() => handleStarHover(i)}
             onMouseLeave={() => handleStarHover(0)}
+            style={{ color: "#95BF74" }}
           />
         );
       } else {
@@ -51,6 +53,7 @@ const StarRating = ({ rating, onRatingChange, disableHover }) => {
             onClick={() => handleStarClick(i)}
             onMouseEnter={() => handleStarHover(i)}
             onMouseLeave={() => handleStarHover(0)}
+            style={{ color: "#95BF74" }}
           />
         );
       }
@@ -60,6 +63,7 @@ const StarRating = ({ rating, onRatingChange, disableHover }) => {
           icon={i <= rating ? solidStar : regularStar}
           key={`star${i}`}
           onClick={() => handleStarClick(i)}
+          style={{ color: "#556f44" }}
         />
       );
     }
