@@ -72,7 +72,7 @@ const Map = () => {
         </button>
 
             <input
-              id="search-museums-bar"
+              id="search-museums-bar-map"
               type="text"
               placeholder="Explore Museums"
               onChange={(event) =>
@@ -82,7 +82,7 @@ const Map = () => {
             />
 
         {isSearchBarExpanded && (
-          <div className="filter-buttons">
+          <div className="filter-buttons-map">
             <input
               type="checkbox"
               id="art"
