@@ -15,6 +15,11 @@ export default function JournalEntries({ token, userId }) {
   const [newEntry, setNewEntry] = useState({ title: "", body: "" });
   const [searchQuery, setSearchQuery] = useState("");
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString();
+  };
+
   useEffect(() => {
     const fetchEntries = async () => {
       try {
@@ -158,7 +163,7 @@ export default function JournalEntries({ token, userId }) {
               <div className="view-entry">
                 <h2>{entry.title}</h2>
                 <p>{entry.body}</p>
-                <p>Date: {entry.date}</p>
+                <p>Date: {formatDate(entry.date)}</p>
                 {token && (
                   <div className="action-buttons">
                     <button
