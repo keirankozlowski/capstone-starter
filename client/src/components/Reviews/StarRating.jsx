@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStarHalf } from "@fortawesome/free-solid-svg-icons";
+import { faStarHalfStroke } from "@fortawesome/free-solid-svg-icons";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 
@@ -37,12 +37,12 @@ const StarRating = ({ rating, onRatingChange, disableHover }) => {
       ) {
         starIcon = (
           <FontAwesomeIcon
-            icon={faStarHalf}
+            icon={faStarHalfStroke}
             key={`halfStar${i}`}
             onClick={() => handleStarClick(i)}
             onMouseEnter={() => handleStarHover(i)}
             onMouseLeave={() => handleStarHover(0)}
-            style={{ color: "#95BF74" }}
+            // style={{ color: "#95BF74" }}
           />
         );
       } else {
