@@ -14,9 +14,6 @@ export default function JournalEntries({ token, userId }) {
   const [editingEntry, setEditingEntry] = useState(null);
   const [newEntry, setNewEntry] = useState({ title: "", body: "" });
 
-  const navigate = useNavigate();
-
-  // Fetch all journal entries
   useEffect(() => {
     const fetchEntries = async () => {
       try {
@@ -32,7 +29,7 @@ export default function JournalEntries({ token, userId }) {
     };
 
     fetchEntries();
-  }, []);
+  }, [userId]);
 
   const handleCreateEntry = async () => {
     if (!token) {
@@ -104,12 +101,25 @@ export default function JournalEntries({ token, userId }) {
     }
   };
 
+  // Filter entries based on the search query
+  const filteredEntries = journalEntries.filter((entry) =>
+    entry.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="journal-entries-container">
       <h1>Journal Entries</h1>
       {error && <p className="error-message">{error}</p>}
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search entries..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
       <ul className="journal-entry-list">
-        {journalEntries.map((entry) => (
+        {filteredEntries.map((entry) => (
           <li key={entry.entryId} className="journal-entry-card">
             {editingEntry?.entryId === entry.entryId ? (
               <div className="edit-entry-form">

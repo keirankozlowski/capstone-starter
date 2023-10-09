@@ -135,10 +135,6 @@
   height: 70px;
 }
 
-.heart-button {
-  color: #95BF74;
-}
-
 @keyframes spin {
   0% {
     transform: rotate(0deg);
