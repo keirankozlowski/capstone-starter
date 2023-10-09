@@ -1,3 +1,4 @@
+/* MAP  */
 .map-container {
   display: flex;
   flex-direction: row-reverse;
@@ -5,6 +6,7 @@
   margin-top: 20px;
 }
 
+/* MAP SIDE PANEL  */
 .mapPanel {
   width: 25%;
   margin-left: 1.5vw;
@@ -26,3 +28,91 @@
     max-width: 100%;
     height: auto;
   }
+
+/* MAP SEARCH */
+#search-museums-bar {
+  height: 40px;
+  outline: none;
+  border: none;
+  background: none;
+  transition: width 0.3s ease-in-out;
+  border-bottom: 1px solid #283f3b;
+  width: 0;
+  overflow: hidden;
+  float: left;
+  margin-right: 10px;
+  color: #283f3b;
+}
+
+#search-museums-bar::placeholder {
+  color: #0000004d;
+}
+
+#search-museums-bar.expanded {
+  width: 70%;
+  opacity: 1; 
+}
+
+.search-btn-map {
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  background: #283f3b;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  transition: 0.3s;
+  right: 0;
+}
+
+.search-btn-map:hover {
+  background: #fff;
+  color: #283f3b;
+}
+
+#search-museums-bar.expanded {
+  width: 70%;
+  padding-left: 10px;
+}
+
+/* MAP FILTER  */
+.filter-buttons {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.2em;
+}
+
+.filter-buttons input[type="checkbox"] {
+  display: none;
+}
+
+.filter-buttons label {
+  position: relative;
+  padding-left: 1.5em;
+  margin-bottom: 0.2em;
+  color: #fff;
+  transition: color 0.3s ease-in-out;
+}
+
+.filter-buttons label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.3em;
+  width: 1em;
+  height: 1em;
+  border: 1px solid #fff;
+  background-color: #283f3b;
+  border-radius: 3px;
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.filter-buttons input[type="checkbox"]:checked + label:before {
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.filter-buttons input[type="checkbox"]:checked + label {
+  color: #283f3b;
+}

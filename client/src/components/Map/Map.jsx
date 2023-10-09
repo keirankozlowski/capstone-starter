@@ -5,6 +5,8 @@ import customMapStyle from "./mapStyle.json";
 import { fetchAllMuseums } from "../../helpers/fetching";
 import MapPanel from "./MapPanel";
 import "./Map.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const mapStyles = {
   width: "75%",
@@ -26,6 +28,8 @@ const Map = () => {
   ]);
   const [museums, setMuseums] = useState([]);
   const [error, setError] = useState(null);
+  const [selectedMarker, setSelectedMarker] = useState(null);
+  const [isSearchBarExpanded, setIsSearchBarExpanded] = useState(false);
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: apiKey,
   });
@@ -34,7 +38,6 @@ const Map = () => {
     const renderMuseums = async () => {
       try {
         const museumArray = await fetchAllMuseums();
-        console.log("Museum Array: ", museumArray);
         setMuseums(museumArray);
       } catch (error) {
         setError("Failed to get museums");
@@ -57,49 +60,62 @@ const Map = () => {
     }
   };
 
+  const toggleSearchBar = () => {
+    setIsSearchBarExpanded(!isSearchBarExpanded);
+  };
+
   return (
     <div className="map-container">
-      <div className="mapPanel">
-        <label>
-          Search:
-          <input
-            id="search-museums-bar"
-            type="text"
-            placeholder="search museums"
-            onChange={(event) =>
-              setSearchParam(event.target.value.toLowerCase())
-            }
-          />
-        </label>
+      <div className={`mapPanel ${isSearchBarExpanded ? "expanded" : ""}`}>
+        <button className="search-btn-map" onClick={toggleSearchBar}>
+          <FontAwesomeIcon icon={faSearch} />
+        </button>
 
-        <div className="filter-buttons">
-          <input
-            type="checkbox"
-            id="art"
-            value="art"
-            checked={selectedTypes.includes("art")}
-            onChange={onOptionChange}
-          />
-          <label htmlFor="art">Art</label>
-          <input
-            type="checkbox"
-            id="academic"
-            value="academic"
-            checked={selectedTypes.includes("academic")}
-            onChange={onOptionChange}
-          />
-          <label htmlFor="academic">Academic</label>
-          <input
-            type="checkbox"
-            id="other"
-            value="other"
-            checked={selectedTypes.includes("other")}
-            onChange={onOptionChange}
-          />
-          <label htmlFor="other">Other</label>
-        </div>
+            <input
+              id="search-museums-bar"
+              type="text"
+              placeholder="Explore Museums"
+              onChange={(event) =>
+                setSearchParam(event.target.value.toLowerCase())
+              }
+              className={isSearchBarExpanded ? "expanded" : ""}
+            />
+
+        {isSearchBarExpanded && (
+          <div className="filter-buttons">
+            <input
+              type="checkbox"
+              id="art"
+              value="art"
+              checked={selectedTypes.includes("art")}
+              onChange={onOptionChange}
+            />
+            <label htmlFor="art">Art</label>
+            <input
+              type="checkbox"
+              id="academic"
+              value="academic"
+              checked={selectedTypes.includes("academic")}
+              onChange={onOptionChange}
+            />
+            <label htmlFor="academic">Academic</label>
+            <input
+              type="checkbox"
+              id="other"
+              value="other"
+              checked={selectedTypes.includes("other")}
+              onChange={onOptionChange}
+            />
+            <label htmlFor="other">Other</label>
+          </div>
+        )}
+
         <div className="panel-content">
-          <MapPanel museums={filteredMuseums} />
+          <MapPanel
+            museums={filteredMuseums}
+            selectedMarker={selectedMarker}
+            setSelectedMarker={setSelectedMarker}
+          />
         </div>
       </div>
 
@@ -110,7 +126,12 @@ const Map = () => {
           center={center}
           options={{ styles: customMapStyle }}
         >
-          <MapMarkers searchParam={searchParam} selectedTypes={selectedTypes} />
+          <MapMarkers
+            searchParam={searchParam}
+            selectedTypes={selectedTypes}
+            setSelectedMarker={setSelectedMarker}
+            selectedMarker={selectedMarker}
+          />
         </GoogleMap>
       )}
     </div>
