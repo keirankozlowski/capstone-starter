@@ -1,0 +1,147 @@
+/* ReviewCard.css - Styled as Journal Entry Cards and EditReview.css */
+
+/* Styles for player cards and the edit-review container */
+.player-card, .edit-review-container {
+    border: 1px solid #ddd;
+    background-color: #fff;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.player-card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styles for star rating component with green stars */
+.star-rating {
+    background-image: linear-gradient(90deg, #99DDC8, #659B5E, #95BF74, #556F44, #99DDC8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: solid;
+}
+
+.review-body, .edit-review-textarea {
+    font-size: 1rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.review-date {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.review-username {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Styles for buttons with green stars and made to look exactly the same */
+.edit-review-button, .delete-review-button, .update-button, .cancel-button {
+    background-color: #34495e;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glimmering effect with changing colors */
+.edit-review-button:hover, .delete-review-button:hover, .update-button:hover, .cancel-button:hover {
+    background: linear-gradient(45deg, #99DDC8, #659B5E, #95BF74, #556F44);
+    background-size: 200% 200%;
+    animation: shimmer 2s linear infinite;
+    color: #fff;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Styles for the create review textarea */
+.create-review-container {
+    margin-top: 16px;
+}
+
+.create-review-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    min-height: 200px; /* Increase the height as needed */
+}
+
+.create-review-button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    margin-top: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Glimmering effect with changing colors */
+.create-review-button:hover {
+    background: linear-gradient(45deg, #99DDC8, #659B5E, #95BF74, #556F44);
+    background-size: 200% 200%;
+    animation: shimmer 2s linear infinite;
+    color: #fff;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Error message styling */
+.error-message {
+    color: #d9534f;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Styling for the title and body inputs */
+.form-input {
+    margin-bottom: 15px;
+}
+
+.form-input label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-input input[type="text"], .form-input textarea, .edit-review-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Style for the button container */
+.button-container {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+}
+
