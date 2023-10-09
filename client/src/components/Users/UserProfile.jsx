@@ -13,6 +13,7 @@ export default function JournalEntries({ token, userId }) {
   const [error, setError] = useState(null);
   const [editingEntry, setEditingEntry] = useState(null);
   const [newEntry, setNewEntry] = useState({ title: "", body: "" });
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchEntries = async () => {
