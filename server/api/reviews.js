@@ -5,7 +5,8 @@ const {
   createReview,
   getAllReviews,
   getReviewById,
-  getReviewByUserId,
+  // getReviewByUserId,
+  getReviewsByUserId,
   getReviewsByMuseumId,
   getReviewsByMuseumIdwithUsername,
   updateReview,
@@ -39,14 +40,14 @@ router.get("/:reviewId", async (req, res, next) => {
 
 // GET review by user Id - api/reviews/user/:userId
 
-router.get("/user/:userId", async (req, res, next) => {
-  try {
-    const review = await getReviewByUserId(req.params.userId);
-    res.send(review);
-  } catch (error) {
-    next(error);
-  }
-});
+// router.get("/user/:userId", async (req, res, next) => {
+//   try {
+//     const review = await getReviewByUserId(req.params.userId);
+//     res.send(review);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 // Get review by museum Id - api/reviews/museum/:museumId
 
@@ -98,6 +99,17 @@ router.put("/:reviewId", async (req, res, next) => {
   try {
     const review = await updateReview(req.params.reviewId, req.body);
     res.send(review);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Get all reviews by userId
+router.get("/user/:userId", async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const userReviews = await getReviewsByUserId(userId);
+    res.send(userReviews);
   } catch (error) {
     next(error);
   }
