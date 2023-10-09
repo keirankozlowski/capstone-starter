@@ -78,7 +78,7 @@
 .create-button:hover {
   background: linear-gradient(45deg, #99DDC8, #659B5E, #95BF74, #556F44);
   background-size: 200% 200%;
-  animation: shimmer 2s linear infinite;
+  animation: shimmer 6s linear infinite;
   color: #fff;
 }
 
