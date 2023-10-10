@@ -60,7 +60,13 @@ const StarRating = ({ rating, onRatingChange, disableHover }) => {
     } else {
       starIcon = (
         <FontAwesomeIcon
-          icon={i <= rating ? solidStar : regularStar}
+          icon={
+            i <= rating
+              ? solidStar
+              : i - 0.5 <= rating
+              ? faStarHalfStroke
+              : regularStar
+          }
           key={`star${i}`}
           onClick={() => handleStarClick(i)}
           style={{ color: "#556f44" }}
