@@ -5,7 +5,10 @@
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 }
 
-.detailsButton {
+/* Style the See Details and Learn More buttons */
+.details-button,
+.learn-more-button,
+.museum-buttons {
   background-color: #031926;
   /* Button background color */
   color: white;
@@ -19,7 +22,27 @@
   cursor: pointer;
   /* Add pointer cursor on hover */
   transition: background-color 0.2s;
-  /* Add a smooth transition effect for background color */
+  flex-grow: 1;
+  margin-right: 5px;
+  text-align: center;
+}
+
+.details-button:hover,
+.learn-more-button:hover,
+.museum-buttons:hover {
+  background: linear-gradient(45deg, #99DDC8, #659B5E, #95BF74, #556F44);
+  background-size: 200% 200%;
+  animation: shimmer 6s linear infinite;
+  color: #fff;
+}
+
+@keyframes shimmer {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 /* Style the museum list items */
@@ -27,6 +50,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center; /* Center the content vertically */
+  align-items: center; /* Center the content horizontally */
   margin-bottom: 20px;
   /* Add margin between each museum card */
   border: 1px solid #ddd;
@@ -34,8 +59,7 @@
   margin: 20px 0;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* Box shadow for a subtle elevation effect */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Add a subtle box shadow */
   transition: transform 0.2s;
   /* Add a smooth transition effect */
   list-style: none;
@@ -43,10 +67,15 @@
 
 /* Style the museum images within the card */
 .museum-image {
-  max-width: 150px;
-  /* Adjust the max-width to make the images smaller */
-  height: auto;
-  /* Maintain the image aspect ratio */
+  max-width: 300px; /* Increased max-width for larger images */
+  height: auto; /* Maintain the image aspect ratio */
+  transition: transform 0.2s, box-shadow 0.2s; /* Add transitions for image scaling and box shadow */
+}
+
+/* Add a subtle zoom effect on hover for the museum image */
+.museum-item:hover .museum-image {
+  transform: scale(1.03); /* Slightly zoom in the image on hover */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow on hover */
 }
 
 /* Style the museum headers (museum name) */
@@ -87,32 +116,31 @@
 
 /* Hover effect for the Back to Map button */
 .museum-buttons:hover {
-  background-color: #468189
-    /* Button background color on hover */
+  background-color: #468189;
+  /* Button background color on hover */
 }
 
 .museum-item:hover .overlay {
-	opacity: 1;
+  opacity: 1;
 }
 
 .overlay {
-	position: absolute;
+  position: absolute;
   top: 0; /* Position it at the top of .museum-item */
   left: 0;
-	background: rgba(0, 0, 0, 0.8);
-	width: 100%;
-	transition: 0.5s ease;
-	opacity: 0;
-	/* bottom: 0; */
-	font-size: 20px;
-	padding: 20px;
-	text-align: center;
+  background: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  transition: 0.5s ease;
+  opacity: 0;
+  /* bottom: 0; */
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
 }
 
 .favorite-overlay {
   color: white;
 }
-
 
 .loader {
   border: 10px solid #f3f3f3;
@@ -127,7 +155,6 @@
   border-right: 16px solid #556F44;
   border-bottom: 16px solid #659B5E;
   border-left: 16px solid #95BF74;
-  /* background-image: "../Images/logo.png"; */
 }
 
 .loader img {
@@ -145,7 +172,6 @@
   }
 }
 
-
 /* Add space between cards on larger screens */
 @media (min-width: 768px) {
   .museum-item {
@@ -153,3 +179,13 @@
     /* Add margin to the right of each card */
   }
 }
+
+
+
+
+
+
+
+
+
+
