@@ -68,11 +68,13 @@ export default function UserReviews({ userId, token }) {
         ) : (
           reviews.map((review) => (
             <div key={review.reviewId} className="user-review-card">
+              <p>{review.museumName}</p>
               <StarRating
                 rating={review.rating}
                 onRatingChange={() => {}}
                 disableHover={true}
               />
+
               <p>{review.body}</p>
               <p>{review.date}</p>
               <div>

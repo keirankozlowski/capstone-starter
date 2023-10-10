@@ -15,23 +15,36 @@ const Dropdown = () => {
 
   return (
     <div className="dropdown">
-      <button onClick={handleOpen}>
+      <button onClick={handleOpen} className="nav-anchor">
         {!open ? <>My Profile +</> : <>My Profile -</>}
       </button>
+
       {open && (
-        <ul className="menu">
-          <li className="menu-item">
-            <Link to="/profile" onClick={handleClose}>
+        <ul className="dropdown-links">
+          <li>
+            <Link
+              to="/profile/journal"
+              onClick={handleClose}
+              className="nav-anchor"
+            >
               Journal
             </Link>
           </li>
-          <li className="menu-item">
-            <Link to="/profile/reviews" onClick={handleClose}>
+          <li>
+            <Link
+              to="/profile/reviews"
+              onClick={handleClose}
+              className="nav-anchor"
+            >
               Reviews
             </Link>
           </li>
-          <li className="menu-item">
-            <Link to="/profile/favorites" onClick={handleClose}>
+          <li>
+            <Link
+              to="/profile/favorites"
+              onClick={handleClose}
+              className="nav-anchor"
+            >
               Favorites
             </Link>
           </li>
