@@ -18,8 +18,7 @@ export default function AverageRating({ reviews }) {
 
   return (
     <div className="averageRating">
-      {/* <span>Average Rating:</span> */}
-      <span className="average-number">{averageRating.toFixed(1)}</span>
+      <span className="average-number">{averageRating.toFixed(1)}</span>{" "}
       <div className="rating-container">
         <StarRating
           rating={averageRating}
@@ -27,6 +26,7 @@ export default function AverageRating({ reviews }) {
           disableHover={true}
         />
       </div>
+      <span className="review-count"> ({reviews.length})</span>
     </div>
   );
 }

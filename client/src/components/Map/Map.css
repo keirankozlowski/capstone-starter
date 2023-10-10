@@ -92,16 +92,24 @@
   color: #fff;
   padding: 2px 4px;
   border-radius: 5px;
-  font-size: x-small;
-  position: absolute;
-  right: 0;
-  transform: translateY(-50%);
-  margin: 1.5em;
+  font-size: small;
+}
+
+.detailsButton-map-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.3em;
 }
 
 .exit-button {
   font-size: x-large;
   color: #283f3b;
+  position: fixed;
+  top: 0.5em; 
+  right: 0.5em;
+  background-color: transparent;
+  border: none;
+  z-index: 2;
 }
 
 /* MAP SEARCH */
@@ -115,11 +123,13 @@
   width: 0;
   float: left;
   margin-top: 0.5em;
+  margin-right: 3em;
   color: #283f3b;
 }
 
 #search-museums-bar-map::placeholder {
   color: #0000004d;
+  font-size: 1em;
 }
 
 #search-museums-bar-map.expanded {
@@ -162,6 +172,8 @@
   display: flex;
   flex-direction: column;
   margin-top: 0.5em;
+  margin-right: 5em;
+  margin-bottom: -1em;
 }
 
 .filter-buttons-map input[type="checkbox"] {
@@ -196,4 +208,17 @@
 
 .filter-buttons-map input[type="checkbox"]:checked + label {
   color: #283f3b;
+}
+
+/* MEDIA QUERIES  */
+@media (max-width: 768px) {
+  .mapPanel {
+    width: 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .mapPanel {
+    width: 100%;
+  }
 }

@@ -67,19 +67,19 @@ const Map = () => {
   return (
     <div className="map-container">
       <div className={`mapPanel ${isSearchBarExpanded ? "expanded" : ""}`}>
-        <button className="search-btn-map" onClick={toggleSearchBar}>
-          <FontAwesomeIcon icon={faSearch} />
-        </button>
+        {selectedMarker === null && (
+          <button className="search-btn-map" onClick={toggleSearchBar}>
+            <FontAwesomeIcon icon={faSearch} />
+          </button>
+        )}
 
-            <input
-              id="search-museums-bar-map"
-              type="text"
-              placeholder="Explore Museums"
-              onChange={(event) =>
-                setSearchParam(event.target.value.toLowerCase())
-              }
-              className={isSearchBarExpanded ? "expanded" : ""}
-            />
+        <input
+          id="search-museums-bar-map"
+          type="text"
+          placeholder="Explore Museums"
+          onChange={(event) => setSearchParam(event.target.value.toLowerCase())}
+          className={isSearchBarExpanded ? "expanded" : ""}
+        />
 
         {isSearchBarExpanded && (
           <div className="filter-buttons-map">

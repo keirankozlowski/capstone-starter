@@ -66,14 +66,16 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
           <h3>
             {selectedMuseum.museumName}
 
-            <button
-              className="detailsButton-map"
-              onClick={() => {
-                navigate(`/museums/${selectedMarker.museumId}`);
-              }}
-            >
-              See Details
-            </button>
+            <div className="detailsButton-map-container">
+              <button
+                className="detailsButton-map"
+                onClick={() => {
+                  navigate(`/museums/${selectedMarker.museumId}`);
+                }}
+              >
+                See Details
+              </button>
+            </div>
           </h3>
           <p>
             {descriptionExpanded
@@ -92,19 +94,14 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
           )}{" "}
           <br />
           <SingleReview museumId={selectedMuseum.museumId} />
-          <button
-            className="exit-button"
-            onClick={exitSingleMuseumView}
-            style={{
-              position: "absolute",
-              top: "10px",
-              right: "10px",
-              backgroundColor: "transparent",
-              border: "none",
-            }}
-          >
-            &#x2716;
-          </button>
+          <div className="exit-button-container">
+            <button
+              className="exit-button"
+              onClick={exitSingleMuseumView}
+            >
+              &#x2716;
+            </button>
+          </div>
         </div>
       ) : (
         <ul>
