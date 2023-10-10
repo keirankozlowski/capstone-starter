@@ -6,7 +6,7 @@ const {
   getAllReviews,
   getReviewById,
   // getReviewByUserId,
-  getReviewsByUserId,
+  getReviewsByUserIdWithMuseumName,
   getReviewsByMuseumId,
   getReviewsByMuseumIdwithUsername,
   updateReview,
@@ -108,7 +108,7 @@ router.put("/:reviewId", async (req, res, next) => {
 router.get("/user/:userId", async (req, res, next) => {
   try {
     const userId = req.params.userId;
-    const userReviews = await getReviewsByUserId(userId);
+    const userReviews = await getReviewsByUserIdWithMuseumName(userId);
     res.send(userReviews);
   } catch (error) {
     next(error);
