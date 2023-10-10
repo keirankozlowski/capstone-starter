@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-rt;
 import { createUser } from "../../helpers/fetching";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../Redux/authSlice";
