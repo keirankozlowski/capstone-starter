@@ -6,7 +6,10 @@ export default function AverageRating({ reviews }) {
 
   useEffect(() => {
     if (reviews && reviews.length) {
-      const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+      const totalRating = reviews.reduce(
+        (sum, review) => sum + review.rating,
+        0
+      );
       setAverageRating(totalRating / reviews.length);
     } else {
       setAverageRating(0);
@@ -15,8 +18,15 @@ export default function AverageRating({ reviews }) {
 
   return (
     <div className="averageRating">
-      Average Rating: <StarRating rating={averageRating} onRatingChange={() => {}} disableHover={true} />
-      {averageRating.toFixed(1)}
+      <span className="average-number">{averageRating.toFixed(1)}</span>{" "}
+      <div className="rating-container">
+        <StarRating
+          rating={averageRating}
+          onRatingChange={() => {}}
+          disableHover={true}
+        />
+      </div>
+      <span className="review-count"> ({reviews.length})</span>
     </div>
   );
 }

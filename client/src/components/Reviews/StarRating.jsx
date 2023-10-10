@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStarHalf } from "@fortawesome/free-solid-svg-icons";
+import { faStarHalfStroke } from "@fortawesome/free-solid-svg-icons";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 
@@ -28,7 +28,7 @@ const StarRating = ({ rating, onRatingChange, disableHover }) => {
             onClick={() => handleStarClick(i)}
             onMouseEnter={() => handleStarHover(i)}
             onMouseLeave={() => handleStarHover(0)}
-            style={{ color: "#95BF74" }}
+            style={{ color: "#556f44" }}
           />
         );
       } else if (
@@ -37,12 +37,12 @@ const StarRating = ({ rating, onRatingChange, disableHover }) => {
       ) {
         starIcon = (
           <FontAwesomeIcon
-            icon={faStarHalf}
+            icon={faStarHalfStroke}
             key={`halfStar${i}`}
             onClick={() => handleStarClick(i)}
             onMouseEnter={() => handleStarHover(i)}
             onMouseLeave={() => handleStarHover(0)}
-            style={{ color: "#95BF74" }}
+            style={{ color: "#556f44" }}
           />
         );
       } else {
@@ -53,14 +53,20 @@ const StarRating = ({ rating, onRatingChange, disableHover }) => {
             onClick={() => handleStarClick(i)}
             onMouseEnter={() => handleStarHover(i)}
             onMouseLeave={() => handleStarHover(0)}
-            style={{ color: "#95BF74" }}
+            style={{ color: "#556f44" }}
           />
         );
       }
     } else {
       starIcon = (
         <FontAwesomeIcon
-          icon={i <= rating ? solidStar : regularStar}
+          icon={
+            i <= rating
+              ? solidStar
+              : i - 0.5 <= rating
+              ? faStarHalfStroke
+              : regularStar
+          }
           key={`star${i}`}
           onClick={() => handleStarClick(i)}
           style={{ color: "#556f44" }}

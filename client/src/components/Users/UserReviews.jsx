@@ -9,6 +9,11 @@ export default function UserReviews({ userId, token }) {
   const [selectedReview, setSelectedReview] = useState(null);
   const [error, setError] = useState(null);
 
+ const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString();
+  };
+
   useEffect(() => {
     async function getUserReviews() {
       if (userId === null) {
@@ -74,7 +79,7 @@ export default function UserReviews({ userId, token }) {
                 disableHover={true}
               />
               <p>{review.body}</p>
-              <p>{review.date}</p>
+              <p>{formatDate(review.date)}</p>
               <div>
                 <p>{review.username}</p>
               </div>

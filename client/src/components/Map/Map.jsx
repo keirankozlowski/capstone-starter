@@ -9,8 +9,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const mapStyles = {
-  width: "75%",
-  height: "95vh",
+  width: "100%",
+  height: "100vh",
 };
 const center = {
   lat: 40.73061,
@@ -52,6 +52,14 @@ const Map = () => {
     return (searchParam.length === 0 || nameMatches) && typeMatches;
   });
 
+  useEffect(() => {
+    if (selectedMarker !== null) {
+      setIsSearchBarExpanded(false);
+    } else {
+      setSearchParam("");
+    }
+  }, [selectedMarker]);
+
   const onOptionChange = (e) => {
     if (selectedTypes.includes(e.target.value)) {
       setSelectedTypes(selectedTypes.filter((t) => e.target.value !== t));
@@ -66,23 +74,31 @@ const Map = () => {
 
   return (
     <div className="map-container">
-      <div className={`mapPanel ${isSearchBarExpanded ? "expanded" : ""}`}>
-        <button className="search-btn-map" onClick={toggleSearchBar}>
-          <FontAwesomeIcon icon={faSearch} />
-        </button>
+      <div
+        className={`mapPanel ${
+          isSearchBarExpanded && selectedMarker === null ? "expanded" : ""
+        }`}
+      >
+        {selectedMarker === null && (
+          <button className="search-btn-map" onClick={toggleSearchBar}>
+            <FontAwesomeIcon icon={faSearch} />
+          </button>
+        )}
 
-            <input
-              id="search-museums-bar"
-              type="text"
-              placeholder="Explore Museums"
-              onChange={(event) =>
-                setSearchParam(event.target.value.toLowerCase())
-              }
-              className={isSearchBarExpanded ? "expanded" : ""}
-            />
+        {selectedMarker === null && (
+          <input
+            id="search-museums-bar-map"
+            type="text"
+            placeholder="Explore Museums"
+            onChange={(event) =>
+              setSearchParam(event.target.value.toLowerCase())
+            }
+            className={isSearchBarExpanded ? "expanded" : ""}
+          />
+        )}
 
-        {isSearchBarExpanded && (
-          <div className="filter-buttons">
+        {selectedMarker === null && isSearchBarExpanded && (
+          <div className="filter-buttons-map">
             <input
               type="checkbox"
               id="art"
