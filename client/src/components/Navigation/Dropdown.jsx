@@ -50,7 +50,6 @@ const Dropdown = () => {
           </li>
         </ul>
       )}
-      {/* {open ? <div>Is Open</div> : <div>Is Closed</div>} */}
     </div>
   );
 };
