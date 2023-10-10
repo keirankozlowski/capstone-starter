@@ -34,7 +34,7 @@ export default function AppRouter() {
           <Route path="/map" element={<Map />} />
           <Route path="/museums" element={<GetAllMuseums />} />
           <Route
-            path="/profile"
+            path="/profile/journal"
             element={
               <UserProfile token={token} username={username} userId={userId} />
             }
