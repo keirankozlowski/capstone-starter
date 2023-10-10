@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import SingleReview from "../Reviews/SingleReview";
 
 const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
-
   const [error, setError] = useState(null);
   const [museumReviews, setMuseumReviews] = useState({});
   const [selectedMuseum, setSelectedMuseum] = useState(null);
@@ -48,8 +47,15 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
     fetchReviewsForMuseum(museum.museumId);
   };
 
+  const exitSingleMuseumView = () => {
+    setSelectedMarker(null);
+    setSelectedMuseum(null);
+    setSelectedMuseumReviews([]);
+  };
+
   return (
-    <div className="side-panel"><br />
+    <div className="side-panel">
+      <br />
       {selectedMuseum ? (
         <div>
           <img
@@ -57,11 +63,26 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
             alt={selectedMuseum.museumName}
             style={{ width: "300px" }}
           />
-          <h3>{selectedMuseum.museumName}</h3>
+          <h3>
+            {selectedMuseum.museumName}
+
+            <div className="detailsButton-map-container">
+              <button
+                className="detailsButton-map"
+                onClick={() => {
+                  navigate(`/museums/${selectedMarker.museumId}`);
+                }}
+              >
+                See Details
+              </button>
+            </div>
+          </h3>
           <p>
             {descriptionExpanded
               ? selectedMuseum.description
-              : selectedMuseum.description.substring(0, 150)}
+              : selectedMuseum.description.length > 150
+              ? selectedMuseum.description.substring(0, 150) + "..."
+              : selectedMuseum.description}
           </p>
           {selectedMuseum.description.length > 150 && (
             <button
@@ -70,20 +91,17 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
             >
               {descriptionExpanded ? "See Less" : "See More"}
             </button>
-          )}
-
-          <SingleReview
-            museumId={selectedMuseum.museumId}
-          />
-
-          <button
-            className="detailsButton"
-            onClick={() => {
-              navigate(`/museums/${selectedMarker.museumId}`);
-            }}
-          >
-            See Details
-          </button>
+          )}{" "}
+          <br />
+          <SingleReview museumId={selectedMuseum.museumId} />
+          <div className="exit-button-container">
+            <button
+              className="exit-button"
+              onClick={exitSingleMuseumView}
+            >
+              &#x2716;
+            </button>
+          </div>
         </div>
       ) : (
         <ul>

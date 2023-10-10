@@ -17,6 +17,11 @@ export default function SingleReview({ museumId, token, userId }) {
 
   const navigate = useNavigate();
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString();
+  };
+
   // FETCH REVIEWS BY MUSEUMID
   useEffect(() => {
     async function getMuseumReviews() {
@@ -88,7 +93,7 @@ export default function SingleReview({ museumId, token, userId }) {
               disableHover={true}
             />
             <p className="review-body">{review.body}</p>
-            <p className="review-date">{review.date}</p>
+            <p className="review-date">{formatDate(review.date)}</p>
             <div>
               <p className="review-username">{review.username}</p>
             </div>
