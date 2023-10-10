@@ -9,8 +9,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const mapStyles = {
-  width: "75%",
-  height: "95vh",
+  width: "100%",
+  height: "100vh",
 };
 const center = {
   lat: 40.73061,

@@ -2,22 +2,23 @@
 .map-container {
   display: flex;
   flex-direction: row-reverse;
-  margin-left: 20px;
-  margin-top: 20px;
+  z-index: -1;
 }
 
 /* MAP SIDE PANEL  */
 .mapPanel {
   width: 25%;
-  margin-left: 1.5vw;
+  background-color: #959d90;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 100vh;
 }
 
 .side-panel {
-  background-color: #b5bda5;
-  padding: 1em;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   position: relative;
-  border: 0.1em solid #556f44; 
+  color: #283f3b;
 }
 
 .side-panel h3 {
@@ -27,21 +28,41 @@
 }
 
 .panel-content {
-  max-height: 85vh;
   overflow-y: auto;
   max-width: 90%;
   list-style: none;
 }
 
 .side-panel ul li {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 1em;
   border-bottom: 1px solid #556f4475;
   padding-bottom: 1em;
+  position: relative;
+}
+
+.side-panel ul li .item-content {
+  flex: 1;
 }
 
 .side-panel ul li h4 {
   font-size: large;
   margin-top: 0.5em;
+  margin-bottom: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.side-panel h4 {
+  font-weight: bold;
+  margin-top: 1em;
+  font-size: large;
+}
+
+.side-panel h4:hover {
+  color: white;
 }
 
 .side-panel ul li img {
@@ -51,15 +72,31 @@
 
 .side-panel p {
   margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .see-more-button {
+  color: #283f3b;
+  font-size: small;
+  position: absolute;
+  right: 0;
+  margin-right: 1em;
+}
+
+.see-more-button:hover {
+  color: white;
+}
+
+.detailsButton-map {
   background-color: #283f3b;
   color: #fff;
   padding: 2px 4px;
-  margin-top: 0.5em;
   border-radius: 5px;
   font-size: x-small;
+  position: absolute;
+  right: 0;
+  transform: translateY(-50%);
+  margin: 1.5em;
 }
 
 .exit-button {
@@ -76,9 +113,8 @@
   transition: width 0.3s ease-in-out;
   border-bottom: 1px solid #283f3b;
   width: 0;
-  overflow: hidden;
   float: left;
-  margin-right: 10px;
+  margin-top: 0.5em;
   color: #283f3b;
 }
 
@@ -101,8 +137,10 @@
   align-items: center;
   text-decoration: none;
   transition: 0.3s;
+  position: absolute;
+  top: 0;
   right: 0;
-  margin-bottom: 0.5em;
+  margin: 1em;
 }
 
 .search-btn-map:hover {
@@ -115,11 +153,15 @@
   padding-left: 10px;
 }
 
+.rating-container {
+  display: inline-block;
+}
+
 /* MAP FILTER  */
 .filter-buttons-map {
   display: flex;
   flex-direction: column;
-  margin-top: 0.2em;
+  margin-top: 0.5em;
 }
 
 .filter-buttons-map input[type="checkbox"] {
