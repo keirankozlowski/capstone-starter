@@ -73,15 +73,19 @@ const Map = () => {
           </button>
         )}
 
-        <input
-          id="search-museums-bar-map"
-          type="text"
-          placeholder="Explore Museums"
-          onChange={(event) => setSearchParam(event.target.value.toLowerCase())}
-          className={isSearchBarExpanded ? "expanded" : ""}
-        />
+        {selectedMarker === null && (
+          <input
+            id="search-museums-bar-map"
+            type="text"
+            placeholder="Explore Museums"
+            onChange={(event) =>
+              setSearchParam(event.target.value.toLowerCase())
+            }
+            className={isSearchBarExpanded ? "expanded" : ""}
+          />
+        )}
 
-        {isSearchBarExpanded && (
+        {selectedMarker === null && isSearchBarExpanded && (
           <div className="filter-buttons-map">
             <input
               type="checkbox"
