@@ -52,6 +52,14 @@ const Map = () => {
     return (searchParam.length === 0 || nameMatches) && typeMatches;
   });
 
+  useEffect(() => {
+    if (selectedMarker !== null) {
+      setIsSearchBarExpanded(false);
+    } else {
+      setSearchParam("");
+    }
+  }, [selectedMarker]);
+
   const onOptionChange = (e) => {
     if (selectedTypes.includes(e.target.value)) {
       setSelectedTypes(selectedTypes.filter((t) => e.target.value !== t));
@@ -66,7 +74,11 @@ const Map = () => {
 
   return (
     <div className="map-container">
-      <div className={`mapPanel ${isSearchBarExpanded ? "expanded" : ""}`}>
+      <div
+        className={`mapPanel ${
+          isSearchBarExpanded && selectedMarker === null ? "expanded" : ""
+        }`}
+      >
         {selectedMarker === null && (
           <button className="search-btn-map" onClick={toggleSearchBar}>
             <FontAwesomeIcon icon={faSearch} />
