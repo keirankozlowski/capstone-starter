@@ -43,9 +43,14 @@ async function loginUser(username, password) {
         password: `${password}`,
       }),
     });
-    // console.log("this is my fetched response: ", response);
-    const result = await response.json();
-    return result;
+
+    if (response.status === 200) {
+      const result = await response.json();
+      return result;
+    } else {
+      const errorResponse = await response.json();
+      return { error: errorResponse.message }; // Return an error message
+    }
   } catch (error) {
     console.error(error);
   }
