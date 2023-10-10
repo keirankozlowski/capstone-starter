@@ -19,38 +19,50 @@ function Navbar({ token }) {
   };
 
   return (
-    <nav className="navbar">
-      <img src={logo} alt="Logo" className="logo" />
-      <img />
-      <h1 className="navbar-title">Museum App</h1>
-      <ul className="nav-links">
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/map">Map</Link>
-        </li>
-        <li>
-          <Link to="/museums">Museums</Link>
-        </li>
-        {token ? (
-          <>
-            <li>
-              <Dropdown />
-            </li>
-            <button className="auth-btn" onClick={onLogout}>
-              Log Out
-            </button>
-          </>
-        ) : (
-          <>
-            <li>
-              <Link to="/register">Register/Login</Link>
-            </li>
-          </>
-        )}
-      </ul>
-    </nav>
+    <div className="navbar-container">
+      <nav className="navbar">
+        <img src={logo} alt="Logo" className="logo" />
+        <img />
+        <h1 className="navbar-title">Museum App</h1>
+        <ul className="nav-links">
+          <li>
+            <Link to="/" className="nav-anchor">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/map" className="nav-anchor">
+              Map
+            </Link>
+          </li>
+          <li>
+            <Link to="/museums" className="nav-anchor">
+              Museums
+            </Link>
+          </li>
+          {token ? (
+            <>
+              <li>
+                <Dropdown />
+              </li>
+              <li>
+                <button className="auth-btn" onClick={onLogout}>
+                  Log Out
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link to="/register" className="nav-anchor">
+                  Register/Login
+                </Link>
+              </li>
+            </>
+          )}
+        </ul>
+      </nav>
+    </div>
   );
 }
 
