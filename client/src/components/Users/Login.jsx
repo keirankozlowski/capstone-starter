@@ -1,141 +1,98 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { loginUser } from "../../helpers/fetching";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../Redux/authSlice";
-// import { fetchFavoritesByUserIdAsync } from "../../Redux/favoriteSlice";
-import { setFavorites } from "../../Redux/favoriteSlice";
-import { fetchFavoritesByUserId } from "../../helpers/fetching";
+import MessageAlert from "./MessageAlert";
+import "./JournalEntries.css";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState({});
   const [successMessage, setSuccessMessage] = useState(null);
-  const [error, setError] = useState(null);
 
   const nav = useNavigate();
   const dispatch = useDispatch();
 
+  const isFormValid = () => {
+    const errors = {};
+
+    if (!username.trim()) {
+      errors.username = "Invalid username. Please register an account.";
+    }
+
+    if (!password.trim()) {
+      errors.password = "Incorrect password. Please try again.";
+    }
+
+    setError(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const register = await loginUser(username, password);
+    if (isFormValid()) {
+      const loginResult = await loginUser(username, password);
 
-    if (register) {
-      setSuccessMessage("You have logged in");
-      setError(null);
-      dispatch(
-        setCredentials({
-          username: register.user.username,
-          userId: register.user.userId,
-          token: register.token,
-        })
-        // fetchFavoritesByUserIdAsync(register.user.userId)
-      );
-      const myFavorites = await fetchFavoritesByUserId(register.user.userId);
-
-      // Dispatch setFavorites action to update favorites in Redux store
-      dispatch(setFavorites(myFavorites));
-    } else {
-      setSuccessMessage("");
-      setError("Please try again or register for an account");
+      if (loginResult && loginResult.user) {
+        dispatch(
+          setCredentials({
+            username: loginResult.user.username,
+            userId: loginResult.user.userId,
+            token: loginResult.token,
+          })
+        );
+        setError({});
+        setSuccessMessage("You have logged in!");
+        nav("/map");
+      } else {
+        // Handle other errors here
+        setError({
+          general: "Invalid username or password. Please try again.",
+        });
+        setSuccessMessage("");
+      }
     }
-    nav("/map");
   };
 
   return (
-    <div className="login-container">
-      {" "}
-      {/* Apply the CSS class */}
+    <div className="form-container">
       <div className="login-container">
         <h1>Login</h1>
 
         <form onSubmit={handleSubmit}>
+          <MessageAlert
+            usernameError={error.username}
+            passwordError={error.password}
+            generalError={error.general}
+            successMessage={successMessage}
+            type="error"
+            onClose={() =>
+              setError({
+                ...error,
+                username: "",
+                password: "",
+                general: "",
+              })
+            }
+          />
           <input
             autoFocus
-            id="username"
             placeholder="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
-            id="password"
             type="password"
             placeholder="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+
           <button type="submit">Submit</button>
         </form>
-
-        {error && <p className="error-message">{error}</p>}
-        {successMessage && <p className="success-message">{successMessage}</p>}
       </div>
     </div>
   );
 }
-
-// import { useState } from "react";
-// import { loginUser } from "../../helpers/fetching";
-// import { useNavigate } from "react-router-dom";
-// import { useDispatch } from "react-redux";
-// // import { login } from "../../Redux/authSlice";
-// import { setCredentials } from "../../Redux/authSlice";
-// import "./JournalEntries.css";
-
-// export default function Login({ token }) {
-//   const [username, setUsername] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [successMessage, setSuccessMessage] = useState(null);
-//   const [error, setError] = useState(null);
-
-//   const nav = useNavigate();
-//   const dispatch = useDispatch();
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     // console.log(username, password);
-//     const register = await loginUser(username, password);
-//     console.log("register", register);
-
-//     if (register) {
-//       setSuccessMessage("You have logged in");
-//       setError(null);
-//       dispatch(
-//         setCredentials({
-//           username: register.user.username,
-//           userId: register.user.userId,
-//           token: register.token,
-//         })
-//       );
-//     } else {
-//       setSuccessMessage("");
-//       setError("Please try again or register for an account");
-//     }
-//     nav("/map");
-//   };
-
-//   return (
-//     <>
-//       <h1>Login</h1>
-
-//       <form onSubmit={handleSubmit}>
-//         <input
-//           autoFocus
-//           id="username"
-//           placeholder="username"
-//           value={username}
-//           onChange={(e) => setUsername(e.target.value)}
-//         />
-//         <input
-//           id="password"
-//           type="password"
-//           placeholder="password"
-//           value={password}
-//           onChange={(e) => setPassword(e.target.value)}
-//         />
-//         <button type="submit">Submit</button>
-//       </form>
-//       {/* {token == null ? null : <h4>You're logged in!</h4>} */}
-//     </>
-//   );
-// }

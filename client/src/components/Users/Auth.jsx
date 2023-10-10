@@ -4,9 +4,13 @@ import Register from "./Register";
 
 export default function Auth({ token }) {
   return (
-    <div>
-      <Login token={token} />
-      <Register token={token} />
-    </div>
+    <>
+      <div className="auth-background">
+        <div className="auth-container">
+          <Register token={token} />
+          <Login token={token} />
+        </div>
+      </div>
+    </>
   );
 }

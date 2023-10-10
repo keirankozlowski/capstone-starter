@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectFavorites } from "../../Redux/favoriteSlice";
 import { fetchAllMuseums } from "../../helpers/fetching";
-import "./MyMuseums.css";
+import "./Users.css";
 import FavoriteMuseum from "../Museums/FavoriteMuseum";
 
 export default function MyMuseumsList({ userId, token }) {

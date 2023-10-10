@@ -1,45 +1,71 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { createUser } from "../../helpers/fetching";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../Redux/authSlice";
-import "./JournalEntries.css"; 
+import MessageAlert from "./MessageAlert";
+import "./JournalEntries.css";
 
 export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState({});
   const [successMessage, setSuccessMessage] = useState(null);
 
-  const nav = useNavigate();
   const dispatch = useDispatch();
+
+  const isFormValid = () => {
+    const errors = {};
+
+    if (!username.trim()) {
+      errors.username = "Username is required.";
+    } else if (username.length < 4) {
+      errors.username = "Username must be at least 4 characters long.";
+    }
+
+    if (!password.trim()) {
+      errors.password = "Password is required.";
+    } else if (password.length < 8) {
+      errors.password = "Password must be at least 8 characters long.";
+    }
+
+    setError(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(username, password);
-    const register = await createUser(username, password);
+    if (isFormValid()) {
+      console.log(username, password);
+      const register = await createUser(username, password);
 
-    if (register) {
-      dispatch(
-        setCredentials({
-          username: register.user.username,
-          userId: register.user.userId,
-          token: register.token,
-        })
-      );
-      setError(null);
-      setSuccessMessage("You have signed up! Please log into your account!");
-    } else {
-      setError("Invalid credentials, please try again");
+      if (register) {
+        dispatch(
+          setCredentials({
+            username: register.user.username,
+            userId: register.user.userId,
+            token: register.token,
+          })
+        );
+        setError({});
+        setSuccessMessage("You have signed up! Please log into your account.");
+      } else {
+        setError({ general: "Invalid credentials, please try again" });
+      }
     }
   };
 
   return (
-    <div className="form-container"> {/* Apply the CSS class */}
+    <div className="form-container">
       <div className="register-container">
         <h1>Register</h1>
 
         <form onSubmit={handleSubmit}>
+          <MessageAlert
+            usernameError={error.username}
+            passwordError={error.password}
+            type="error"
+            onClose={() => setError({ ...error, username: "", password: "" })}
+          />
           <input
             autoFocus
             placeholder="username"
@@ -52,89 +78,10 @@ export default function Register() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+
           <button type="submit">Submit</button>
         </form>
-
-        {error && <p className="error-message">{error}</p>}
-        {successMessage && <p className="success-message">{successMessage}</p>}
       </div>
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-// import { useState } from "react";
-// import { createUser } from "../../helpers/fetching";
-// import { useNavigate } from "react-router-dom";
-// import { useDispatch } from "react-redux";
-// import { setCredentials } from "../../Redux/authSlice";
-// import "./JournalEntries.css"; 
-
-// export default function Register() {
-//   const [username, setUsername] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [error, setError] = useState(null);
-//   const [successMessage, setSuccessMessage] = useState(null);
-
-//   const nav = useNavigate();
-//   const dispatch = useDispatch();
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     console.log(username, password);
-//     const register = await createUser(username, password);
-//     // console.log("register:", register);
-
-//     if (register) {
-//       dispatch(
-//         setCredentials({
-//           username: register.user.username,
-//           userId: register.user.userId,
-//           token: register.token,
-//         })
-//       );
-//       setError(null);
-//       setSuccessMessage("You have signed up! Please log into your account!");
-//     } else {
-//       setError("Invalid credentials, please try again");
-//     }
-
-//     //deleted .data from below
-//     // setToken(register.token);
-//     // console.log(register);
-//     // console.log("register", register);
-//     // setUsername("");
-//     // setPassword("");
-//     // nav("/posts");
-//   };
-
-//   return (
-//     <>
-//       <h1>Register</h1>
-
-//       <form onSubmit={handleSubmit}>
-//         <input
-//           autoFocus
-//           placeholder="username"
-//           value={username}
-//           onChange={(e) => setUsername(e.target.value)}
-//         />
-//         <input
-//           type="password"
-//           placeholder="password"
-//           value={password}
-//           onChange={(e) => setPassword(e.target.value)}
-//         />
-//         <button type="submit">Submit</button>
-//       </form>
-//       {/* {token == null ? null : <h4>You're registered!</h4>} */}
-//     </>
-//   );
-// }
