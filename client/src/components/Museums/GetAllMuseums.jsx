@@ -3,11 +3,14 @@ import { fetchAllMuseums } from "../../helpers/fetching";
 import "./AllMuseums.css";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../Loading/Spinner";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export default function GetAllMuseums() {
   const [museums, setMuseums] = useState([]);
   const [error, setError] = useState(null);
   const [searchParam, setSearchParam] = useState("");
+  const [isSearchBarExpanded, setIsSearchBarExpanded] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,20 +31,31 @@ export default function GetAllMuseums() {
       )
     : museums;
 
+  const toggleSearchBar = () => {
+    setIsSearchBarExpanded(!isSearchBarExpanded);
+  };
+
   return (
     <div className="all-museums-container">
       <h1 className="page-title">All Museums</h1>
 
-      <label className="search-filter-label">
-        <h4>Search:</h4>
-        <input
-          id="search-museums-bar"
-          type="text"
-          placeholder="Search museums"
-          onChange={(event) => setSearchParam(event.target.value.toLowerCase())}
-        />
-      </label>
+      <div className="search-museums-container">
+        <button className="search-btn-museums" onClick={toggleSearchBar}>
+          <FontAwesomeIcon icon={faSearch} />
+        </button>
 
+        <label className="search-museums-bar">
+          <input
+            id="search-museums-bar"
+            type="text"
+            placeholder="Explore Museums"
+            onChange={(event) =>
+              setSearchParam(event.target.value.toLowerCase())
+            }
+            className={isSearchBarExpanded ? "expanded" : ""}
+          />
+        </label>
+      </div>
       {searchedMuseumsPage.length === 0 ? (
         <Spinner />
       ) : (
@@ -81,17 +95,6 @@ export default function GetAllMuseums() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
 
 // import React, { useState, useEffect } from "react";
 // import { fetchAllMuseums } from "../../helpers/fetching";
