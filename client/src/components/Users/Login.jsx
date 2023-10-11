@@ -3,6 +3,8 @@ import { loginUser } from "../../helpers/fetching";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../Redux/authSlice";
+import { fetchFavoritesByUserId } from "../../helpers/fetching";
+import { setFavorites } from "../../Redux/favoriteSlice";
 import MessageAlert from "./MessageAlert";
 import "./JournalEntries.css";
 
@@ -43,6 +45,12 @@ export default function Login() {
             token: loginResult.token,
           })
         );
+        const myFavorites = await fetchFavoritesByUserId(
+          loginResult.user.userId
+        );
+
+        // Dispatch setFavorites action to update favorites in Redux store
+        dispatch(setFavorites(myFavorites));
         setError({});
         setSuccessMessage("You have logged in!");
         nav("/map");

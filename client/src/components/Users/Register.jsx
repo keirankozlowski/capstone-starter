@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createUser } from "../../helpers/fetching";
+import { createUser, fetchUserByUsername } from "../../helpers/fetching";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../Redux/authSlice";
 import MessageAlert from "./MessageAlert";
@@ -13,7 +13,17 @@ export default function Register() {
 
   const dispatch = useDispatch();
 
-  const isFormValid = () => {
+  const checkUsernameExists = async (username) => {
+    try {
+      const userExists = await fetchUserByUsername(username);
+      return userExists;
+    } catch (error) {
+      // Handle errors from the fetching call
+      return false;
+    }
+  };
+
+  const isFormValid = async () => {
     const errors = {};
 
     if (!username.trim()) {
@@ -28,14 +38,18 @@ export default function Register() {
       errors.password = "Password must be at least 8 characters long.";
     }
 
+    const userExists = await checkUsernameExists(username);
+    if (userExists) {
+      errors.duplicateUser = "User exists. Please choose a different username.";
+    }
+
     setError(errors);
     return Object.keys(errors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isFormValid()) {
-      console.log(username, password);
+    if (await isFormValid()) {
       const register = await createUser(username, password);
 
       if (register) {
@@ -48,8 +62,11 @@ export default function Register() {
         );
         setError({});
         setSuccessMessage("You have signed up! Please log into your account.");
+        setUsername("");
+        setPassword("");
       } else {
         setError({ general: "Invalid credentials, please try again" });
+        setSuccessMessage("");
       }
     }
   };
@@ -63,6 +80,7 @@ export default function Register() {
           <MessageAlert
             usernameError={error.username}
             passwordError={error.password}
+            duplicateError={error.duplicateUser}
             type="error"
             onClose={() => setError({ ...error, username: "", password: "" })}
           />
@@ -81,6 +99,7 @@ export default function Register() {
 
           <button type="submit">Submit</button>
         </form>
+        {successMessage && <p className="success-message">{successMessage}</p>}
       </div>
     </div>
   );

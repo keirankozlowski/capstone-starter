@@ -82,7 +82,7 @@ async function logoutUser(username, password) {
 
 async function fetchUserByUsername(username) {
   try {
-    const response = await fetch(`${baseURL}/users/${username}`);
+    const response = await fetch(`${baseURL}/users/user/${username}`);
     const result = await response.json();
     console.log(result);
     return result;

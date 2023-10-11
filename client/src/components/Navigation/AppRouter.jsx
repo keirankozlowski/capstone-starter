@@ -19,7 +19,7 @@ import UserReviews from "../Users/UserReviews";
 
 export default function AppRouter() {
   const token = useSelector(selectCurrentToken);
-  const username = useSelector(selectCurrentUsername);
+  const currentUser = useSelector(selectCurrentUsername);
   const userId = useSelector(selectCurrentUserId);
 
   return (
@@ -36,7 +36,11 @@ export default function AppRouter() {
           <Route
             path="/profile/journal"
             element={
-              <UserProfile token={token} username={username} userId={userId} />
+              <UserProfile
+                token={token}
+                currentUser={currentUser}
+                userId={userId}
+              />
             }
           />
           <Route

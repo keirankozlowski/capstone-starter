@@ -4,6 +4,7 @@ export default function MessageAlert({
   usernameError,
   passwordError,
   generalError,
+  duplicateError,
   successMessage,
   type,
   onClose,
@@ -16,17 +17,18 @@ export default function MessageAlert({
       usernameError ||
       passwordError ||
       generalError ||
+      duplicateError ||
       (usernameError && passwordError)
     ) {
       setVisible(true);
     } else {
       setVisible(false);
     }
-  }, [usernameError, passwordError, generalError]);
+  }, [usernameError, passwordError, generalError, duplicateError]);
 
   const alertClasses =
     type === "error"
-      ? "bg-red-100 border  text-red-700 px-4 py-3 rounded relative"
+      ? "bg-red-100 border text-red-700 px-4 py-3 rounded relative"
       : "bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative";
 
   const closeAlert = () => {
@@ -42,12 +44,18 @@ export default function MessageAlert({
           {generalError && <p>{generalError}</p>}
           {usernameError && <p>{usernameError}</p>}
           {passwordError && <p>{passwordError}</p>}
+          {duplicateError && <p>{duplicateError}</p>}
         </>
       ) : (
-        // Display success message
-        <>{successMessage && <p>{successMessage}</p>}</>
+        // Display success message in an alert box
+        <>
+          {successMessage && (
+            <div className={alertClasses}>
+              <p className="text-green-900">{successMessage}</p>
+            </div>
+          )}
+        </>
       )}
-
       <div className="absolute top-0 right-0 mt-1 mr-1">
         {/* Circular border */}
         <div className="rounded-full w-6 h-6 border border-red-500 flex items-center justify-center">
