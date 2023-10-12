@@ -120,9 +120,30 @@
 }
 
 
-  .heart-button {
-    color: #95BF74;
+
+  /* MY MUSEUM LIST */
+
+
+  .museum-img {
+    max-width: 150px;
+    height: auto;
   }
+
+  h1 {
+      text-align: center;
+  }
+
+  .favorites-card {
+    position: relative;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+
 
   /* AUTH FORMS */
 
@@ -196,11 +217,10 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    /* You can add a background color or styles here if needed */
+
   }
 
 
-  /* Style each form individually if needed */
   .auth-container > div {
     /* flex: 1; */
     margin: 10px; /* Add spacing between forms */
@@ -209,7 +229,7 @@
   /* Container for Register and Login forms */
 .form-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 
@@ -224,8 +244,9 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin: 10px;
+  margin: 5px;
 }
 
 
@@ -241,7 +262,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px;
+  margin: 5px;
 }
 
 /* Form Heading */
@@ -249,6 +270,8 @@
 .login-container h1 {
     text-align: center;
     margin-bottom: 20px;
+    margin: 20px 0;
+    padding: 10px;
     font-size: 2rem;
 }
 
@@ -283,6 +306,40 @@
     background: linear-gradient(45deg, #99DDC8, #9DBEBB, #99DDC8);
     animation: shimmer 5s linear infinite;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.link-button {
+  position: relative;
+  display: inline-block;
+  padding: 5px;
+  border: none;
+  color: #659B5E;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.link-button::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: #659B5E;
+  transition: all 0.4s;
+}
+
+
+.link-button::after {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.link-button:hover::after {
+  width: 100%;
+  left: 0;
+  transform: translateX(0);
 }
 
 /* Shimmer animation */
