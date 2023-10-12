@@ -18,11 +18,17 @@
   flex-direction: column;
   align-items: center;
   max-height: 100vh;
+  -ms-overflow-style: none;
 }
 
 .side-panel {
   position: relative;
   color: #283f3b;
+  overflow: hidden;
+}
+
+.panel-content::-webkit-scrollbar {
+  width: 0;
 }
 
 .side-panel h3 {
@@ -32,7 +38,7 @@
 }
 
 .panel-content {
-  overflow-y: auto;
+  overflow-y: scroll;
   max-width: 90%;
   list-style: none;
 }
