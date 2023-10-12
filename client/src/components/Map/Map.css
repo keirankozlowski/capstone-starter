@@ -64,6 +64,7 @@
 
 .side-panel h4:hover {
   color: white;
+  cursor: pointer;
 }
 
 .side-panel ul li {
@@ -109,6 +110,7 @@
 
 .detailsButton-map:hover {
   background-color: #d59726;
+  cursor: pointer;
 }
 
 .detailsButton-map-container {
