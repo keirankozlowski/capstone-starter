@@ -23,7 +23,12 @@ function Navbar({ token }) {
   return (
     <div className="navbar-container">
       <nav className="navbar">
-        <img src={logo} alt="Logo" className="logo" />
+        <img
+          src={logo}
+          alt="Logo"
+          className="logo"
+          onClick={() => navigate("/")}
+        />
         <img />
         <h1 className="navbar-title">aMUSE</h1>
         <ul className="nav-links">
@@ -48,11 +53,13 @@ function Navbar({ token }) {
               <li>
                 <Dropdown />
               </li>
-              <li>
+              {/* <li> */}
+              <div className="logout-container">
                 <button className="auth-btn" onClick={onLogout}>
                   Log Out
                 </button>
-              </li>
+              </div>
+              {/* </li> */}
             </>
           ) : (
             <>
