@@ -114,13 +114,18 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
         <ul>
           {museums.map((museum) => (
             <li key={museum.museumName}>
-              <a href={`/museums/${museum.museumId}`}>
+              <div
+                onClick={() => {
+                  handleSelectMuseumByName(museum);
+                  closeDescription();
+                }}
+              >
                 <img
                   src={museum.image}
                   alt={museum.museumName}
                   style={{ width: "300px" }}
                 />
-              </a>
+              </div>
               <h4
                 onClick={() => {
                   handleSelectMuseumByName(museum);

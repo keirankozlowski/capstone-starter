@@ -130,6 +130,10 @@
   z-index: 2;
 }
 
+.exit-button:hover {
+  color: #fff;
+}
+
 /* MAP SEARCH */
 #search-museums-bar-map {
   height: 40px;
