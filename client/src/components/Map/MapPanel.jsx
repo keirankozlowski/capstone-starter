@@ -65,7 +65,7 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
     <div className="side-panel">
       <br />
       {selectedMuseum ? (
-        <div>
+        <div className="single-museum-content">
           <div onClick={() => navigate(`/museums/${selectedMarker.museumId}`)}>
             <img
               src={selectedMuseum.image}
@@ -111,36 +111,38 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
           </div>
         </div>
       ) : (
-        <ul>
-          {museums.map((museum) => (
-            <li key={museum.museumName}>
-              <div
-                onClick={() => {
-                  handleSelectMuseumByName(museum);
-                  closeDescription();
-                }}
-              >
-                <img
-                  src={museum.image}
-                  alt={museum.museumName}
-                  style={{ width: "300px" }}
+        <div className="all-museums-content">
+          <ul>
+            {museums.map((museum) => (
+              <li key={museum.museumName}>
+                <div
+                  onClick={() => {
+                    handleSelectMuseumByName(museum);
+                    closeDescription();
+                  }}
+                >
+                  <img
+                    src={museum.image}
+                    alt={museum.museumName}
+                    style={{ width: "300px" }}
+                  />
+                </div>
+                <h4
+                  onClick={() => {
+                    handleSelectMuseumByName(museum);
+                    closeDescription();
+                  }}
+                >
+                  {museum.museumName}
+                </h4>
+                <AverageRating
+                  museumId={museum.museumId}
+                  reviews={museumReviews[museum.museumId] || []}
                 />
-              </div>
-              <h4
-                onClick={() => {
-                  handleSelectMuseumByName(museum);
-                  closeDescription();
-                }}
-              >
-                {museum.museumName}
-              </h4>
-              <AverageRating
-                museumId={museum.museumId}
-                reviews={museumReviews[museum.museumId] || []}
-              />
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );
