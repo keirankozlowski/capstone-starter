@@ -116,12 +116,6 @@
 
 /* Logout */
 
-.fixed-logout-container {
-  position: fixed;
-  bottom: 30px;
-  left: 70px;
-}
-
 
 .auth-btn {
   margin-top: 5rem;
