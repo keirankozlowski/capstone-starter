@@ -183,7 +183,40 @@
 
   }
 
+.empty-favorites-page {
+  position: relative;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  margin: 30px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
 
+.favorites-museum-btn {
+  background-color: #031926;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    flex-grow: 1;
+    margin-top: 10px;
+    margin-right: 5px;
+    text-align: center;
+}
+
+.favorites-museum-btn:hover {
+background: linear-gradient(45deg, #99DDC8, #659B5E, #95BF74, #556F44);
+background-size: 200% 200%;
+animation: shimmer 6s linear infinite;
+color: #fff;
+}
 
   /* AUTH FORMS */
 

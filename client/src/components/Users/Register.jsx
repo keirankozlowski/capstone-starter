@@ -64,9 +64,6 @@ export default function Register() {
           })
         );
         setError({});
-        setSuccessMessage("You have signed up! Please log into your account.");
-        setUsername("");
-        setPassword("");
         navigate("/login");
       } else {
         setError({ general: "Invalid credentials, please try again" });
