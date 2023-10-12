@@ -17,15 +17,35 @@ export default function Login() {
   const nav = useNavigate();
   const dispatch = useDispatch();
 
-  const isFormValid = () => {
+  const checkCredentials = async (username, password) => {
+    try {
+      const validUser = await loginUser(username, password);
+      console.log("valid user", validUser);
+      return validUser;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const isFormValid = async () => {
     const errors = {};
 
     if (!username.trim()) {
-      errors.username = "Invalid username. Please register an account.";
+      errors.username = "Please enter a valid username or register an account.";
     }
 
     if (!password.trim()) {
-      errors.password = "Incorrect password. Please try again.";
+      errors.password = "Password required.";
+    }
+
+    const validUser = await checkCredentials(username, password);
+    if (!validUser) {
+      errors.invalidUser = "Invalid username or password. Please try again.";
+    } else {
+      delete errors.invalidUser;
+    }
+    if (!validUser) {
+      errors.invalidUser = "Incorrect login credentials, please try again.";
     }
 
     setError(errors);
@@ -56,7 +76,6 @@ export default function Login() {
         setSuccessMessage("You have logged in!");
         nav("/map");
       } else {
-        // Handle other errors here
         setError({
           general: "Invalid username or password. Please try again.",
         });
@@ -87,6 +106,7 @@ export default function Login() {
               usernameError={error.username}
               passwordError={error.password}
               generalError={error.general}
+              invalidUserError={error.invalidUser}
               successMessage={successMessage}
               type="error"
               onClose={() =>

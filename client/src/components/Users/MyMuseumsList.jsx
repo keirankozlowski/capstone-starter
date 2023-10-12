@@ -32,7 +32,7 @@ export default function MyMuseumsList({ userId, token }) {
   return (
     <>
       <div className="favorites-container">
-        <h1>My Favorite Museums</h1>
+        <h1 className="favorite-title">My Favorite Museums</h1>
         <ul>
           {favoriteMuseumsData.map((museum) => (
             <div className="favorites-card" key={museum.museumId}>
@@ -45,11 +45,11 @@ export default function MyMuseumsList({ userId, token }) {
                   />
                 )}
               </div>
-              <h2>{museum.museumName}</h2>
+              <h2 className="fav-museum-name">{museum.museumName}</h2>
               <img className="museum-img" src={museum.image} />
               <p>{museum.description}</p>
               <button
-                className="detailsButton"
+                className="favorite-detail-btn"
                 onClick={() => {
                   navigate(`/museums/${museum.museumId}`);
                 }}

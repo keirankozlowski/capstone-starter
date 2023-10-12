@@ -16,7 +16,7 @@ function Navbar({ token }) {
   const onLogout = () => {
     dispatch(logOut());
     dispatch(resetFavorites());
-    navigate("/register");
+    navigate("/login");
     console.log("logout token:", token);
   };
 
