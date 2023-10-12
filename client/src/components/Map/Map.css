@@ -160,6 +160,7 @@
 #search-museums-bar-map::placeholder {
   color: #0000004d;
   font-size: 1em;
+  text-align:  center;
 }
 
 #search-museums-bar-map.expanded {
@@ -202,8 +203,8 @@
   display: flex;
   flex-direction: column;
   margin-top: 0.5em;
-  margin-right: 5em;
   margin-bottom: 0.5em;
+  margin-right: 1em;
 }
 
 .filter-buttons-map input[type="checkbox"] {
