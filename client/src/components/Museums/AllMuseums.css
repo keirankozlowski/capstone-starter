@@ -65,6 +65,7 @@
   list-style: none;
 }
 
+
 /* Style the museum images within the card */
 .museum-image {
   max-width: 300px; /* Increased max-width for larger images */
@@ -222,23 +223,36 @@
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
+  margin-left: 1000px;
+  margin-top: 20px;
+  position: relative;
   padding: 10px;
-  margin-left: 950px;
 }
 
 .heart-button {
+  position: absolute;
   color: #95BF74;
   cursor: pointer;
-
+  width: 36px;
+  height: 36px;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .favorite-text {
   color: #9fd5cc;
   opacity: 0;
   transition: 0.3s;
-  right: 50px;
-  font-size: 14px;
+  font: 12px;
+  padding: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .heart-button:hover + .favorite-text {
