@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { logOut } from "../../Redux/authSlice"; //
+import { useDispatch, useSelector } from "react-redux";
+import { logOut, selectIsLoggedIn } from "../../Redux/authSlice"; //
 import "./Navbar.css"; // Import your CSS file
 import logo from ".././images/logo.png";
 import { resetFavorites } from "../../Redux/favoriteSlice";
@@ -10,6 +10,8 @@ import Dropdown from "./Dropdown";
 function Navbar({ token }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const onLogout = () => {
     dispatch(logOut());
@@ -40,7 +42,8 @@ function Navbar({ token }) {
               Museums
             </Link>
           </li>
-          {token ? (
+          {/* {token ? ( */}
+          {isLoggedIn ? (
             <>
               <li>
                 <Dropdown />
@@ -54,8 +57,8 @@ function Navbar({ token }) {
           ) : (
             <>
               <li>
-                <Link to="/register" className="nav-anchor">
-                  Register/Login
+                <Link to="/login" className="nav-anchor">
+                  Login
                 </Link>
               </li>
             </>

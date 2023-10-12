@@ -17,8 +17,8 @@ export default function Auth({ token }) {
             </p>
           </div>
 
-          <Register token={token} />
-          <Login token={token} />
+          {/* <Register token={token} />
+          <Login token={token} /> */}
         </div>
       </div>
     </>
