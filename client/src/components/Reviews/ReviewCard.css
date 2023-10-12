@@ -1,7 +1,8 @@
 /* ReviewCard.css - Styled as Journal Entry Cards and EditReview.css */
 
 /* Styles for player cards and the edit-review container */
-.player-card, .edit-review-container {
+.player-card,
+.edit-review-container {
     border: 1px solid #ddd;
     background-color: #fff;
     margin: 20px 0;
@@ -23,7 +24,8 @@
     color: solid;
 }
 
-.review-body, .edit-review-textarea {
+.review-body,
+.edit-review-textarea {
     font-size: 1rem;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -41,7 +43,10 @@
 }
 
 /* Styles for buttons with green stars and made to look exactly the same */
-.edit-review-button, .delete-review-button, .update-button, .cancel-button {
+.edit-review-button,
+.delete-review-button,
+.update-button,
+.cancel-button {
     background-color: #34495e;
     color: #fff;
     border: none;
@@ -55,7 +60,10 @@
 }
 
 /* Glimmering effect with changing colors */
-.edit-review-button:hover, .delete-review-button:hover, .update-button:hover, .cancel-button:hover {
+.edit-review-button:hover,
+.delete-review-button:hover,
+.update-button:hover,
+.cancel-button:hover {
     background: linear-gradient(45deg, #99DDC8, #659B5E, #95BF74, #556F44);
     background-size: 200% 200%;
     animation: shimmer 6s linear infinite;
@@ -66,6 +74,7 @@
     0% {
         background-position: 0 0;
     }
+
     100% {
         background-position: 200% 0;
     }
@@ -74,6 +83,8 @@
 /* Styles for the create review textarea */
 .create-review-container {
     margin-top: 16px;
+    border-style: dotted;
+    border-color: #659B5E;
 }
 
 .create-review-textarea {
@@ -82,7 +93,8 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1rem;
-    min-height: 200px; /* Increase the height as needed */
+    min-height: 200px;
+    /* Increase the height as needed */
 }
 
 .create-review-button {
@@ -108,6 +120,7 @@
     0% {
         background-position: 0 0;
     }
+
     100% {
         background-position: 200% 0;
     }
@@ -131,7 +144,9 @@
     margin-bottom: 5px;
 }
 
-.form-input input[type="text"], .form-input textarea, .edit-review-textarea {
+.form-input input[type="text"],
+.form-input textarea,
+.edit-review-textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -142,6 +157,6 @@
 /* Style for the button container */
 .button-container {
     display: flex;
-    justify-content: flex-end; /* Align buttons to the right */
+    justify-content: flex-end;
+    /* Align buttons to the right */
 }
-

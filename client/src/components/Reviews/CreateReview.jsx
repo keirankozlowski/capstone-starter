@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
-import { addReview, fetchAllReviews, fetchReviewsByMuseumId } from "../../helpers/fetching";
+import {
+  addReview,
+  fetchAllReviews,
+  fetchReviewsByMuseumId,
+} from "../../helpers/fetching";
 import { useNavigate } from "react-router-dom";
 import StarRating from "./StarRating";
+import "./ReviewCard.css";
 
 export default function CreateReview({ setReviews, museumId, token, userId }) {
   const [newReview, setNewReview] = useState({ rating: 0, body: "" });
@@ -42,7 +47,7 @@ export default function CreateReview({ setReviews, museumId, token, userId }) {
   };
 
   return (
-    <>
+    <div className="create-review-container">
       <h3>Add a review</h3>
       Rating: <StarRating rating={rating} onRatingChange={handleRatingChange} />
       <form onSubmit={submitHandler}>
@@ -53,8 +58,8 @@ export default function CreateReview({ setReviews, museumId, token, userId }) {
         />
         <br />
 
-        <button type="submit">Create Review</button>
+        <button type="create-review-button">Create Review</button>
       </form>
-    </>
+    </div>
   );
 }
