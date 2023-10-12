@@ -66,9 +66,20 @@
   color: white;
 }
 
-.side-panel ul li img {
+.side-panel ul li {
   max-width: 100%;
   border-radius: 5px;
+}
+
+.side-panel img {
+  max-width: 100%;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+
+.side-panel img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .side-panel p {
