@@ -53,6 +53,14 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
     setSelectedMuseumReviews([]);
   };
 
+  const toggleDescriptionExpansion = () => {
+    setDescriptionExpanded(!descriptionExpanded);
+  };
+
+  const closeDescription = () => {
+    setDescriptionExpanded(false);
+  };
+
   return (
     <div className="side-panel">
       <br />
@@ -88,7 +96,7 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
           </p>
           {selectedMuseum.description.length > 150 && (
             <button
-              onClick={() => setDescriptionExpanded(!descriptionExpanded)}
+              onClick={toggleDescriptionExpansion}
               className="see-more-button"
             >
               {descriptionExpanded ? "See Less" : "See More"}
@@ -116,6 +124,7 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
               <h4
                 onClick={() => {
                   handleSelectMuseumByName(museum);
+                  closeDescription();
                 }}
               >
                 {museum.museumName}
