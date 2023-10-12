@@ -40,6 +40,7 @@
 .panel-content {
   overflow-y: scroll;
   max-width: 90%;
+  max-height: 90%;
   list-style: none;
 }
 
@@ -84,6 +85,7 @@
 .side-panel img {
   max-width: 100%;
   transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: -1em;
 }
 
 
@@ -201,7 +203,7 @@
   flex-direction: column;
   margin-top: 0.5em;
   margin-right: 5em;
-  margin-bottom: -1em;
+  margin-bottom: 0.5em;
 }
 
 .filter-buttons-map input[type="checkbox"] {
