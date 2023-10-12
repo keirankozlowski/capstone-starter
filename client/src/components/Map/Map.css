@@ -5,6 +5,9 @@
   z-index: -1;
 }
 
+/* INFO WINDOW */
+
+
 /* MAP SIDE PANEL  */
 .mapPanel {
   min-width: 25%;
@@ -123,15 +126,12 @@
   font-size: x-large;
   color: #283f3b;
   position: fixed;
-  top: 0.5em; 
+  top: 0.1em; 
   right: 0.5em;
+  padding-bottom: 2em;
   background-color: transparent;
   border: none;
   z-index: 2;
-}
-
-.exit-button:hover {
-  color: #fff;
 }
 
 /* MAP SEARCH */
