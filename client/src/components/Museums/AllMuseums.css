@@ -80,6 +80,7 @@
   list-style: none;
 }
 
+
 /* Style the museum images within the card */
 .museum-image {
   max-width: 300px;
@@ -139,29 +140,6 @@
 .museum-buttons:hover {
   background-color: #468189;
   /* Button background color on hover */
-}
-
-.museum-item:hover .overlay {
-  opacity: 1;
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  /* Position it at the top of .museum-item */
-  left: 0;
-  background: rgba(0, 0, 0, 0.8);
-  width: 100%;
-  transition: 0.5s ease;
-  opacity: 0;
-  /* bottom: 0; */
-  font-size: 20px;
-  padding: 20px;
-  text-align: center;
-}
-
-.favorite-overlay {
-  color: white;
 }
 
 .loader {
@@ -260,6 +238,45 @@
   padding-left: 10px;
 }
 
-.button-container {
-  margin-top: auto;
+/* FAVORITE BUTTON */
+
+.heart-container {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  /* margin-left: 1400px; */
+  margin-top: 20px;
+  position: relative;
+  padding: 10px;
+}
+
+.heart-button {
+  position: absolute;
+  color: #95BF74;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.favorite-text {
+  color: #9fd5cc;
+  opacity: 0;
+  transition: 0.3s;
+  font: 12px;
+  padding: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.heart-button:hover+.favorite-text {
+  opacity: 1;
+  color: #77ACA2;
 }

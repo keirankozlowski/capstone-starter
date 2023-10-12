@@ -43,6 +43,7 @@ export default function Login() {
             username: loginResult.user.username,
             userId: loginResult.user.userId,
             token: loginResult.token,
+            isLoggedIn: true,
           })
         );
         const myFavorites = await fetchFavoritesByUserId(
@@ -65,41 +66,57 @@ export default function Login() {
   };
 
   return (
-    <div className="form-container">
-      <div className="login-container">
-        <h1>Login</h1>
+    <div className="auth-container">
+      <div className="auth-background">
+        <div className="app-description-container">
+          <p className="app-description-text">
+            Welcome! Join our community of museum enthusiasts as you search,
+            review, and rate museums. Save your most cherished experiences with
+            your favorite museums and keep a personalized journal of your
+            visits, capturing the exhibits that left a lasting impression.
+          </p>
+        </div>
+      </div>
 
-        <form onSubmit={handleSubmit}>
-          <MessageAlert
-            usernameError={error.username}
-            passwordError={error.password}
-            generalError={error.general}
-            successMessage={successMessage}
-            type="error"
-            onClose={() =>
-              setError({
-                ...error,
-                username: "",
-                password: "",
-                general: "",
-              })
-            }
-          />
-          <input
-            autoFocus
-            placeholder="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+      <div className="form-container">
+        <div className="login-container">
+          <h1>Login</h1>
 
-          <button type="submit">Submit</button>
-        </form>
+          <form onSubmit={handleSubmit}>
+            <MessageAlert
+              usernameError={error.username}
+              passwordError={error.password}
+              generalError={error.general}
+              successMessage={successMessage}
+              type="error"
+              onClose={() =>
+                setError({
+                  ...error,
+                  username: "",
+                  password: "",
+                  general: "",
+                })
+              }
+            />
+            <input
+              autoFocus
+              placeholder="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            <button type="submit">Submit</button>
+          </form>
+          <button className="link-button" onClick={() => nav("/register")}>
+            Don't have an account? Register here.
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectFavorites } from "../../Redux/favoriteSlice";
 import { fetchAllMuseums } from "../../helpers/fetching";
-import "./Users.css";
+import "./JournalEntries.css";
 import FavoriteMuseum from "../Museums/FavoriteMuseum";
 
 export default function MyMuseumsList({ userId, token }) {
@@ -36,12 +36,14 @@ export default function MyMuseumsList({ userId, token }) {
         <ul>
           {favoriteMuseumsData.map((museum) => (
             <div className="favorites-card" key={museum.museumId}>
-              <div className="overlay flex items-center justify-center">
-                <FavoriteMuseum
-                  userId={userId}
-                  museumId={museum.museumId}
-                  token={token}
-                />
+              <div className="flex items-center justify-center">
+                {token && (
+                  <FavoriteMuseum
+                    userId={userId}
+                    museumId={museum.museumId}
+                    token={token}
+                  />
+                )}
               </div>
               <h2>{museum.museumName}</h2>
               <img className="museum-img" src={museum.image} />
