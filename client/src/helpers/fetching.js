@@ -44,15 +44,10 @@ async function loginUser(username, password) {
       }),
     });
 
-    if (response.status === 200) {
-      const result = await response.json();
-      return result;
-    } else {
-      const errorResponse = await response.json();
-      return { error: errorResponse.message }; // Return an error message
-    }
+    const result = await response.json();
+    return result;
   } catch (error) {
-    console.error(error);
+    console.error("Invalid credentials", error);
   }
 }
 

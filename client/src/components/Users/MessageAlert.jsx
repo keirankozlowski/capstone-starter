@@ -5,6 +5,7 @@ export default function MessageAlert({
   passwordError,
   generalError,
   duplicateError,
+  invalidUserError,
   successMessage,
   type,
   onClose,
@@ -18,13 +19,20 @@ export default function MessageAlert({
       passwordError ||
       generalError ||
       duplicateError ||
+      invalidUserError ||
       (usernameError && passwordError)
     ) {
       setVisible(true);
     } else {
       setVisible(false);
     }
-  }, [usernameError, passwordError, generalError, duplicateError]);
+  }, [
+    usernameError,
+    passwordError,
+    generalError,
+    duplicateError,
+    invalidUserError,
+  ]);
 
   const alertClasses =
     type === "error"
@@ -45,6 +53,7 @@ export default function MessageAlert({
           {usernameError && <p>{usernameError}</p>}
           {passwordError && <p>{passwordError}</p>}
           {duplicateError && <p>{duplicateError}</p>}
+          {invalidUserError && <p>{invalidUserError}</p>}
         </>
       ) : (
         // Display success message in an alert box
@@ -58,7 +67,7 @@ export default function MessageAlert({
       )}
       <div className="absolute top-0 right-0 mt-1 mr-1">
         {/* Circular border */}
-        <div className="rounded-full w-6 h-6 border border-red-500 flex items-center justify-center">
+        <div className="rounded-full w-5 h-5 border border-red-500 flex items-center justify-center">
           {/* "X" button */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
