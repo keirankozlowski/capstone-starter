@@ -36,7 +36,7 @@ export default function GetAllMuseums() {
   };
 
   return (
-    <div className="all-museums-container">
+    <div>
       <h1 className="page-title">All Museums</h1>
 
       <div className="search-museums-container">
@@ -59,17 +59,18 @@ export default function GetAllMuseums() {
       {searchedMuseumsPage.length === 0 ? (
         <Spinner />
       ) : (
-        <div className="museum-list">
+        <div className="all-museums-container">
           {searchedMuseumsPage.map((museum) => (
             <div key={museum.museumName} className="museum-item">
               <h2 className="museum-headers">{museum.museumName}</h2>
-              <img
-                src={museum.image}
-                alt={museum.museumName}
-                className="museum-image"
-              />
-              <p className="museum-description">{museum.description}</p>
-
+              <div className="image-and-text">
+                <img
+                  src={museum.image}
+                  alt={museum.museumName}
+                  className="museum-image"
+                />
+                <p className="museum-description">{museum.description}</p>
+              </div>
               <div className="button-container">
                 <button
                   className="details-button"
@@ -77,7 +78,7 @@ export default function GetAllMuseums() {
                     navigate(`/museums/${museum.museumId}`);
                   }}
                 >
-                  See Details
+                  See Reviews
                 </button>
                 <a
                   href={museum.link}
@@ -85,7 +86,7 @@ export default function GetAllMuseums() {
                   rel="noopener noreferrer"
                   className="learn-more-button"
                 >
-                  Learn More
+                  Museum Website
                 </a>
               </div>
             </div>
