@@ -35,7 +35,7 @@ export default function MyMuseumsList({ userId, token }) {
         <h1 className="favorite-title">My Favorite Museums</h1>
         {favoriteMuseumsData.length === 0 ? (
           <div className="empty-favorites-page">
-            <p>No favorite museums.</p>
+            <p className="empty-favorites-title">No favorite museums yet.</p>
             <button
               className="favorites-museum-btn"
               onClick={() => {
