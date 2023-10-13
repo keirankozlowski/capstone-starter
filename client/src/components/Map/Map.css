@@ -6,6 +6,11 @@
 }
 
 /* INFO WINDOW */
+.info-window {
+  max-width: 200px;
+  text-align: center;
+}
+
 .museumName-infowindow {
   color: #283f3b;
   font-weight: bold;
@@ -14,20 +19,25 @@
   font-size: 1.2em;
 }
 
-.detailsButtonIF {
-  color: #283f3b;
+.detailsbutton-container {
+  display: flex;
+  gap: 1em; 
+  margin-top: 1em;
+  justify-content: center;
 }
 
-.get-directions-link {
-  color: #283f3b;
+.detailsButtonIF, .get-directions-link {
+  background-color: #283f3b;
+  color: #fff;
+  padding: 2px 4px;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.detailsButtonIF:hover {
-  color: #959d90;
-}
-
-.get-directions-link:hover {
-  color: #959d90
+.detailsButtonIF:hover, .get-directions-link:hover {
+  background-color: #959d90;
 }
 
 /* MAP SIDE PANEL  */
@@ -167,6 +177,10 @@
   background-color: transparent;
   border: none;
   z-index: 2;
+}
+
+.singleReview-mapPanel {
+  background-color: green;
 }
 
 /* MAP SEARCH */

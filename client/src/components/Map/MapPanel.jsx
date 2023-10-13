@@ -103,7 +103,9 @@ const MapPanel = ({ museums, selectedMarker, setSelectedMarker }) => {
             </button>
           )}{" "}
           <br />
-          <SingleReview museumId={selectedMuseum.museumId} />
+          <SingleReview
+            museumId={selectedMuseum.museumId}
+          />
           <div className="exit-button-container">
             <button className="exit-button" onClick={exitSingleMuseumView}>
               &#x2716;
