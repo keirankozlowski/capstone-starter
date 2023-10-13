@@ -25,6 +25,7 @@ export default function Register() {
     }
   };
 
+
   const isFormValid = async () => {
     const errors = {};
 
@@ -125,5 +126,6 @@ export default function Register() {
         </div>
       </div>
     </div>
+  
   );
 }
