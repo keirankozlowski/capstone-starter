@@ -31,6 +31,7 @@ function Navbar({ token }) {
         />
         <img />
         <h1 className="navbar-title">aMUSE</h1>
+        <h1 className="navbar-title">aMUSE</h1>
         <ul className="nav-links">
           <li>
             <Link to="/" className="nav-anchor">

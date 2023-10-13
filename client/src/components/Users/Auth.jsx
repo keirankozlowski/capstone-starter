@@ -2,6 +2,7 @@ import React from "react";
 import Login from "./Login";
 import Register from "./Register";
 import "../Users/JournalEntries.css";
+import "../Users/JournalEntries.css";
 
 export default function Auth({ token }) {
   return (
@@ -17,8 +18,8 @@ export default function Auth({ token }) {
             </p>
           </div>
 
-          {/* <Register token={token} />
-          <Login token={token} /> */}
+          <Register token={token} />
+          <Login token={token} />
         </div>
       </div>
     </>
