@@ -2,6 +2,7 @@ import React from "react";
 import Login from "./Login";
 import Register from "./Register";
 import "../Users/JournalEntries.css";
+import "../Users/JournalEntries.css";
 
 export default function Auth({ token }) {
   return (

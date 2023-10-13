@@ -99,6 +99,8 @@
 
 
 
+
+
 /* Styling for the title and body inputs */
 .form-input {
   margin-bottom: 15px;
@@ -149,6 +151,7 @@
 
 
 
+
   .auth-background {
     display: flex;
     flex-wrap: wrap;
@@ -156,11 +159,45 @@
       align-items: center;
   }
 
+  
   .app-description-container {
     position: relative;
     display: flex;
     flex-direction: column;
+    flex-direction: column;
     align-items: center;
+    padding: 20px;
+    width: 75%;
+    margin: 50px 100px;
+    backdrop-filter: blur(10px);
+    z-index: 1;
+  }
+
+  .app-description-container::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .app-description-text {
+    z-index: 1;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    font-family: "Your Gorgeous Font", sans-serif;
+    color: rgba(0, 0, 0, 0.548);
+  }
+
+  /* Auth Container Styles */
+  .auth-container {
+    position: relative;
     padding: 20px;
     width: 75%;
     margin: 50px 100px;
@@ -196,6 +233,8 @@
     min-height: 100vh;
     display: grid;
     grid-template-rows: auto 1fr; /* Stack rows: first the app description, then the forms */
+    display: grid;
+    grid-template-rows: auto 1fr; /* Stack rows: first the app description, then the forms */
   }
 
   .auth-background::before {
@@ -210,6 +249,12 @@
     background-size: cover;
     background-position: center;
     opacity: 0.5;
+  }
+
+  .auth-background {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .auth-background {
