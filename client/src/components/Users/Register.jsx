@@ -68,6 +68,7 @@ export default function Register() {
         setSuccessMessage("You have signed up! Please log into your account.");
         setUsername("");
         setPassword("");
+        navigate("/login");
       } else {
         setError({ general: "Invalid credentials, please try again" });
         setSuccessMessage("");
@@ -91,30 +92,38 @@ export default function Register() {
         <div className="register-container">
           <h1>Register</h1>
 
-        <form onSubmit={handleSubmit}>
-          <MessageAlert
-            usernameError={error.username}
-            passwordError={error.password}
-            duplicateError={error.duplicateUser}
-            type="error"
-            onClose={() => setError({ ...error, username: "", password: "" })}
-          />
-          <input
-            autoFocus
-            placeholder="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <form onSubmit={handleSubmit}>
+            <MessageAlert
+              usernameError={error.username}
+              passwordError={error.password}
+              duplicateError={error.duplicateUser}
+              type="error"
+              onClose={() => setError({ ...error, username: "", password: "" })}
+            />
+            <input
+              autoFocus
+              placeholder="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
 
-          <button type="submit">Submit</button>
-        </form>
-        {successMessage && <p className="success-message">{successMessage}</p>}
+            <button type="submit">Submit</button>
+          </form>
+          <div>
+            <button className="link-button" onClick={() => navigate("/login")}>
+              Already have an account? Login here.
+            </button>
+          </div>
+          {successMessage && (
+            <p className="success-message">{successMessage}</p>
+          )}
+        </div>
       </div>
     </div>
     </div>
