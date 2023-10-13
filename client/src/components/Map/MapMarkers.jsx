@@ -83,12 +83,12 @@ const MapMarkers = ({ searchParam, selectedTypes, selectedMarker, setSelectedMar
           }}
         >
           <div style={{ maxWidth: "300px", maxHeight: "50vh" }}>
+          <h3 className="museumName-infowindow">{selectedMarker.museumName}</h3>
             <img
               src={selectedMarker.image}
               alt={selectedMarker.museumName}
-              style={{ width: "250px" }}
+              style={{ width: "250px", marginBottom: "0.5em" }}
             />
-            <h3>{selectedMarker.museumName}</h3>
 
             <AverageRating
               museumId={selectedMarker.museumId}
@@ -96,7 +96,7 @@ const MapMarkers = ({ searchParam, selectedTypes, selectedMarker, setSelectedMar
             />
 
             <button
-              className="detailsButton"
+              className="detailsButtonIF"
               onClick={() => {
                 navigate(`/museums/${selectedMarker.museumId}`);
               }}
@@ -109,6 +109,7 @@ const MapMarkers = ({ searchParam, selectedTypes, selectedMarker, setSelectedMar
                 href={`https://www.google.com/maps/dir/?api=1&destination=${selectedMarker.lat},${selectedMarker.lng}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="get-directions-link"
               >
                 Get Directions
               </a>

@@ -6,7 +6,29 @@
 }
 
 /* INFO WINDOW */
+.museumName-infowindow {
+  color: #283f3b;
+  font-weight: bold;
+  text-align: center;
+  padding: 0.3em;
+  font-size: 1.2em;
+}
 
+.detailsButtonIF {
+  color: #283f3b;
+}
+
+.get-directions-link {
+  color: #283f3b;
+}
+
+.detailsButtonIF:hover {
+  color: #959d90;
+}
+
+.get-directions-link:hover {
+  color: #959d90
+}
 
 /* MAP SIDE PANEL  */
 .mapPanel {
