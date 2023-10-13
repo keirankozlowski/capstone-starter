@@ -1,7 +1,17 @@
 /* AllMuseums.css */
 
-.page-title {
+.page-header {
+  display: flex;
+  flex-direction: row-reverse;
   font-size: 3rem;
+  color: white;
+  background-image: url('../Images/monetpaint.png');
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.page-header h1 {
+  padding-left: 4rem;
 }
 
 .all-museums-container {
@@ -157,10 +167,10 @@
   border-left: 16px solid #95BF74;
 }
 
-.loader img {
+/* .loader img {
   width: 70px;
   height: 70px;
-}
+} */
 
 @keyframes spin {
   0% {
@@ -183,10 +193,12 @@
 /* ALL MUSEUMS SEARCH */
 .search-museums-container {
   display: flex;
+  justify-content: flex-end;
   position: relative;
   align-items: center;
   margin-top: 0.5em;
-  margin-right: 3em;
+  margin-right: 1em;
+  margin-bottom: 3em;
 }
 
 #search-museums-bar {
@@ -279,4 +291,9 @@
 .heart-button:hover+.favorite-text {
   opacity: 1;
   color: #77ACA2;
+}
+
+
+.button-container {
+  margin-top: auto;
 }

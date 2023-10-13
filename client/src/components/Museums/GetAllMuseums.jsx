@@ -37,8 +37,9 @@ export default function GetAllMuseums() {
 
   return (
     <div>
-      <h1 className="page-title">All Museums</h1>
-
+      <div className="page-header">
+        <h1>Browse Museums</h1>
+      </div>
       <div className="search-museums-container">
         <button className="search-btn-museums" onClick={toggleSearchBar}>
           <FontAwesomeIcon icon={faSearch} />
@@ -78,7 +79,7 @@ export default function GetAllMuseums() {
                     navigate(`/museums/${museum.museumId}`);
                   }}
                 >
-                  See Reviews
+                  See Details
                 </button>
                 <a
                   href={museum.link}
