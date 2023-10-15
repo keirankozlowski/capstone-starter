@@ -7,11 +7,6 @@ import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./Redux/store.js";
 import App from "./App.jsx";
 import "./index.css";
-// import { library } from "@fortawesome/fontawesome-svg-core";
-// import { faBars } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-// library.add(faBars);
 
 // const clientId = import.meta.env.VITE_REACT_APP_CLIENT_ID;
 

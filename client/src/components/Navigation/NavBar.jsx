@@ -90,6 +90,100 @@
 
 // export default Navbar;
 
+/* TESTING OUT MOBILE RESPONSE*/
+
+// import React, { useState } from "react";
+// import { Link, useNavigate } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+// import { logOut, selectIsLoggedIn } from "../../Redux/authSlice";
+// import "./Navbar.css";
+// import logo from ".././images/logo.png";
+// import { resetFavorites } from "../../Redux/favoriteSlice";
+// import Dropdown from "./Dropdown";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+
+// function Navbar({ token }) {
+//   const [isOpen, setIsOpen] = useState(false);
+
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
+
+//   const isLoggedIn = useSelector(selectIsLoggedIn);
+
+//   const onLogout = () => {
+//     dispatch(logOut());
+//     dispatch(resetFavorites());
+//     navigate("/login");
+//     console.log("logout token:", token);
+//   };
+
+//   const toggleNavbar = () => {
+//     setIsOpen(!isOpen);
+//     console.log(isOpen);
+//   };
+
+//   return (
+//     <div className="navbar-container">
+//       <nav className="navbar">
+//         <div className="top-nav">
+//           <img
+//             src={logo}
+//             alt="Logo"
+//             className="logo"
+//             onClick={() => navigate("/")}
+//           />
+//           <h1 className="navbar-title">aMUSE</h1>
+//           <button className="menu-button" onClick={toggleNavbar}>
+//             {isOpen ? (
+//               <FontAwesomeIcon icon={faTimes} />
+//             ) : (
+//               <FontAwesomeIcon icon={faBars} />
+//             )}
+//           </button>
+//         </div>
+//         <ul className="nav-links">
+//           <li>
+//             <Link to="/" className="nav-anchor">
+//               Home
+//             </Link>
+//           </li>
+//           <li>
+//             <Link to="/map" className="nav-anchor">
+//               Map
+//             </Link>
+//           </li>
+//           <li>
+//             <Link to="/museums" className="nav-anchor">
+//               Museums
+//             </Link>
+//           </li>
+//           {isLoggedIn ? (
+//             <>
+//               <li>
+//                 <Dropdown />
+//               </li>
+//               <div className="logout-container">
+//                 <button className="auth-btn" onClick={onLogout}>
+//                   Log Out
+//                 </button>
+//               </div>
+//             </>
+//           ) : (
+//             <li>
+//               <Link to="/login" className="nav-anchor">
+//                 Login
+//               </Link>
+//             </li>
+//           )}
+//         </ul>
+//       </nav>
+//     </div>
+//   );
+// }
+
+// export default Navbar;
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -99,10 +193,10 @@ import logo from ".././images/logo.png";
 import { resetFavorites } from "../../Redux/favoriteSlice";
 import Dropdown from "./Dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 function Navbar({ token }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -116,59 +210,114 @@ function Navbar({ token }) {
     console.log("logout token:", token);
   };
 
-  const toggleNavbar = () => {
-    setIsOpen(!isOpen);
+  const toggleSidebar = () => {
+    setShowSidebar(!showSidebar);
+    console.log(showSidebar);
+  };
+
+  const closeSidebar = () => {
+    setShowSidebar(false);
   };
 
   return (
     <div className="navbar-container">
       <nav className="navbar">
-        <img
-          src={logo}
-          alt="Logo"
-          className="logo"
-          onClick={() => navigate("/")}
-        />
-        <h1 className="navbar-title">aMUSE</h1>
-        <div className="menu-button" onClick={toggleNavbar}>
-          <FontAwesomeIcon icon={faBars} />
+        <div className="top-nav">
+          <img
+            src={logo}
+            alt="Logo"
+            className="logo"
+            onClick={() => navigate("/")}
+          />
+          <h1 className="navbar-title">aMUSE</h1>
+          <button
+            className="menu-button active"
+            onClick={() => toggleSidebar()}
+          >
+            {showSidebar ? (
+              <FontAwesomeIcon icon={faTimes} />
+            ) : (
+              <FontAwesomeIcon icon={faBars} />
+            )}
+          </button>
         </div>
-        <ul className="nav-links">
-          <li>
-            <Link to="/" className="nav-anchor">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/map" className="nav-anchor">
-              Map
-            </Link>
-          </li>
-          <li>
-            <Link to="/museums" className="nav-anchor">
-              Museums
-            </Link>
-          </li>
-          {isLoggedIn ? (
-            <>
-              <li>
-                <Dropdown />
-              </li>
-              <div className="logout-container">
-                <button className="auth-btn" onClick={onLogout}>
-                  Log Out
-                </button>
-              </div>
-            </>
-          ) : (
+        <div className="side-navbar">
+          <ul className="nav-links">
             <li>
-              <Link to="/login" className="nav-anchor">
-                Login
+              <Link to="/" className="nav-anchor">
+                Home
               </Link>
             </li>
-          )}
-        </ul>
+            <li>
+              <Link to="/map" className="nav-anchor">
+                Map
+              </Link>
+            </li>
+            <li>
+              <Link to="/museums" className="nav-anchor">
+                Museums
+              </Link>
+            </li>
+            {isLoggedIn ? (
+              <>
+                <li>
+                  <Dropdown />
+                </li>
+                <div className="logout-container">
+                  <button className="auth-btn" onClick={onLogout}>
+                    Log Out
+                  </button>
+                </div>
+              </>
+            ) : (
+              <li>
+                <Link to="/login" className="nav-anchor">
+                  Login
+                </Link>
+              </li>
+            )}
+          </ul>
+        </div>
       </nav>
+      {showSidebar && (
+        <div className="sidebar active">
+          <ul className="nav-links">
+            <li>
+              <Link to="/" className="nav-anchor" onClick={closeSidebar}>
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/map" className="nav-anchor" onClick={closeSidebar}>
+                Map
+              </Link>
+            </li>
+            <li>
+              <Link to="/museums" className="nav-anchor" onClick={closeSidebar}>
+                Museums
+              </Link>
+            </li>
+            {isLoggedIn ? (
+              <>
+                <li>
+                  <Dropdown closeSidebar={closeSidebar} />
+                </li>
+                <div className="logout-container">
+                  <button className="auth-btn" onClick={onLogout}>
+                    Log Out
+                  </button>
+                </div>
+              </>
+            ) : (
+              <li>
+                <Link to="/login" className="nav-anchor" onClick={closeSidebar}>
+                  Login
+                </Link>
+              </li>
+            )}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

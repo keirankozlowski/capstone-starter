@@ -1,6 +1,8 @@
 /* Navbar CSS */
+
+
 .navbar-container {
-  z-index: 1;
+  z-index: 3;
   min-height: 100vh;
   width: 15vw;
   background: #283f3b;
@@ -26,6 +28,7 @@
   color: white;
   font-size: 1.5rem;
   margin-top: 0.5rem;
+  text-align: center;
 }
 
 .nav-links {
@@ -107,7 +110,7 @@ span{
   display: block;
   /* padding: 25px 80px; */
 }
-.home-btn::before, button::after{
+.home-btn::before, .home-btn::after{
   content:"";
   width: 0;
   height: 2px;
@@ -214,32 +217,50 @@ button:hover span::before, button:hover span::after{
   transform: scaleX(1);
 }
 
+.sidebar {
+  display: none;
+}
+
+
 /* RESPONSIVE STYLING  */
 
-@media screen and (max-width: 400px) {
+/* @media screen and (max-width: 400px) { */
+  @media screen and (max-width: 600px) {
+
+    .side-navbar {
+      display: none;
+    }
+
   .navbar-container {
     width: 100%;
     position: fixed;
+    background: none;
     top: 0;
     left: 0;
-    /* bottom: auto; */
-    /* min-height: 100vh;
-    background: #283f3b;
-    height: 80px; */
-    z-index: 2;
   }
 
+    .top-nav {
+    background: #283f3b;
+    z-index: 5;
+    width: 100%;
+    position: fixed;
+    background: #283f3b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }
 
 
   .navbar {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
   }
 
   .logo {
     width: 18vw;
-    position: fixed;
     top: 10px;
     left: 10px;
     margin: 0;
@@ -247,8 +268,11 @@ button:hover span::before, button:hover span::after{
 
   .navbar-title {
     font-size: 2.5rem;
-    text-align: center;
-    margin: 10px;
+    display: flex;
+    height: 100%;
+    margin-right: auto;
+    margin-left: auto;
+
   }
 
   .menu-button {
@@ -260,31 +284,39 @@ button:hover span::before, button:hover span::after{
     position: absolute;
     top: 10px;
     right: 10px;
-    z-index: 2;
   }
 
 
-  .menu-button.active + .nav-links {
-    display: block;
-    background: #283f3b;
-    position: absolute;
-    top: -100%;
-    left: 0;
-    width: 100%;
-    z-index: 1;
-    border-top: 1px solid white;
-    text-align: center;
-    /* transition: max-height 0.3s ease-in-out; */
 
+  .nav-links>li {
+    margin: 1rem 0;
   }
 
-  .nav-links {
-    display: none;
+  /*
+  .dropdown-links>li {
+    margin: 1rem 1rem;
+  } */
+
+
+  .sidebar {
+    display: flex;
     flex-direction: column;
-    background-color: #283f3b;
+    justify-content: flex-start; /* Vertically center the links */
+    align-items: center;
+    position: fixed;
+    top: -100%;
     width: 100%;
-    text-align: center;
+    height: 100vh;
+    background: #283f3b;
+    z-index: 1;
+    transition: top 0.3s ease;
+    padding: 20px;
 
+  }
+
+
+  .sidebar.active {
+    top: 4rem;
   }
 
   .nav-anchor {
@@ -293,6 +325,10 @@ button:hover span::before, button:hover span::after{
 
   .auth-btn {
     font-size: 1.5rem;
+    position: fixed;
+    bottom: 5rem;
+    left: 0;
+    width: 100%;
   }
 
   .auth-btn::before {
@@ -301,7 +337,7 @@ button:hover span::before, button:hover span::after{
     left: 0;
     right: 0;
     bottom: 0;
-    height: 2px; /* Border size */
+    height: 2px;
     background-color: #f4e9cd;
     transform: scaleX(0);
     transform-origin: 0 100% ;
