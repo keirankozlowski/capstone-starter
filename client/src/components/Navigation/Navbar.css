@@ -69,6 +69,10 @@
   left: calc(100% + 1rem);
 }
 
+.menu-button {
+  display: none;
+}
+
 /* Home.css */
 
 .quote {
@@ -209,3 +213,184 @@ button:hover span::before, button:hover span::after{
 .auth-btn:focus::before {
   transform: scaleX(1);
 }
+
+/* RESPONSIVE STYLING  */
+
+@media screen and (max-width: 400px) {
+  .navbar-container {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* bottom: auto; */
+    /* min-height: 100vh;
+    background: #283f3b;
+    height: 80px; */
+    z-index: 2;
+  }
+
+
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    width: 18vw;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    margin: 0;
+  }
+
+  .navbar-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 10px;
+  }
+
+  .menu-button {
+    display: block;
+    padding: 10px;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+  }
+
+
+  .menu-button.active + .nav-links {
+    display: block;
+    background: #283f3b;
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    border-top: 1px solid white;
+    text-align: center;
+    /* transition: max-height 0.3s ease-in-out; */
+
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: #283f3b;
+    width: 100%;
+    text-align: center;
+
+  }
+
+  .nav-anchor {
+    font-size: 1.5rem;
+  }
+
+  .auth-btn {
+    font-size: 1.5rem;
+  }
+
+  .auth-btn::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px; /* Border size */
+    background-color: #f4e9cd;
+    transform: scaleX(0);
+    transform-origin: 0 100% ;
+    transition: transform 300ms ease-in-out;
+  }
+
+  .auth-btn:hover::before,
+  .auth-btn:focus::before {
+    transform: scaleX(1);
+  }
+
+  .quote {
+    z-index: -1;
+    font-size: 24px;
+  }
+}
+
+/* @media screen and (max-width: 400px) {
+  .navbar-container {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: auto;
+    min-height: 100vh;
+    background: #283f3b;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: none;
+  }
+
+  .logo {
+    width: 18vw;
+    top: 10px;
+    left: 10px;
+    margin-top: 0;
+  }
+
+  .navbar-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 0;
+  }
+
+  .menu-button {
+    display: block;
+    padding: 10px;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+  }
+
+  .menu-button:active + .nav-links {
+    display: block;
+    background: #283f3b;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    border-top: 1px solid white;
+    text-align: center;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: #283f3b;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-anchor {
+    font-size: 1.5rem;
+  }
+
+  .auth-btn {
+    font-size: 1.5rem;
+  }
+
+  .quote {
+    z-index: -1;
+  }
+} */
